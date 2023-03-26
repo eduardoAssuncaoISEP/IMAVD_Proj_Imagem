@@ -91,17 +91,17 @@ namespace IMAVD_IMAGE_Proj
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
-            if(pictureBox1.Image != null)
+            if (pictureBox1.Image != null)
             {
                 Bitmap img = new Bitmap(pictureBox1.Image);
                 int width = pictureBox1.Image.Width;
                 int height = pictureBox1.Image.Height;
 
-                Bitmap red = new Bitmap(img);
+                //Bitmap red = new Bitmap(img);
 
-                for(int y = 0; y < height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    for(int x = 0; x < width; x++)
+                    for (int x = 0; x < width; x++)
                     {
                         Color p = img.GetPixel(x, y);
 
@@ -110,11 +110,105 @@ namespace IMAVD_IMAGE_Proj
                         int g = p.G;
                         int b = p.B;
 
-                        red.SetPixel(x, y, Color.FromArgb(a, r, 0, 0));
+                        img.SetPixel(x, y, Color.FromArgb(a, r, 0, 0));
                     }
                 }
 
-                pictureBox2.Image = red;
+                pictureBox2.Image = img;
+            }
+        }
+
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //verificando se a imagem foi aberta
+            if (pictureBox1.Image != null)
+            {
+                Bitmap img = new Bitmap(pictureBox1.Image);
+                int width = pictureBox1.Image.Width;
+                int height = pictureBox1.Image.Height;
+
+                //Bitmap red = new Bitmap(img);
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        Color p = img.GetPixel(x, y);
+
+                        int a = p.A;
+                        int r = p.R;
+                        int g = p.G;
+                        int b = p.B;
+
+                        img.SetPixel(x, y, Color.FromArgb(a, 0, g, 0));
+                    }
+                }
+
+                pictureBox2.Image = img;
+            }
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //verificando se a imagem foi aberta
+            if (pictureBox1.Image != null)
+            {
+                Bitmap img = new Bitmap(pictureBox1.Image);
+                int width = pictureBox1.Image.Width;
+                int height = pictureBox1.Image.Height;
+
+                //Bitmap red = new Bitmap(img);
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        Color p = img.GetPixel(x, y);
+
+                        int a = p.A;
+                        int r = p.R;
+                        int g = p.G;
+                        int b = p.B;
+
+                        img.SetPixel(x, y, Color.FromArgb(a, 0, 0, b));
+                    }
+                }
+
+                pictureBox2.Image = img;
+            }
+        }
+
+        private void invertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //verificando se a imagem foi aberta
+            if (pictureBox1.Image != null)
+            {
+                Bitmap img = new Bitmap(pictureBox1.Image);
+                int width = pictureBox1.Image.Width;
+                int height = pictureBox1.Image.Height;
+
+                //Bitmap red = new Bitmap(img);
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        Color p = img.GetPixel(x, y);
+
+                        int a = p.A;
+                        int r = p.R;
+                        int g = p.G;
+                        int b = p.B;
+
+                        r = 255 - r;
+                        g = 255 - g;
+                        b = 255 - b;
+
+                        img.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                    }
+                }
+
+                pictureBox2.Image = img;
             }
         }
     }

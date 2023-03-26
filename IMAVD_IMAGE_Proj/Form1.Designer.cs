@@ -39,6 +39,7 @@
             inforToolStripMenuItem = new ToolStripMenuItem();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
             pictureBox2 = new PictureBox();
+            invertToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -79,7 +80,7 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem, invertToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -97,12 +98,14 @@
             greenToolStripMenuItem.Name = "greenToolStripMenuItem";
             greenToolStripMenuItem.Size = new Size(224, 26);
             greenToolStripMenuItem.Text = "Green";
+            greenToolStripMenuItem.Click += greenToolStripMenuItem_Click;
             // 
             // blueToolStripMenuItem
             // 
             blueToolStripMenuItem.Name = "blueToolStripMenuItem";
             blueToolStripMenuItem.Size = new Size(224, 26);
             blueToolStripMenuItem.Text = "Blue";
+            blueToolStripMenuItem.Click += blueToolStripMenuItem_Click;
             // 
             // inforToolStripMenuItem
             // 
@@ -127,6 +130,13 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
+            // 
+            // invertToolStripMenuItem
+            // 
+            invertToolStripMenuItem.Name = "invertToolStripMenuItem";
+            invertToolStripMenuItem.Size = new Size(224, 26);
+            invertToolStripMenuItem.Text = "Negative";
+            invertToolStripMenuItem.Click += invertToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -161,5 +171,6 @@
         private ToolStripMenuItem inforToolStripMenuItem;
         private ToolStripMenuItem propertiesToolStripMenuItem;
         private PictureBox pictureBox2;
+        private ToolStripMenuItem invertToolStripMenuItem;
     }
 }
