@@ -82,5 +82,40 @@ namespace IMAVD_IMAGE_Proj
             Properties properties = new Properties();
             properties.Show();
         }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //verificando se a imagem foi aberta
+            if(pictureBox1.Image != null)
+            {
+                Bitmap img = new Bitmap(pictureBox1.Image);
+                int width = pictureBox1.Image.Width;
+                int height = pictureBox1.Image.Height;
+
+                Bitmap red = new Bitmap(img);
+
+                for(int y = 0; y < height; y++)
+                {
+                    for(int x = 0; x < width; x++)
+                    {
+                        Color p = img.GetPixel(x, y);
+
+                        int a = p.A;
+                        int r = p.R;
+                        int g = p.G;
+                        int b = p.B;
+
+                        red.SetPixel(x, y, Color.FromArgb(a, r, 0, 0));
+                    }
+                }
+
+                pictureBox2.Image = red;
+            }
+        }
     }
 }
