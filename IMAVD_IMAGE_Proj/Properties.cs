@@ -26,5 +26,10 @@ namespace IMAVD_IMAGE_Proj
             image_size.Text = Form1.imageSize;
             image_created.Text = Form1.imageCreatedOn;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
     }
 }

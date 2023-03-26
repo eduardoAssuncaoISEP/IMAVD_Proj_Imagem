@@ -55,20 +55,17 @@ namespace IMAVD_IMAGE_Proj
 
                 // set image information for global variable
                 imageName = Path.GetFileName(open.FileName);
-                imageExtension = Path.GetExtension(open.FileName);              
-                imageDimension = pictureBox1.Image.Size.ToString();
-                
+                imageExtension = Path.GetExtension(open.FileName);
+
+                string width = pictureBox1.Image.Width.ToString();
+                string height = pictureBox1.Image.Height.ToString();
+                imageDimension = width + " x " + height;
+
                 long tamanhoEmBytes = fileInfo.Length;
-                double tamanhoEmKilobytes = (double)tamanhoEmBytes / 1024;
-                imageSize = tamanhoEmBytes.ToString();
-                
+                int tamanhoEmKilobytes = (int)tamanhoEmBytes / 1024;
+                imageSize = tamanhoEmKilobytes.ToString() + " KB";
                 imageLocation = Path.GetFullPath(open.FileName);
-
                 imageCreatedOn = fileInfo.CreationTime.ToString();
-                //double size = Math.Round(((double)open.Conted))
-
-                
-                //imageCreatedOn = pictureBox1.Image.GetPropertyItem(36867);
 
 
 
