@@ -2,6 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 
 namespace IMAVD_IMAGE_Proj
 {
@@ -15,6 +16,12 @@ namespace IMAVD_IMAGE_Proj
         public static string imageSize = "";
         public static string imageCreatedOn = "";
 
+        [DllImport("user32.dll")]
+        static extern bool GetCursorPos(ref Point lpPoint);
+
+        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +29,8 @@ namespace IMAVD_IMAGE_Proj
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+
 
         }
 
@@ -67,9 +76,55 @@ namespace IMAVD_IMAGE_Proj
                 imageLocation = Path.GetFullPath(open.FileName);
                 imageCreatedOn = fileInfo.CreationTime.ToString();
 
-
-
             }
+        }
+
+        /*PointF stretched(Point p0, PictureBox pb)
+        {
+            if (pb.Image == null) return PointF.Empty;
+
+            float scaleX = 1f * pb.Image.Width / pb.ClientSize.Width;
+            float scaleY = 1f * pb.Image.Height / pb.ClientSize.Height;
+
+            return new PointF(p0.X * scaleX, p0.Y * scaleY);
+        }*/
+
+        //Function to get color from image
+        public Color GetColorAt(Point location)
+        {
+            using (Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
+            {
+                using (Graphics gdest = Graphics.FromImage(screenPixel))
+                {
+                    using (Graphics gsrc = Graphics.FromHwnd(pictureBox1.Handle))
+                    {
+                        IntPtr hSrcDC = gsrc.GetHdc();
+                        IntPtr hDC = gdest.GetHdc();
+                        int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
+                        gdest.ReleaseHdc();
+                        gsrc.ReleaseHdc();
+                    }
+                }
+
+                return screenPixel.GetPixel(0, 0);
+            }
+        }
+
+        //Get color with the moving mouse in the image
+        private void getColorImage_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            panel1.BackColor = GetColorAt(e.Location);
+
+        }
+
+        //Get color with a mouse click
+        private void getColorImage_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            Color pixel = GetColorAt(e.Location);
+            MessageBox.Show("Cor do pixel: " + pixel.ToString());
+
         }
 
         private void inforToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +132,7 @@ namespace IMAVD_IMAGE_Proj
 
         }
 
+        //Call the properties Form
         private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties properties = new Properties();
@@ -88,6 +144,7 @@ namespace IMAVD_IMAGE_Proj
 
         }
 
+        //Convert color to red
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
@@ -118,6 +175,7 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
+        //Convert color to green
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
@@ -148,6 +206,7 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
+        //Convert color to blue
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
@@ -178,6 +237,7 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
+        //invert color 
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
