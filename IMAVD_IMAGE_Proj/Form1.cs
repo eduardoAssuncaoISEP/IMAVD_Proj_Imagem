@@ -15,6 +15,7 @@ namespace IMAVD_IMAGE_Proj
         public static string imageLocation = "";
         public static string imageSize = "";
         public static string imageCreatedOn = "";
+        public static Image imagePath = null;
 
         [DllImport("user32.dll")]
         static extern bool GetCursorPos(ref Point lpPoint);
@@ -63,6 +64,7 @@ namespace IMAVD_IMAGE_Proj
                 FileInfo fileInfo = new FileInfo(open.FileName);
 
                 // set image information for global variable
+                imagePath = pictureBox1.Image;
                 imageName = Path.GetFileName(open.FileName);
                 imageExtension = Path.GetExtension(open.FileName);
 
