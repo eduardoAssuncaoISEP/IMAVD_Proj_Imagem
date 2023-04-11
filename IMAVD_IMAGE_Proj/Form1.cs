@@ -111,6 +111,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         //Get color with the moving mouse in the image
+        //Fazer ativaçao após ter clicado na opção Get color na toolbar
         private void getColorImage_MouseMove(object sender, MouseEventArgs e)
         {
 
@@ -119,6 +120,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         //Get color with a mouse click
+        //Fazer ativaçao após ter clicado na opção Get color na toolbar
         private void getColorImage_MouseClick(object sender, MouseEventArgs e)
         {
 
@@ -270,6 +272,12 @@ namespace IMAVD_IMAGE_Proj
 
                 pictureBox2.Image = img;
             }
+        }
+
+        private void findColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorSearch colorSearch = new ColorSearch();
+            colorSearch.Show();
         }
     }
 }

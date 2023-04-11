@@ -39,6 +39,9 @@
             invertToolStripMenuItem = new ToolStripMenuItem();
             inforToolStripMenuItem = new ToolStripMenuItem();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
+            colorToolStripMenuItem = new ToolStripMenuItem();
+            findColorToolStripMenuItem = new ToolStripMenuItem();
+            getColorToolStripMenuItem = new ToolStripMenuItem();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -119,7 +122,7 @@
             // 
             // inforToolStripMenuItem
             // 
-            inforToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { propertiesToolStripMenuItem });
+            inforToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { propertiesToolStripMenuItem, colorToolStripMenuItem });
             inforToolStripMenuItem.Name = "inforToolStripMenuItem";
             inforToolStripMenuItem.Size = new Size(54, 24);
             inforToolStripMenuItem.Text = "Infor";
@@ -128,9 +131,29 @@
             // propertiesToolStripMenuItem
             // 
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            propertiesToolStripMenuItem.Size = new Size(159, 26);
+            propertiesToolStripMenuItem.Size = new Size(224, 26);
             propertiesToolStripMenuItem.Text = "Properties";
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
+            // 
+            // colorToolStripMenuItem
+            // 
+            colorToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { findColorToolStripMenuItem, getColorToolStripMenuItem });
+            colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+            colorToolStripMenuItem.Size = new Size(224, 26);
+            colorToolStripMenuItem.Text = "Color";
+            // 
+            // findColorToolStripMenuItem
+            // 
+            findColorToolStripMenuItem.Name = "findColorToolStripMenuItem";
+            findColorToolStripMenuItem.Size = new Size(224, 26);
+            findColorToolStripMenuItem.Text = "Color search";
+            findColorToolStripMenuItem.Click += findColorToolStripMenuItem_Click;
+            // 
+            // getColorToolStripMenuItem
+            // 
+            getColorToolStripMenuItem.Name = "getColorToolStripMenuItem";
+            getColorToolStripMenuItem.Size = new Size(224, 26);
+            getColorToolStripMenuItem.Text = "Get color";
             // 
             // pictureBox2
             // 
@@ -184,5 +207,8 @@
         private PictureBox pictureBox2;
         private ToolStripMenuItem invertToolStripMenuItem;
         private Panel panel1;
+        private ToolStripMenuItem colorToolStripMenuItem;
+        private ToolStripMenuItem findColorToolStripMenuItem;
+        private ToolStripMenuItem getColorToolStripMenuItem;
     }
 }
