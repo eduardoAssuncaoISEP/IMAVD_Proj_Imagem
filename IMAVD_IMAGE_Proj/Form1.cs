@@ -17,11 +17,6 @@ namespace IMAVD_IMAGE_Proj
         public static string imageCreatedOn = "";
         public static Image imagePath = null;
 
-        [DllImport("user32.dll")]
-        static extern bool GetCursorPos(ref Point lpPoint);
-
-        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
-        public static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
 
         public Form1()
         {
@@ -79,56 +74,6 @@ namespace IMAVD_IMAGE_Proj
                 imageCreatedOn = fileInfo.CreationTime.ToString();
 
             }
-        }
-
-        /*PointF stretched(Point p0, PictureBox pb)
-        {
-            if (pb.Image == null) return PointF.Empty;
-
-            float scaleX = 1f * pb.Image.Width / pb.ClientSize.Width;
-            float scaleY = 1f * pb.Image.Height / pb.ClientSize.Height;
-
-            return new PointF(p0.X * scaleX, p0.Y * scaleY);
-        }*/
-
-        //Function to get color from image
-        public Color GetColorAt(Point location)
-        {
-            using (Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
-            {
-                using (Graphics gdest = Graphics.FromImage(screenPixel))
-                {
-                    using (Graphics gsrc = Graphics.FromHwnd(pictureBox1.Handle))
-                    {
-                        IntPtr hSrcDC = gsrc.GetHdc();
-                        IntPtr hDC = gdest.GetHdc();
-                        int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
-                        gdest.ReleaseHdc();
-                        gsrc.ReleaseHdc();
-                    }
-                }
-
-                return screenPixel.GetPixel(0, 0);
-            }
-        }
-
-        //Get color with the moving mouse in the image
-        //Fazer ativaçao após ter clicado na opção Get color na toolbar
-        private void getColorImage_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            panel1.BackColor = GetColorAt(e.Location);
-
-        }
-
-        //Get color with a mouse click
-        //Fazer ativaçao após ter clicado na opção Get color na toolbar
-        private void getColorImage_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            Color pixel = GetColorAt(e.Location);
-            MessageBox.Show("Cor do pixel: " + pixel.ToString());
-
         }
 
         private void inforToolStripMenuItem_Click(object sender, EventArgs e)
@@ -280,6 +225,12 @@ namespace IMAVD_IMAGE_Proj
         {
             ColorSearch colorSearch = new ColorSearch();
             colorSearch.Show();
+        }
+
+        private void getColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetColor getColor = new GetColor();
+            getColor.Show();
         }
     }
 }

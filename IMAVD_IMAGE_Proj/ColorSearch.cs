@@ -45,7 +45,7 @@ namespace IMAVD_IMAGE_Proj
                 {
                     selectColorPanel.BackColor = colorDialog1.Color;
                     //colorSelectName.Text = colorDialog1.Color.;
-                  
+
                     //If it is know color, display the color name
                     if (colorSelectName.Text == Color.White.ToString())
                     {

@@ -57,8 +57,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.MouseClick += getColorImage_MouseClick;
-            pictureBox1.MouseMove += getColorImage_MouseMove;
             // 
             // menuStrip1
             // 
@@ -154,6 +152,7 @@
             getColorToolStripMenuItem.Name = "getColorToolStripMenuItem";
             getColorToolStripMenuItem.Size = new Size(224, 26);
             getColorToolStripMenuItem.Text = "Get color";
+            getColorToolStripMenuItem.Click += getColorToolStripMenuItem_Click;
             // 
             // pictureBox2
             // 

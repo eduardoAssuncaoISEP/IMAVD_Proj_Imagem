@@ -39,7 +39,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(426, 29);
+            pictureBox1.Location = new Point(12, 33);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(351, 379);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -49,7 +49,7 @@
             // 
             // pickColor
             // 
-            pickColor.Location = new Point(85, 167);
+            pickColor.Location = new Point(432, 33);
             pickColor.Name = "pickColor";
             pickColor.Size = new Size(94, 29);
             pickColor.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // selectColorPanel
             // 
-            selectColorPanel.Location = new Point(45, 241);
+            selectColorPanel.Location = new Point(532, 32);
             selectColorPanel.Name = "selectColorPanel";
             selectColorPanel.Size = new Size(90, 30);
             selectColorPanel.TabIndex = 2;
@@ -67,7 +67,7 @@
             // colorSelectName
             // 
             colorSelectName.AutoSize = true;
-            colorSelectName.Location = new Point(187, 241);
+            colorSelectName.Location = new Point(628, 37);
             colorSelectName.Name = "colorSelectName";
             colorSelectName.Size = new Size(85, 20);
             colorSelectName.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             // colorDetectButton
             // 
-            colorDetectButton.Location = new Point(95, 356);
+            colorDetectButton.Location = new Point(509, 105);
             colorDetectButton.Name = "colorDetectButton";
             colorDetectButton.Size = new Size(142, 29);
             colorDetectButton.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 430);
             Controls.Add(colorDetectButton);
             Controls.Add(colorSelectName);
             Controls.Add(selectColorPanel);
