@@ -44,9 +44,11 @@
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
+            trackBar1 = new TrackBar();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -170,11 +172,20 @@
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(512, 82);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(250, 56);
+            trackBar1.TabIndex = 10;
+            trackBar1.Scroll += trackBar1_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(824, 759);
+            Controls.Add(trackBar1);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
             Controls.Add(pictureBox2);
@@ -187,6 +198,7 @@
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,5 +220,6 @@
         private ToolStripMenuItem findColorToolStripMenuItem;
         private ToolStripMenuItem getColorToolStripMenuItem;
         private PictureBox pictureBox1;
+        private TrackBar trackBar1;
     }
 }

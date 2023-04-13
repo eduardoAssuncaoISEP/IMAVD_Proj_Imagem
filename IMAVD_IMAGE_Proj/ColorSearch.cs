@@ -66,6 +66,8 @@ namespace IMAVD_IMAGE_Proj
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+
+            int countColor = 0;
             try
             {
                 Boolean IsColorFound = false;
@@ -79,14 +81,17 @@ namespace IMAVD_IMAGE_Proj
                     {
                         for (int j = 0; j < pictureBox1.Image.Width; j++)
                         {
+                            countColor++;
                             //Get the color at each pixel
                             Color now_color = bmp.GetPixel(j, i);
 
                             //Compare Pixel's Color ARGB property with the picked color's ARGB property
                             if (now_color.ToArgb() == colorDialog1.Color.ToArgb())
                             {
+                                countColor++;
                                 IsColorFound = true;
                                 MessageBox.Show("Color Found!");
+                                getColorCountLabel.Text = Convert.ToString(countColor + " Pixels");
                                 break;
                             }
                         }

@@ -34,6 +34,7 @@
             colorSelectName = new Label();
             colorDialog1 = new ColorDialog();
             colorDetectButton = new Button();
+            getColorCountLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -84,11 +85,21 @@
             colorDetectButton.UseVisualStyleBackColor = true;
             colorDetectButton.Click += button1_Click_1;
             // 
+            // getColorCountLabel
+            // 
+            getColorCountLabel.AutoSize = true;
+            getColorCountLabel.Location = new Point(509, 157);
+            getColorCountLabel.Name = "getColorCountLabel";
+            getColorCountLabel.Size = new Size(50, 20);
+            getColorCountLabel.TabIndex = 6;
+            getColorCountLabel.Text = "label1";
+            // 
             // ColorSearch
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 430);
+            Controls.Add(getColorCountLabel);
             Controls.Add(colorDetectButton);
             Controls.Add(colorSelectName);
             Controls.Add(selectColorPanel);
@@ -110,5 +121,6 @@
         private Label colorSelectName;
         private ColorDialog colorDialog1;
         private Button colorDetectButton;
+        private Label getColorCountLabel;
     }
 }

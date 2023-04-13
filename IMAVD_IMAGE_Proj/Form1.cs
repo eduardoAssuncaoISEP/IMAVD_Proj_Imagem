@@ -221,6 +221,14 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
+        Image Zoom(Image img, Size size)
+        {
+            Bitmap bmp = new Bitmap(img, img.Width + (img.Width * size.Width / 100), img.Height + (img.Height * size.Height / 100));
+            Graphics g = Graphics.FromImage(bmp);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            return bmp;
+        }
+
         private void findColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorSearch colorSearch = new ColorSearch();
@@ -231,6 +239,14 @@ namespace IMAVD_IMAGE_Proj
         {
             GetColor getColor = new GetColor();
             getColor.Show();
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar1.Value > 0)
+            {
+                pictureBox1.Image = Zoom(pictureBox1.Image, new Size(trackBar1.Value, trackBar1.Value));
+            }
         }
     }
 }
