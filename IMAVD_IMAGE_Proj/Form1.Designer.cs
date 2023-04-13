@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
@@ -44,19 +43,11 @@
             getColorToolStripMenuItem = new ToolStripMenuItem();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox1 = new PictureBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(29, 66);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(361, 329);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -129,7 +120,7 @@
             // propertiesToolStripMenuItem
             // 
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            propertiesToolStripMenuItem.Size = new Size(224, 26);
+            propertiesToolStripMenuItem.Size = new Size(159, 26);
             propertiesToolStripMenuItem.Text = "Properties";
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
             // 
@@ -137,26 +128,26 @@
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { findColorToolStripMenuItem, getColorToolStripMenuItem });
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            colorToolStripMenuItem.Size = new Size(224, 26);
+            colorToolStripMenuItem.Size = new Size(159, 26);
             colorToolStripMenuItem.Text = "Color";
             // 
             // findColorToolStripMenuItem
             // 
             findColorToolStripMenuItem.Name = "findColorToolStripMenuItem";
-            findColorToolStripMenuItem.Size = new Size(224, 26);
+            findColorToolStripMenuItem.Size = new Size(174, 26);
             findColorToolStripMenuItem.Text = "Color search";
             findColorToolStripMenuItem.Click += findColorToolStripMenuItem_Click;
             // 
             // getColorToolStripMenuItem
             // 
             getColorToolStripMenuItem.Name = "getColorToolStripMenuItem";
-            getColorToolStripMenuItem.Size = new Size(224, 26);
+            getColorToolStripMenuItem.Size = new Size(174, 26);
             getColorToolStripMenuItem.Text = "Get color";
             getColorToolStripMenuItem.Click += getColorToolStripMenuItem_Click;
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(29, 401);
+            pictureBox2.Location = new Point(24, 390);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(361, 329);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -165,35 +156,42 @@
             // 
             // panel1
             // 
-            panel1.Location = new Point(525, 66);
+            panel1.Location = new Point(512, 159);
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 125);
             panel1.TabIndex = 8;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(24, 55);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(361, 329);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(824, 759);
+            Controls.Add(pictureBox1);
             Controls.Add(panel1);
             Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
@@ -209,5 +207,6 @@
         private ToolStripMenuItem colorToolStripMenuItem;
         private ToolStripMenuItem findColorToolStripMenuItem;
         private ToolStripMenuItem getColorToolStripMenuItem;
+        private PictureBox pictureBox1;
     }
 }

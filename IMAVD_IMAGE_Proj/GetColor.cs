@@ -68,7 +68,7 @@ namespace IMAVD_IMAGE_Proj
 
             Color pixel = GetColorAt(e.Location);
             MessageBox.Show("Cor do pixel: " + pixel.ToString());
-            getColorLabel.Text = pixel.ToString();
+            getColorTextBox.Text = pixel.ToString();
 
         }
 

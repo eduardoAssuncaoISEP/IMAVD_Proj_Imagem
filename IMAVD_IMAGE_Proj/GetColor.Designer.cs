@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             getColorPictureBox = new PictureBox();
             getColorPanel = new Panel();
-            getColorLabel = new Label();
             getColorButton = new Button();
+            getColorTextBox = new TextBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             ((System.ComponentModel.ISupportInitialize)getColorPictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -39,30 +41,23 @@
             // 
             getColorPictureBox.Location = new Point(34, 47);
             getColorPictureBox.Name = "getColorPictureBox";
-            getColorPictureBox.Size = new Size(311, 325);
+            getColorPictureBox.Size = new Size(361, 329);
             getColorPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             getColorPictureBox.TabIndex = 0;
             getColorPictureBox.TabStop = false;
+            getColorPictureBox.MouseClick += getColorImage_MouseClick;
+            getColorPictureBox.MouseMove += getColorImage_MouseMove;
             // 
             // getColorPanel
             // 
-            getColorPanel.Location = new Point(442, 72);
+            getColorPanel.Location = new Point(527, 70);
             getColorPanel.Name = "getColorPanel";
             getColorPanel.Size = new Size(250, 125);
             getColorPanel.TabIndex = 1;
             // 
-            // getColorLabel
-            // 
-            getColorLabel.AutoSize = true;
-            getColorLabel.Location = new Point(549, 242);
-            getColorLabel.Name = "getColorLabel";
-            getColorLabel.Size = new Size(50, 20);
-            getColorLabel.TabIndex = 2;
-            getColorLabel.Text = "label1";
-            // 
             // getColorButton
             // 
-            getColorButton.Location = new Point(527, 318);
+            getColorButton.Location = new Point(609, 316);
             getColorButton.Name = "getColorButton";
             getColorButton.Size = new Size(94, 29);
             getColorButton.TabIndex = 3;
@@ -70,20 +65,31 @@
             getColorButton.UseVisualStyleBackColor = true;
             getColorButton.Click += getColorButton_Click;
             // 
+            // getColorTextBox
+            // 
+            getColorTextBox.Location = new Point(527, 201);
+            getColorTextBox.Name = "getColorTextBox";
+            getColorTextBox.Size = new Size(250, 27);
+            getColorTextBox.TabIndex = 4;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
+            // 
             // GetColor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(824, 759);
+            Controls.Add(getColorTextBox);
             Controls.Add(getColorButton);
-            Controls.Add(getColorLabel);
             Controls.Add(getColorPanel);
             Controls.Add(getColorPictureBox);
             Name = "GetColor";
             Text = "GetColor";
             Load += GetColor_Load;
-            MouseClick += getColorImage_MouseClick;
-            MouseMove += getColorImage_MouseMove;
             ((System.ComponentModel.ISupportInitialize)getColorPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -93,7 +99,8 @@
 
         private PictureBox getColorPictureBox;
         private Panel getColorPanel;
-        private Label getColorLabel;
         private Button getColorButton;
+        private TextBox getColorTextBox;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }
