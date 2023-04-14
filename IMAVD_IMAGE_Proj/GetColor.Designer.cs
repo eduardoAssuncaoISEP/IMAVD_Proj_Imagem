@@ -39,6 +39,7 @@
             // 
             // getColorPictureBox
             // 
+            getColorPictureBox.Cursor = Cursors.Cross;
             getColorPictureBox.Location = new Point(34, 47);
             getColorPictureBox.Name = "getColorPictureBox";
             getColorPictureBox.Size = new Size(361, 329);

@@ -36,6 +36,7 @@
             greenToolStripMenuItem = new ToolStripMenuItem();
             blueToolStripMenuItem = new ToolStripMenuItem();
             invertToolStripMenuItem = new ToolStripMenuItem();
+            cropToolStripMenuItem = new ToolStripMenuItem();
             inforToolStripMenuItem = new ToolStripMenuItem();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
             colorToolStripMenuItem = new ToolStripMenuItem();
@@ -47,6 +48,14 @@
             trackBar1 = new TrackBar();
             panelPictureBox2 = new Panel();
             label1 = new Label();
+            widthCrop = new TextBox();
+            heightCrop = new TextBox();
+            yPositionCrop = new TextBox();
+            xPositionCrop = new TextBox();
+            xCropLabel = new Label();
+            yCropLabel = new Label();
+            HeightCropLabel = new Label();
+            widthCropLabel = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -81,7 +90,7 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem, invertToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem, invertToolStripMenuItem, cropToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -114,6 +123,13 @@
             invertToolStripMenuItem.Size = new Size(152, 26);
             invertToolStripMenuItem.Text = "Negative";
             invertToolStripMenuItem.Click += invertToolStripMenuItem_Click;
+            // 
+            // cropToolStripMenuItem
+            // 
+            cropToolStripMenuItem.Name = "cropToolStripMenuItem";
+            cropToolStripMenuItem.Size = new Size(152, 26);
+            cropToolStripMenuItem.Text = "Crop";
+            cropToolStripMenuItem.Click += cropToolStripMenuItem_Click;
             // 
             // inforToolStripMenuItem
             // 
@@ -208,11 +224,87 @@
             label1.TabIndex = 12;
             label1.Text = "ZOOM";
             // 
+            // widthCrop
+            // 
+            widthCrop.Location = new Point(584, 168);
+            widthCrop.Name = "widthCrop";
+            widthCrop.Size = new Size(125, 27);
+            widthCrop.TabIndex = 13;
+            // 
+            // heightCrop
+            // 
+            heightCrop.Location = new Point(584, 216);
+            heightCrop.Name = "heightCrop";
+            heightCrop.Size = new Size(125, 27);
+            heightCrop.TabIndex = 14;
+            // 
+            // yPositionCrop
+            // 
+            yPositionCrop.Location = new Point(584, 120);
+            yPositionCrop.Name = "yPositionCrop";
+            yPositionCrop.Size = new Size(125, 27);
+            yPositionCrop.TabIndex = 16;
+            // 
+            // xPositionCrop
+            // 
+            xPositionCrop.Location = new Point(584, 64);
+            xPositionCrop.Name = "xPositionCrop";
+            xPositionCrop.Size = new Size(125, 27);
+            xPositionCrop.TabIndex = 15;
+            // 
+            // xCropLabel
+            // 
+            xCropLabel.AutoSize = true;
+            xCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            xCropLabel.Location = new Point(559, 67);
+            xCropLabel.Name = "xCropLabel";
+            xCropLabel.Size = new Size(23, 20);
+            xCropLabel.TabIndex = 17;
+            xCropLabel.Text = "X:";
+            // 
+            // yCropLabel
+            // 
+            yCropLabel.AutoSize = true;
+            yCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            yCropLabel.Location = new Point(559, 123);
+            yCropLabel.Name = "yCropLabel";
+            yCropLabel.Size = new Size(22, 20);
+            yCropLabel.TabIndex = 18;
+            yCropLabel.Text = "Y:";
+            // 
+            // HeightCropLabel
+            // 
+            HeightCropLabel.AutoSize = true;
+            HeightCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            HeightCropLabel.Location = new Point(510, 219);
+            HeightCropLabel.Name = "HeightCropLabel";
+            HeightCropLabel.Size = new Size(68, 20);
+            HeightCropLabel.TabIndex = 20;
+            HeightCropLabel.Text = "HEIGHT:";
+            // 
+            // widthCropLabel
+            // 
+            widthCropLabel.AutoSize = true;
+            widthCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            widthCropLabel.Location = new Point(515, 171);
+            widthCropLabel.Name = "widthCropLabel";
+            widthCropLabel.Size = new Size(63, 20);
+            widthCropLabel.TabIndex = 19;
+            widthCropLabel.Text = "WIDTH:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 829);
+            Controls.Add(HeightCropLabel);
+            Controls.Add(widthCropLabel);
+            Controls.Add(yCropLabel);
+            Controls.Add(xCropLabel);
+            Controls.Add(yPositionCrop);
+            Controls.Add(xPositionCrop);
+            Controls.Add(heightCrop);
+            Controls.Add(widthCrop);
             Controls.Add(label1);
             Controls.Add(panelPictureBox2);
             Controls.Add(trackBar1);
@@ -255,5 +347,14 @@
         private Panel panelPictureBox2;
         private TrackBar trackBar1;
         private Label label1;
+        private ToolStripMenuItem cropToolStripMenuItem;
+        private TextBox widthCrop;
+        private TextBox heightCrop;
+        private TextBox yPositionCrop;
+        private TextBox xPositionCrop;
+        private Label xCropLabel;
+        private Label yCropLabel;
+        private Label HeightCropLabel;
+        private Label widthCropLabel;
     }
 }
