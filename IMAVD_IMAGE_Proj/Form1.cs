@@ -23,10 +23,18 @@ namespace IMAVD_IMAGE_Proj
             InitializeComponent();
         }
 
+        PictureBox org;
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            trackBar1.Minimum = 1;
+            trackBar1.Maximum = 6;
+            trackBar1.SmallChange = 1;
+            trackBar1.LargeChange = 1;
+            trackBar1.UseWaitCursor = false;
 
+            this.DoubleBuffered = true; //minimazes the strutter
 
         }
 
@@ -57,7 +65,8 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox1.Image = new Bitmap(open.FileName);
 
                 FileInfo fileInfo = new FileInfo(open.FileName);
-
+                org = new PictureBox();
+                org.Image = pictureBox1.Image;
                 // set image information for global variable
                 imagePath = pictureBox1.Image;
                 imageName = Path.GetFileName(open.FileName);
@@ -221,9 +230,10 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
-        Image Zoom(Image img, Size size)
+        Image ZoomPicture(Image img, Size size)
         {
-            Bitmap bmp = new Bitmap(img, img.Width + (img.Width * size.Width / 100), img.Height + (img.Height * size.Height / 100));
+            Bitmap bmp = new Bitmap(img, Convert.ToInt32(img.Width * size.Width),
+                Convert.ToInt32(img.Height * size.Height));
             Graphics g = Graphics.FromImage(bmp);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             return bmp;
@@ -243,9 +253,10 @@ namespace IMAVD_IMAGE_Proj
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (trackBar1.Value > 0)
+            if (trackBar1.Value != 0)
             {
-                pictureBox1.Image = Zoom(pictureBox1.Image, new Size(trackBar1.Value, trackBar1.Value));
+                pictureBox1.Image = null;
+                pictureBox1.Image = ZoomPicture(org.Image, new Size(trackBar1.Value, trackBar1.Value));
             }
         }
     }

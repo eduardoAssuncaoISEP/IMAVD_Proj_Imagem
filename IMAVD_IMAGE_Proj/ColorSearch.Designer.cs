@@ -90,9 +90,9 @@
             getColorCountLabel.AutoSize = true;
             getColorCountLabel.Location = new Point(509, 157);
             getColorCountLabel.Name = "getColorCountLabel";
-            getColorCountLabel.Size = new Size(50, 20);
+            getColorCountLabel.Size = new Size(85, 20);
             getColorCountLabel.TabIndex = 6;
-            getColorCountLabel.Text = "label1";
+            getColorCountLabel.Text = "CountPixels";
             // 
             // ColorSearch
             // 
