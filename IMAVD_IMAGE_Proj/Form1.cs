@@ -253,7 +253,7 @@ namespace IMAVD_IMAGE_Proj
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (trackBar1.Value != 0)
+            if (trackBar1.Value != 0 && pictureBox1.Image != null)
             {
                 pictureBox1.Image = null;
                 pictureBox1.Image = ZoomPicture(org.Image, new Size(trackBar1.Value, trackBar1.Value));

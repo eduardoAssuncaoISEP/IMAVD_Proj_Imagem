@@ -46,6 +46,7 @@
             pictureBox1 = new PictureBox();
             trackBar1 = new TrackBar();
             panelPictureBox2 = new Panel();
+            label1 = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -60,7 +61,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, inforToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(824, 28);
+            menuStrip1.Size = new Size(749, 28);
             menuStrip1.TabIndex = 6;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -152,9 +153,9 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(37, 23);
+            pictureBox2.Location = new Point(3, 13);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(361, 329);
+            pictureBox2.Size = new Size(397, 330);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
@@ -163,25 +164,28 @@
             // 
             panelPictureBox1.AutoScroll = true;
             panelPictureBox1.Controls.Add(pictureBox1);
-            panelPictureBox1.Location = new Point(23, 43);
+            panelPictureBox1.Location = new Point(12, 40);
             panelPictureBox1.Name = "panelPictureBox1";
-            panelPictureBox1.Size = new Size(446, 387);
+            panelPictureBox1.Size = new Size(403, 360);
             panelPictureBox1.TabIndex = 8;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(37, 27);
+            pictureBox1.Location = new Point(3, 14);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(361, 329);
+            pictureBox1.Size = new Size(397, 330);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
             // trackBar1
             // 
-            trackBar1.Location = new Point(512, 82);
+            trackBar1.Cursor = Cursors.Hand;
+            trackBar1.Location = new Point(431, 99);
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(250, 56);
+            trackBar1.Orientation = Orientation.Vertical;
+            trackBar1.RightToLeft = RightToLeft.No;
+            trackBar1.Size = new Size(56, 237);
             trackBar1.TabIndex = 10;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
@@ -189,16 +193,27 @@
             // 
             panelPictureBox2.AutoScroll = true;
             panelPictureBox2.Controls.Add(pictureBox2);
-            panelPictureBox2.Location = new Point(23, 436);
+            panelPictureBox2.Location = new Point(12, 406);
             panelPictureBox2.Name = "panelPictureBox2";
-            panelPictureBox2.Size = new Size(446, 387);
+            panelPictureBox2.Size = new Size(403, 360);
             panelPictureBox2.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BorderStyle = BorderStyle.Fixed3D;
+            label1.Location = new Point(421, 86);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 22);
+            label1.TabIndex = 12;
+            label1.Text = "ZOOM";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(824, 839);
+            ClientSize = new Size(749, 829);
+            Controls.Add(label1);
             Controls.Add(panelPictureBox2);
             Controls.Add(trackBar1);
             Controls.Add(panelPictureBox1);
@@ -237,7 +252,8 @@
         private ToolStripMenuItem findColorToolStripMenuItem;
         private ToolStripMenuItem getColorToolStripMenuItem;
         private PictureBox pictureBox1;
-        private TrackBar trackBar1;
         private Panel panelPictureBox2;
+        private TrackBar trackBar1;
+        private Label label1;
     }
 }
