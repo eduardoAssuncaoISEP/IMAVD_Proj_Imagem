@@ -277,6 +277,7 @@ namespace IMAVD_IMAGE_Proj
                         //setar essas informações pelo form (pos em X da imagem, pos Y da imagem,tamanho do crop altura, tamanho do crop largura)
                         Rectangle rect = new Rectangle(xCrop, yCrop, wCrop, hCrop);
                         pictureBox1.Image = CropImage(pictureBox1.Image, rect);
+                        saveCropButton.Enabled = true;
                     }
                     else
                     {
@@ -300,6 +301,17 @@ namespace IMAVD_IMAGE_Proj
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
 
+        private void saveCropButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                saveCropButton.Enabled = false;
 
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Arquivos PNG (*.png)|*.png";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image.Save(dialog.FileName, ImageFormat.Png);
+            }
+        }
     }
 }

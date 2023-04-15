@@ -56,6 +56,7 @@
             yCropLabel = new Label();
             HeightCropLabel = new Label();
             widthCropLabel = new Label();
+            saveCropButton = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -292,11 +293,23 @@
             widthCropLabel.TabIndex = 19;
             widthCropLabel.Text = "WIDTH:";
             // 
+            // saveCropButton
+            // 
+            saveCropButton.Enabled = false;
+            saveCropButton.Location = new Point(602, 274);
+            saveCropButton.Name = "saveCropButton";
+            saveCropButton.Size = new Size(94, 29);
+            saveCropButton.TabIndex = 21;
+            saveCropButton.Text = "Save Crop";
+            saveCropButton.UseVisualStyleBackColor = true;
+            saveCropButton.Click += saveCropButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 829);
+            Controls.Add(saveCropButton);
             Controls.Add(HeightCropLabel);
             Controls.Add(widthCropLabel);
             Controls.Add(yCropLabel);
@@ -356,5 +369,6 @@
         private Label yCropLabel;
         private Label HeightCropLabel;
         private Label widthCropLabel;
+        private Button saveCropButton;
     }
 }
