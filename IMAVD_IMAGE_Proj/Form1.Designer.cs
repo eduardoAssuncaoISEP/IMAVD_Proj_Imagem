@@ -57,6 +57,9 @@
             HeightCropLabel = new Label();
             widthCropLabel = new Label();
             saveCropButton = new Button();
+            changeGlowButton = new Button();
+            changeGlowTextBox = new TextBox();
+            changeGlowLabel = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -304,11 +307,40 @@
             saveCropButton.UseVisualStyleBackColor = true;
             saveCropButton.Click += saveCropButton_Click;
             // 
+            // changeGlowButton
+            // 
+            changeGlowButton.Location = new Point(589, 399);
+            changeGlowButton.Name = "changeGlowButton";
+            changeGlowButton.Size = new Size(94, 29);
+            changeGlowButton.TabIndex = 22;
+            changeGlowButton.Text = "Change Glow";
+            changeGlowButton.UseVisualStyleBackColor = true;
+            changeGlowButton.Click += changeGlowButton_Click;
+            // 
+            // changeGlowTextBox
+            // 
+            changeGlowTextBox.Location = new Point(571, 366);
+            changeGlowTextBox.Name = "changeGlowTextBox";
+            changeGlowTextBox.Size = new Size(125, 27);
+            changeGlowTextBox.TabIndex = 23;
+            // 
+            // changeGlowLabel
+            // 
+            changeGlowLabel.AutoSize = true;
+            changeGlowLabel.Location = new Point(583, 340);
+            changeGlowLabel.Name = "changeGlowLabel";
+            changeGlowLabel.Size = new Size(97, 20);
+            changeGlowLabel.TabIndex = 24;
+            changeGlowLabel.Text = "Change Glow";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 829);
+            Controls.Add(changeGlowLabel);
+            Controls.Add(changeGlowTextBox);
+            Controls.Add(changeGlowButton);
             Controls.Add(saveCropButton);
             Controls.Add(HeightCropLabel);
             Controls.Add(widthCropLabel);
@@ -370,5 +402,8 @@
         private Label HeightCropLabel;
         private Label widthCropLabel;
         private Button saveCropButton;
+        private Button changeGlowButton;
+        private TextBox changeGlowTextBox;
+        private Label changeGlowLabel;
     }
 }

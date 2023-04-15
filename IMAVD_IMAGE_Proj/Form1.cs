@@ -313,5 +313,39 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox1.Image.Save(dialog.FileName, ImageFormat.Png);
             }
         }
+
+        public static Bitmap AdjustBrightness(Bitmap image, float brightnessAdjustment)
+        {
+            Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
+
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    int r = Clamp((int)(pixelColor.R + brightnessAdjustment), 0, 255);
+                    int g = Clamp((int)(pixelColor.G + brightnessAdjustment), 0, 255);
+                    int b = Clamp((int)(pixelColor.B + brightnessAdjustment), 0, 255);
+
+                    adjustedImage.SetPixel(x, y, Color.FromArgb(pixelColor.A, r, g, b));
+                }
+            }
+
+            return adjustedImage;
+        }
+
+        private static int Clamp(int value, int min, int max)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
+
+        private void changeGlowButton_Click(object sender, EventArgs e)
+        {
+            int brightnessAdjustment = Convert.ToInt32(changeGlowTextBox.Text);
+
+            Bitmap originalImage = new Bitmap(imagePath);
+            pictureBox1.Image = AdjustBrightness(originalImage, brightnessAdjustment);
+
+        }
     }
 }
