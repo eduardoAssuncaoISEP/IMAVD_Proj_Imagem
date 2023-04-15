@@ -334,6 +334,31 @@ namespace IMAVD_IMAGE_Proj
             return adjustedImage;
         }
 
+        public static Bitmap AdjustContrast(Bitmap image, float contrastLevel)
+        {
+            Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
+            contrastLevel = (100.0f + contrastLevel) / 100.0f;
+            contrastLevel *= contrastLevel;
+
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    float r = pixelColor.R / 255.0f;
+                    float g = pixelColor.G / 255.0f;
+                    float b = pixelColor.B / 255.0f;
+                    r = (((r - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
+                    g = (((g - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
+                    b = (((b - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
+
+                    adjustedImage.SetPixel(x, y, Color.FromArgb(pixelColor.A, Clamp((int)r, 0, 255), Clamp((int)g, 0, 255), Clamp((int)b, 0, 255)));
+                }
+            }
+
+            return adjustedImage;
+        }
+
         private static int Clamp(int value, int min, int max)
         {
             return (value < min) ? min : (value > max) ? max : value;
@@ -346,6 +371,14 @@ namespace IMAVD_IMAGE_Proj
             Bitmap originalImage = new Bitmap(imagePath);
             pictureBox1.Image = AdjustBrightness(originalImage, brightnessAdjustment);
 
+        }
+
+        private void changeContrastButton_Click(object sender, EventArgs e)
+        {
+            int contrastAdjustment = Convert.ToInt32(changeContrastTextBox.Text);
+
+            Bitmap originalImage = new Bitmap(imagePath);
+            pictureBox1.Image = AdjustContrast(originalImage, contrastAdjustment);
         }
     }
 }

@@ -60,6 +60,9 @@
             changeGlowButton = new Button();
             changeGlowTextBox = new TextBox();
             changeGlowLabel = new Label();
+            changeContrastLabel = new Label();
+            changeContrastTextBox = new TextBox();
+            changeContrastButton = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -333,11 +336,40 @@
             changeGlowLabel.TabIndex = 24;
             changeGlowLabel.Text = "Change Glow";
             // 
+            // changeContrastLabel
+            // 
+            changeContrastLabel.AutoSize = true;
+            changeContrastLabel.Location = new Point(578, 448);
+            changeContrastLabel.Name = "changeContrastLabel";
+            changeContrastLabel.Size = new Size(118, 20);
+            changeContrastLabel.TabIndex = 27;
+            changeContrastLabel.Text = "Change Contrast";
+            // 
+            // changeContrastTextBox
+            // 
+            changeContrastTextBox.Location = new Point(574, 471);
+            changeContrastTextBox.Name = "changeContrastTextBox";
+            changeContrastTextBox.Size = new Size(125, 27);
+            changeContrastTextBox.TabIndex = 26;
+            // 
+            // changeContrastButton
+            // 
+            changeContrastButton.Location = new Point(592, 504);
+            changeContrastButton.Name = "changeContrastButton";
+            changeContrastButton.Size = new Size(94, 29);
+            changeContrastButton.TabIndex = 25;
+            changeContrastButton.Text = "Change Glow";
+            changeContrastButton.UseVisualStyleBackColor = true;
+            changeContrastButton.Click += changeContrastButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 829);
+            Controls.Add(changeContrastLabel);
+            Controls.Add(changeContrastTextBox);
+            Controls.Add(changeContrastButton);
             Controls.Add(changeGlowLabel);
             Controls.Add(changeGlowTextBox);
             Controls.Add(changeGlowButton);
@@ -405,5 +437,8 @@
         private Button changeGlowButton;
         private TextBox changeGlowTextBox;
         private Label changeGlowLabel;
+        private Label changeContrastLabel;
+        private TextBox changeContrastTextBox;
+        private Button changeContrastButton;
     }
 }
