@@ -304,7 +304,7 @@ namespace IMAVD_IMAGE_Proj
             Bitmap bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
-        
+
         private void saveCropButton_Click(object sender, EventArgs e)
         {
             if (pictureBox1.Image == null)
@@ -436,6 +436,30 @@ namespace IMAVD_IMAGE_Proj
             pictureBox1.Height = _img.Height;
             //PictureBoxLocation();
             //makeCropButton.Enabled = false;
+        }
+
+        private void rotateLeftButton_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            pictureBox1.Refresh();
+        }
+
+        private void rotateRightButton_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            pictureBox1.Refresh();
+        }
+
+        private void rotateHorizontalButton_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            pictureBox1.Refresh();
+        }
+
+        private void rotateVerticalButton_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox1.Refresh();
         }
     }
 }

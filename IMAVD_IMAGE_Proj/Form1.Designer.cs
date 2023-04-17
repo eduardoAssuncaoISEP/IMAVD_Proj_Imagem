@@ -65,12 +65,22 @@
             changeContrastButton = new Button();
             makeSelectionButton = new Button();
             makeCropButton = new Button();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            rotateVerticalButton = new Button();
+            rotateHorizontalButton = new Button();
+            rotateRightButton = new Button();
+            rotateLeftButton = new Button();
+            tabPage2 = new TabPage();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panelPictureBox2.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -79,7 +89,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, inforToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1152, 28);
+            menuStrip1.Size = new Size(1493, 28);
             menuStrip1.TabIndex = 6;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -368,7 +378,7 @@
             // 
             // makeSelectionButton
             // 
-            makeSelectionButton.Location = new Point(916, 87);
+            makeSelectionButton.Location = new Point(71, 56);
             makeSelectionButton.Name = "makeSelectionButton";
             makeSelectionButton.Size = new Size(135, 29);
             makeSelectionButton.TabIndex = 28;
@@ -377,7 +387,7 @@
             // 
             // makeCropButton
             // 
-            makeCropButton.Location = new Point(938, 137);
+            makeCropButton.Location = new Point(93, 106);
             makeCropButton.Name = "makeCropButton";
             makeCropButton.Size = new Size(94, 29);
             makeCropButton.TabIndex = 29;
@@ -385,13 +395,88 @@
             makeCropButton.UseVisualStyleBackColor = true;
             makeCropButton.Click += makeCropButton_Click;
             // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(832, 86);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(384, 391);
+            tabControl1.TabIndex = 31;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(rotateVerticalButton);
+            tabPage1.Controls.Add(rotateHorizontalButton);
+            tabPage1.Controls.Add(rotateRightButton);
+            tabPage1.Controls.Add(rotateLeftButton);
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(376, 358);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Rotation";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rotateVerticalButton
+            // 
+            rotateVerticalButton.Location = new Point(84, 182);
+            rotateVerticalButton.Name = "rotateVerticalButton";
+            rotateVerticalButton.Size = new Size(141, 29);
+            rotateVerticalButton.TabIndex = 3;
+            rotateVerticalButton.Text = "Rotate Vertical";
+            rotateVerticalButton.UseVisualStyleBackColor = true;
+            rotateVerticalButton.Click += rotateVerticalButton_Click;
+            // 
+            // rotateHorizontalButton
+            // 
+            rotateHorizontalButton.Location = new Point(84, 147);
+            rotateHorizontalButton.Name = "rotateHorizontalButton";
+            rotateHorizontalButton.Size = new Size(141, 29);
+            rotateHorizontalButton.TabIndex = 2;
+            rotateHorizontalButton.Text = "Rotate Horizontal";
+            rotateHorizontalButton.UseVisualStyleBackColor = true;
+            rotateHorizontalButton.Click += rotateHorizontalButton_Click;
+            // 
+            // rotateRightButton
+            // 
+            rotateRightButton.Location = new Point(84, 88);
+            rotateRightButton.Name = "rotateRightButton";
+            rotateRightButton.Size = new Size(141, 29);
+            rotateRightButton.TabIndex = 1;
+            rotateRightButton.Text = "Rotate Right";
+            rotateRightButton.UseVisualStyleBackColor = true;
+            rotateRightButton.Click += rotateRightButton_Click;
+            // 
+            // rotateLeftButton
+            // 
+            rotateLeftButton.Location = new Point(84, 53);
+            rotateLeftButton.Name = "rotateLeftButton";
+            rotateLeftButton.Size = new Size(141, 29);
+            rotateLeftButton.TabIndex = 0;
+            rotateLeftButton.Text = "Rotate Left";
+            rotateLeftButton.UseVisualStyleBackColor = true;
+            rotateLeftButton.Click += rotateLeftButton_Click;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(makeSelectionButton);
+            tabPage2.Controls.Add(makeCropButton);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(376, 358);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Crop";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1152, 829);
-            Controls.Add(makeCropButton);
-            Controls.Add(makeSelectionButton);
+            ClientSize = new Size(1493, 829);
+            Controls.Add(tabControl1);
             Controls.Add(changeContrastLabel);
             Controls.Add(changeContrastTextBox);
             Controls.Add(changeContrastButton);
@@ -425,6 +510,9 @@
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             panelPictureBox2.ResumeLayout(false);
             panelPictureBox2.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -467,5 +555,12 @@
         private Button changeContrastButton;
         private Button makeSelectionButton;
         private Button makeCropButton;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private Button rotateVerticalButton;
+        private Button rotateHorizontalButton;
+        private Button rotateRightButton;
+        private Button rotateLeftButton;
     }
 }
