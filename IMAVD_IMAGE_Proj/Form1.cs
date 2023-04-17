@@ -9,7 +9,7 @@ namespace IMAVD_IMAGE_Proj
 {
     public partial class Form1 : Form
     {
-
+        //get the image niformation
         public static string imageName = "";
         public static string imageExtension = "";
         public static string imageDimension = "";
@@ -18,6 +18,10 @@ namespace IMAVD_IMAGE_Proj
         public static string imageCreatedOn = "";
         public static Image imagePath = null;
 
+        //Crop information
+        private int cropX, cropY, cropWidth, cropHeight, oCropX, oCropY;
+        public Pen cropPen;
+        public DashStyle cropDashStyle = DashStyle.DashDot;
 
         public Form1()
         {
@@ -251,7 +255,7 @@ namespace IMAVD_IMAGE_Proj
             GetColor getColor = new GetColor();
             getColor.Show();
         }
-
+        //Necessário corrigir reset da imagem quando zoom é realizado
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             if (trackBar1.Value != 0 && pictureBox1.Image != null)
@@ -294,13 +298,13 @@ namespace IMAVD_IMAGE_Proj
                 MessageBox.Show("Imagem não foi aberta");
             }
         }
-
+        //Opção alternativa. Pode ser removido
         private static Image CropImage(Image img, Rectangle cropArea)
         {
             Bitmap bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
-
+        
         private void saveCropButton_Click(object sender, EventArgs e)
         {
             if (pictureBox1.Image == null)
@@ -313,7 +317,7 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox1.Image.Save(dialog.FileName, ImageFormat.Png);
             }
         }
-
+        //Necessário corrigir soma de brilho. 
         public static Bitmap AdjustBrightness(Bitmap image, float brightnessAdjustment)
         {
             Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
@@ -334,6 +338,7 @@ namespace IMAVD_IMAGE_Proj
             return adjustedImage;
         }
 
+        //Necessário corrigir soma de contraste.
         public static Bitmap AdjustContrast(Bitmap image, float contrastLevel)
         {
             Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
@@ -368,7 +373,7 @@ namespace IMAVD_IMAGE_Proj
         {
             int brightnessAdjustment = Convert.ToInt32(changeGlowTextBox.Text);
 
-            Bitmap originalImage = new Bitmap(imagePath);
+            Bitmap originalImage = new Bitmap(pictureBox1.Image);
             pictureBox1.Image = AdjustBrightness(originalImage, brightnessAdjustment);
 
         }
@@ -377,8 +382,60 @@ namespace IMAVD_IMAGE_Proj
         {
             int contrastAdjustment = Convert.ToInt32(changeContrastTextBox.Text);
 
-            Bitmap originalImage = new Bitmap(imagePath);
+            Bitmap originalImage = new Bitmap(pictureBox1.Image);
             pictureBox1.Image = AdjustContrast(originalImage, contrastAdjustment);
+        }
+        //Desenho de seleção para crop
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Cursor = Cursors.Cross;
+                cropX = e.X;
+                cropY = e.Y;
+                cropPen = new Pen(Color.Black, 1);
+                cropPen.DashStyle = DashStyle.DashDotDot;
+            }
+            pictureBox1.Refresh();
+        }
+        //Desenho de seleção para crop
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+            if (e.Button == MouseButtons.Left)
+            {
+                pictureBox1.Refresh();
+                cropWidth = e.X - cropX;
+                cropHeight = e.Y - cropY;
+                pictureBox1.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
+            }
+        }
+
+        private void makeCropButton_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+            if (cropWidth < 1)
+                return;
+
+            Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
+
+            Bitmap OriginalImage = new Bitmap(pictureBox1.Image, pictureBox1.Width, pictureBox1.Height);
+
+            Bitmap _img = new Bitmap(cropWidth, cropHeight);
+
+            Graphics g = Graphics.FromImage(_img);
+
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.CompositingQuality = CompositingQuality.HighQuality;
+
+            g.DrawImage(OriginalImage, 0, 0, rect, GraphicsUnit.Pixel);
+            pictureBox1.Image = _img;
+            pictureBox1.Width = _img.Width;
+            pictureBox1.Height = _img.Height;
+            //PictureBoxLocation();
+            //makeCropButton.Enabled = false;
         }
     }
 }

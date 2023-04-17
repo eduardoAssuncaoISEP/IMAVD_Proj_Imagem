@@ -63,6 +63,8 @@
             changeContrastLabel = new Label();
             changeContrastTextBox = new TextBox();
             changeContrastButton = new Button();
+            makeSelectionButton = new Button();
+            makeCropButton = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -77,7 +79,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, inforToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(749, 28);
+            menuStrip1.Size = new Size(1152, 28);
             menuStrip1.TabIndex = 6;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -200,6 +202,8 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
             // 
             // trackBar1
             // 
@@ -362,11 +366,32 @@
             changeContrastButton.UseVisualStyleBackColor = true;
             changeContrastButton.Click += changeContrastButton_Click;
             // 
+            // makeSelectionButton
+            // 
+            makeSelectionButton.Location = new Point(916, 87);
+            makeSelectionButton.Name = "makeSelectionButton";
+            makeSelectionButton.Size = new Size(135, 29);
+            makeSelectionButton.TabIndex = 28;
+            makeSelectionButton.Text = "Make Selection";
+            makeSelectionButton.UseVisualStyleBackColor = true;
+            // 
+            // makeCropButton
+            // 
+            makeCropButton.Location = new Point(938, 137);
+            makeCropButton.Name = "makeCropButton";
+            makeCropButton.Size = new Size(94, 29);
+            makeCropButton.TabIndex = 29;
+            makeCropButton.Text = "Crop";
+            makeCropButton.UseVisualStyleBackColor = true;
+            makeCropButton.Click += makeCropButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(749, 829);
+            ClientSize = new Size(1152, 829);
+            Controls.Add(makeCropButton);
+            Controls.Add(makeSelectionButton);
             Controls.Add(changeContrastLabel);
             Controls.Add(changeContrastTextBox);
             Controls.Add(changeContrastButton);
@@ -440,5 +465,7 @@
         private Label changeContrastLabel;
         private TextBox changeContrastTextBox;
         private Button changeContrastButton;
+        private Button makeSelectionButton;
+        private Button makeCropButton;
     }
 }
