@@ -9,6 +9,10 @@ namespace IMAVD_IMAGE_Proj
 {
     public partial class Form1 : Form
     {
+        private Image Img;
+        private Size OriginalImageSize;
+        private Size ModifiedImageSize;
+
         //get the image niformation
         public static string imageName = "";
         public static string imageExtension = "";
@@ -60,22 +64,22 @@ namespace IMAVD_IMAGE_Proj
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // open file dialog   
-            OpenFileDialog open = new OpenFileDialog();
-            // image filters  
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
-            if (open.ShowDialog() == DialogResult.OK)
+            OpenFileDialog Dlg = new OpenFileDialog();
+            Dlg.Filter = "";
+            Dlg.Title = "Select image";
+            if (Dlg.ShowDialog() == DialogResult.OK)
             {
-                // display image in picture box  
-                pictureBox1.Image = new Bitmap(open.FileName);
+                makeSelectionButton.Enabled = true;
+                Img = Image.FromFile(Dlg.FileName);
+                LoadImage();
 
-                FileInfo fileInfo = new FileInfo(open.FileName);
+                FileInfo fileInfo = new FileInfo(Dlg.FileName);
                 org = new PictureBox();
                 org.Image = pictureBox1.Image;
                 // set image information for global variable
                 imagePath = pictureBox1.Image;
-                imageName = Path.GetFileName(open.FileName);
-                imageExtension = Path.GetExtension(open.FileName);
+                imageName = Path.GetFileName(Dlg.FileName);
+                imageExtension = Path.GetExtension(Dlg.FileName);
 
                 string width = pictureBox1.Image.Width.ToString();
                 string height = pictureBox1.Image.Height.ToString();
@@ -84,10 +88,38 @@ namespace IMAVD_IMAGE_Proj
                 long tamanhoEmBytes = fileInfo.Length;
                 int tamanhoEmKilobytes = (int)tamanhoEmBytes / 1024;
                 imageSize = tamanhoEmKilobytes.ToString() + " KB";
-                imageLocation = Path.GetFullPath(open.FileName);
+                imageLocation = Path.GetFullPath(Dlg.FileName);
                 imageCreatedOn = fileInfo.CreationTime.ToString();
-
             }
+
+            //----------------------------------------------------------//
+        }
+
+        private void LoadImage()
+        {
+            int imgWidth = Img.Width;
+            int imgHeight = Img.Height;
+            pictureBox1.Width = imgWidth;
+            pictureBox1.Height = imgHeight;
+            pictureBox1.Image = Img;
+            PictureBoxLocation();
+            OriginalImageSize = new Size(imgWidth, imgHeight);
+            //SetResizeInfo();
+        }
+
+        private void PictureBoxLocation()
+        {
+            int _x = 0;
+            int _y = 0;
+            if (panelPictureBox1.Width > pictureBox1.Width)
+            {
+                _x = (panelPictureBox1.Width - pictureBox1.Width) / 2;
+            }
+            if (panelPictureBox1.Height > pictureBox1.Height)
+            {
+                _y = (panelPictureBox1.Height - pictureBox1.Height) / 2;
+            }
+            pictureBox1.Location = new Point(_x, _y);
         }
 
         private void inforToolStripMenuItem_Click(object sender, EventArgs e)
@@ -240,7 +272,7 @@ namespace IMAVD_IMAGE_Proj
             Bitmap bmp = new Bitmap(img, Convert.ToInt32(img.Width * size.Width),
                 Convert.ToInt32(img.Height * size.Height));
             Graphics g = Graphics.FromImage(bmp);
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             return bmp;
         }
 
@@ -261,7 +293,7 @@ namespace IMAVD_IMAGE_Proj
             if (trackBar1.Value != 0 && pictureBox1.Image != null)
             {
                 pictureBox1.Image = null;
-                pictureBox1.Image = ZoomPicture(org.Image, new Size(trackBar1.Value, trackBar1.Value));
+                pictureBox1.Image = ZoomPicture(Img, new Size(trackBar1.Value, trackBar1.Value));
             }
         }
 
@@ -385,10 +417,16 @@ namespace IMAVD_IMAGE_Proj
             Bitmap originalImage = new Bitmap(pictureBox1.Image);
             pictureBox1.Image = AdjustContrast(originalImage, contrastAdjustment);
         }
+
+        private void makeSelectionButton_Click(object sender, EventArgs e)
+        {
+            makeSelectionButton.Enabled = false;
+        }
+
         //Desenho de seleção para crop
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
             {
                 Cursor = Cursors.Cross;
                 cropX = e.X;
@@ -403,7 +441,7 @@ namespace IMAVD_IMAGE_Proj
         {
             if (pictureBox1.Image == null)
                 return;
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
             {
                 pictureBox1.Refresh();
                 cropWidth = e.X - cropX;
@@ -434,7 +472,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox1.Image = _img;
             pictureBox1.Width = _img.Width;
             pictureBox1.Height = _img.Height;
-            //PictureBoxLocation();
+            PictureBoxLocation();
             //makeCropButton.Enabled = false;
         }
 
@@ -460,6 +498,48 @@ namespace IMAVD_IMAGE_Proj
         {
             pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox1.Refresh();
+        }
+
+        /// <summary>
+        /// Resize Image
+        /// </summary>
+        private void BindDomainIUpDown()
+        {
+            for (int i = 1; i <= 999; i++)
+            {
+                resizeDomainUpDown.Items.Add(i);
+            }
+            resizeDomainUpDown.Text = "100";
+        }
+        private void resizeDomainUpDown_SelectedItemChanged(object sender, EventArgs e)
+        {
+            int percentage = 0;
+            try
+            {
+                percentage = Convert.ToInt32(resizeDomainUpDown.Text);
+                ModifiedImageSize = new Size((OriginalImageSize.Width * percentage) / 100, (OriginalImageSize.Height * percentage) / 100);
+                //SetResizeInfo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid Percentage");
+                return;
+            }
+        }
+        private void okResizeButton_Click(object sender, EventArgs e)
+        {
+            Bitmap bm_source = new Bitmap(pictureBox1.Image);
+            // Make a bitmap for the result.  
+            Bitmap bm_dest = new Bitmap(Convert.ToInt32(ModifiedImageSize.Width), Convert.ToInt32(ModifiedImageSize.Height));
+            // Make a Graphics object for the result Bitmap.  
+            Graphics gr_dest = Graphics.FromImage(bm_dest);
+            // Copy the source image into the destination bitmap.  
+            gr_dest.DrawImage(bm_source, 0, 0, bm_dest.Width + 1, bm_dest.Height + 1);
+            // Display the result.  
+            pictureBox1.Image = bm_dest;
+            pictureBox1.Width = bm_dest.Width;
+            pictureBox1.Height = bm_dest.Height;
+            PictureBoxLocation();
         }
     }
 }

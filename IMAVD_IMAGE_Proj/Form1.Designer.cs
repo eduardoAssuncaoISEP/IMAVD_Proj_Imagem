@@ -72,6 +72,9 @@
             rotateRightButton = new Button();
             rotateLeftButton = new Button();
             tabPage2 = new TabPage();
+            tabPage3 = new TabPage();
+            okResizeButton = new Button();
+            resizeDomainUpDown = new DomainUpDown();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -81,6 +84,7 @@
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -188,9 +192,9 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(3, 13);
+            pictureBox2.Location = new Point(12, 19);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(397, 330);
+            pictureBox2.Size = new Size(500, 409);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
@@ -201,14 +205,14 @@
             panelPictureBox1.Controls.Add(pictureBox1);
             panelPictureBox1.Location = new Point(12, 40);
             panelPictureBox1.Name = "panelPictureBox1";
-            panelPictureBox1.Size = new Size(403, 360);
+            panelPictureBox1.Size = new Size(523, 497);
             panelPictureBox1.TabIndex = 8;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(3, 14);
+            pictureBox1.Location = new Point(12, 20);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(397, 330);
+            pictureBox1.Size = new Size(500, 455);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
@@ -218,7 +222,7 @@
             // trackBar1
             // 
             trackBar1.Cursor = Cursors.Hand;
-            trackBar1.Location = new Point(431, 99);
+            trackBar1.Location = new Point(576, 99);
             trackBar1.Name = "trackBar1";
             trackBar1.Orientation = Orientation.Vertical;
             trackBar1.RightToLeft = RightToLeft.No;
@@ -230,16 +234,16 @@
             // 
             panelPictureBox2.AutoScroll = true;
             panelPictureBox2.Controls.Add(pictureBox2);
-            panelPictureBox2.Location = new Point(12, 406);
+            panelPictureBox2.Location = new Point(12, 597);
             panelPictureBox2.Name = "panelPictureBox2";
-            panelPictureBox2.Size = new Size(403, 360);
+            panelPictureBox2.Size = new Size(523, 446);
             panelPictureBox2.TabIndex = 11;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Location = new Point(421, 86);
+            label1.Location = new Point(566, 86);
             label1.Name = "label1";
             label1.Size = new Size(55, 22);
             label1.TabIndex = 12;
@@ -247,28 +251,28 @@
             // 
             // widthCrop
             // 
-            widthCrop.Location = new Point(584, 168);
+            widthCrop.Location = new Point(1338, 185);
             widthCrop.Name = "widthCrop";
             widthCrop.Size = new Size(125, 27);
             widthCrop.TabIndex = 13;
             // 
             // heightCrop
             // 
-            heightCrop.Location = new Point(584, 216);
+            heightCrop.Location = new Point(1338, 233);
             heightCrop.Name = "heightCrop";
             heightCrop.Size = new Size(125, 27);
             heightCrop.TabIndex = 14;
             // 
             // yPositionCrop
             // 
-            yPositionCrop.Location = new Point(584, 120);
+            yPositionCrop.Location = new Point(1338, 137);
             yPositionCrop.Name = "yPositionCrop";
             yPositionCrop.Size = new Size(125, 27);
             yPositionCrop.TabIndex = 16;
             // 
             // xPositionCrop
             // 
-            xPositionCrop.Location = new Point(584, 64);
+            xPositionCrop.Location = new Point(1338, 81);
             xPositionCrop.Name = "xPositionCrop";
             xPositionCrop.Size = new Size(125, 27);
             xPositionCrop.TabIndex = 15;
@@ -277,7 +281,7 @@
             // 
             xCropLabel.AutoSize = true;
             xCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            xCropLabel.Location = new Point(559, 67);
+            xCropLabel.Location = new Point(1313, 84);
             xCropLabel.Name = "xCropLabel";
             xCropLabel.Size = new Size(23, 20);
             xCropLabel.TabIndex = 17;
@@ -287,7 +291,7 @@
             // 
             yCropLabel.AutoSize = true;
             yCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            yCropLabel.Location = new Point(559, 123);
+            yCropLabel.Location = new Point(1313, 140);
             yCropLabel.Name = "yCropLabel";
             yCropLabel.Size = new Size(22, 20);
             yCropLabel.TabIndex = 18;
@@ -297,7 +301,7 @@
             // 
             HeightCropLabel.AutoSize = true;
             HeightCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            HeightCropLabel.Location = new Point(510, 219);
+            HeightCropLabel.Location = new Point(1264, 236);
             HeightCropLabel.Name = "HeightCropLabel";
             HeightCropLabel.Size = new Size(68, 20);
             HeightCropLabel.TabIndex = 20;
@@ -307,7 +311,7 @@
             // 
             widthCropLabel.AutoSize = true;
             widthCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            widthCropLabel.Location = new Point(515, 171);
+            widthCropLabel.Location = new Point(1269, 188);
             widthCropLabel.Name = "widthCropLabel";
             widthCropLabel.Size = new Size(63, 20);
             widthCropLabel.TabIndex = 19;
@@ -316,7 +320,7 @@
             // saveCropButton
             // 
             saveCropButton.Enabled = false;
-            saveCropButton.Location = new Point(602, 274);
+            saveCropButton.Location = new Point(93, 155);
             saveCropButton.Name = "saveCropButton";
             saveCropButton.Size = new Size(94, 29);
             saveCropButton.TabIndex = 21;
@@ -326,7 +330,7 @@
             // 
             // changeGlowButton
             // 
-            changeGlowButton.Location = new Point(589, 399);
+            changeGlowButton.Location = new Point(1343, 416);
             changeGlowButton.Name = "changeGlowButton";
             changeGlowButton.Size = new Size(94, 29);
             changeGlowButton.TabIndex = 22;
@@ -336,7 +340,7 @@
             // 
             // changeGlowTextBox
             // 
-            changeGlowTextBox.Location = new Point(571, 366);
+            changeGlowTextBox.Location = new Point(1325, 383);
             changeGlowTextBox.Name = "changeGlowTextBox";
             changeGlowTextBox.Size = new Size(125, 27);
             changeGlowTextBox.TabIndex = 23;
@@ -344,7 +348,7 @@
             // changeGlowLabel
             // 
             changeGlowLabel.AutoSize = true;
-            changeGlowLabel.Location = new Point(583, 340);
+            changeGlowLabel.Location = new Point(1337, 357);
             changeGlowLabel.Name = "changeGlowLabel";
             changeGlowLabel.Size = new Size(97, 20);
             changeGlowLabel.TabIndex = 24;
@@ -353,7 +357,7 @@
             // changeContrastLabel
             // 
             changeContrastLabel.AutoSize = true;
-            changeContrastLabel.Location = new Point(578, 448);
+            changeContrastLabel.Location = new Point(1332, 465);
             changeContrastLabel.Name = "changeContrastLabel";
             changeContrastLabel.Size = new Size(118, 20);
             changeContrastLabel.TabIndex = 27;
@@ -361,14 +365,14 @@
             // 
             // changeContrastTextBox
             // 
-            changeContrastTextBox.Location = new Point(574, 471);
+            changeContrastTextBox.Location = new Point(1328, 488);
             changeContrastTextBox.Name = "changeContrastTextBox";
             changeContrastTextBox.Size = new Size(125, 27);
             changeContrastTextBox.TabIndex = 26;
             // 
             // changeContrastButton
             // 
-            changeContrastButton.Location = new Point(592, 504);
+            changeContrastButton.Location = new Point(1346, 521);
             changeContrastButton.Name = "changeContrastButton";
             changeContrastButton.Size = new Size(94, 29);
             changeContrastButton.TabIndex = 25;
@@ -384,6 +388,7 @@
             makeSelectionButton.TabIndex = 28;
             makeSelectionButton.Text = "Make Selection";
             makeSelectionButton.UseVisualStyleBackColor = true;
+            makeSelectionButton.Click += makeSelectionButton_Click;
             // 
             // makeCropButton
             // 
@@ -399,7 +404,8 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(832, 86);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Location = new Point(676, 81);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(384, 391);
@@ -463,6 +469,7 @@
             // 
             tabPage2.Controls.Add(makeSelectionButton);
             tabPage2.Controls.Add(makeCropButton);
+            tabPage2.Controls.Add(saveCropButton);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -471,11 +478,41 @@
             tabPage2.Text = "Crop";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(okResizeButton);
+            tabPage3.Controls.Add(resizeDomainUpDown);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(376, 358);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Resize";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // okResizeButton
+            // 
+            okResizeButton.Location = new Point(143, 73);
+            okResizeButton.Name = "okResizeButton";
+            okResizeButton.Size = new Size(39, 29);
+            okResizeButton.TabIndex = 1;
+            okResizeButton.Text = "Ok";
+            okResizeButton.UseVisualStyleBackColor = true;
+            okResizeButton.Click += okResizeButton_Click;
+            // 
+            // resizeDomainUpDown
+            // 
+            resizeDomainUpDown.Location = new Point(23, 75);
+            resizeDomainUpDown.Name = "resizeDomainUpDown";
+            resizeDomainUpDown.Size = new Size(104, 27);
+            resizeDomainUpDown.TabIndex = 0;
+            resizeDomainUpDown.SelectedItemChanged += resizeDomainUpDown_SelectedItemChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1493, 829);
+            ClientSize = new Size(1493, 1055);
             Controls.Add(tabControl1);
             Controls.Add(changeContrastLabel);
             Controls.Add(changeContrastTextBox);
@@ -483,7 +520,6 @@
             Controls.Add(changeGlowLabel);
             Controls.Add(changeGlowTextBox);
             Controls.Add(changeGlowButton);
-            Controls.Add(saveCropButton);
             Controls.Add(HeightCropLabel);
             Controls.Add(widthCropLabel);
             Controls.Add(yCropLabel);
@@ -513,6 +549,7 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -562,5 +599,8 @@
         private Button rotateHorizontalButton;
         private Button rotateRightButton;
         private Button rotateLeftButton;
+        private TabPage tabPage3;
+        private DomainUpDown resizeDomainUpDown;
+        private Button okResizeButton;
     }
 }
