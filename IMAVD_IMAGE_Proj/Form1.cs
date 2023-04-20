@@ -541,5 +541,81 @@ namespace IMAVD_IMAGE_Proj
             pictureBox1.Height = bm_dest.Height;
             PictureBoxLocation();
         }
+
+        /// <summary>
+        /// Brightness
+        /// </summary>
+        private void brightnessTrackBar_Scroll(object sender, EventArgs e)
+        {
+            brightnessDomainUpDown.Text = brightnessTrackBar.Value.ToString();
+            float value = brightnessTrackBar.Value * 0.01f;
+
+            float[][] colorMatrixElements = {
+                  new float[] {
+                        1, 0, 0, 0, 0
+                  },
+                  new float[] {
+                        0, 1, 0, 0, 0
+                  },
+                  new float[] {
+                        0, 0, 1, 0, 0
+                  },
+                  new float[] {
+                        0, 0, 0, 1, 0
+                  },
+                  new float[] {
+                        value, value, value, 0, 1
+                  }
+            };
+
+            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            Image _img = Img;
+            Graphics _g = default(Graphics);
+            Bitmap bm_dest = new Bitmap(Convert.ToInt32(_img.Width), Convert.ToInt32(_img.Height));
+            _g = Graphics.FromImage(bm_dest);
+            _g.DrawImage(_img, new Rectangle(0, 0, bm_dest.Width + 1, bm_dest.Height + 1), 0, 0, bm_dest.Width + 1, bm_dest.Height + 1, GraphicsUnit.Pixel, imageAttributes);
+            pictureBox1.Image = bm_dest;
+        }
+
+        /// <summary>
+        /// Constrast
+        /// </summary>
+        private void constrastTrackBar_Scroll(object sender, EventArgs e)
+        {
+            /*brightnessDomainUpDown.Text = brightnessTrackBar.Value.ToString();
+            float value = constrastTrackBar.Value * 0.01f;
+
+            float[][] colorMatrixElements = {
+                  new float[] {
+                        0, 0, 0, 0, 0
+                  },
+                  new float[] {
+                        0, 0, 0, 0, 0
+                  },
+                  new float[] {
+                        0, 0, 0, 0, 0
+                  },
+                  new float[] {
+                        0, 0, 0, 1, 0
+                  },
+                  new float[] {
+                        value, value, value, 0, 1
+                  }
+            };
+
+            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            Image _img = Img;
+            Graphics _g = default(Graphics);
+            Bitmap bm_dest = new Bitmap(Convert.ToInt32(_img.Width), Convert.ToInt32(_img.Height));
+            _g = Graphics.FromImage(bm_dest);
+            _g.DrawImage(_img, new Rectangle(0, 0, bm_dest.Width + 1, bm_dest.Height + 1), 0, 0, bm_dest.Width + 1, bm_dest.Height + 1, GraphicsUnit.Pixel, imageAttributes);
+            pictureBox1.Image = bm_dest;*/
+        }
     }
 }

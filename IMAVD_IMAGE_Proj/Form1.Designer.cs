@@ -75,6 +75,12 @@
             tabPage3 = new TabPage();
             okResizeButton = new Button();
             resizeDomainUpDown = new DomainUpDown();
+            tabPage4 = new TabPage();
+            brightnessTrackBar = new TrackBar();
+            brightnessDomainUpDown = new DomainUpDown();
+            tabPage5 = new TabPage();
+            constrastTrackBar = new TrackBar();
+            constrastDomainUpDown = new DomainUpDown();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -85,6 +91,10 @@
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).BeginInit();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)constrastTrackBar).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -405,6 +415,8 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Location = new Point(676, 81);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -508,6 +520,64 @@
             resizeDomainUpDown.TabIndex = 0;
             resizeDomainUpDown.SelectedItemChanged += resizeDomainUpDown_SelectedItemChanged;
             // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(brightnessTrackBar);
+            tabPage4.Controls.Add(brightnessDomainUpDown);
+            tabPage4.Location = new Point(4, 29);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(376, 358);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Brightness";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // brightnessTrackBar
+            // 
+            brightnessTrackBar.Location = new Point(85, 61);
+            brightnessTrackBar.Maximum = 255;
+            brightnessTrackBar.Minimum = -255;
+            brightnessTrackBar.Name = "brightnessTrackBar";
+            brightnessTrackBar.Size = new Size(130, 56);
+            brightnessTrackBar.TabIndex = 1;
+            brightnessTrackBar.Scroll += brightnessTrackBar_Scroll;
+            // 
+            // brightnessDomainUpDown
+            // 
+            brightnessDomainUpDown.Location = new Point(221, 71);
+            brightnessDomainUpDown.Name = "brightnessDomainUpDown";
+            brightnessDomainUpDown.Size = new Size(84, 27);
+            brightnessDomainUpDown.TabIndex = 0;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(constrastTrackBar);
+            tabPage5.Controls.Add(constrastDomainUpDown);
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(376, 358);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Contrast";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // constrastTrackBar
+            // 
+            constrastTrackBar.Location = new Point(65, 55);
+            constrastTrackBar.Maximum = 100;
+            constrastTrackBar.Minimum = -100;
+            constrastTrackBar.Name = "constrastTrackBar";
+            constrastTrackBar.Size = new Size(130, 56);
+            constrastTrackBar.TabIndex = 3;
+            constrastTrackBar.Scroll += constrastTrackBar_Scroll;
+            // 
+            // constrastDomainUpDown
+            // 
+            constrastDomainUpDown.Location = new Point(201, 65);
+            constrastDomainUpDown.Name = "constrastDomainUpDown";
+            constrastDomainUpDown.Size = new Size(84, 27);
+            constrastDomainUpDown.TabIndex = 2;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -550,6 +620,12 @@
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).EndInit();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)constrastTrackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -602,5 +678,11 @@
         private TabPage tabPage3;
         private DomainUpDown resizeDomainUpDown;
         private Button okResizeButton;
+        private TabPage tabPage4;
+        private DomainUpDown brightnessDomainUpDown;
+        private TrackBar brightnessTrackBar;
+        private TabPage tabPage5;
+        private TrackBar constrastTrackBar;
+        private DomainUpDown constrastDomainUpDown;
     }
 }
