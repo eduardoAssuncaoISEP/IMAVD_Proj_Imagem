@@ -36,7 +36,6 @@
             greenToolStripMenuItem = new ToolStripMenuItem();
             blueToolStripMenuItem = new ToolStripMenuItem();
             invertToolStripMenuItem = new ToolStripMenuItem();
-            cropToolStripMenuItem = new ToolStripMenuItem();
             inforToolStripMenuItem = new ToolStripMenuItem();
             propertiesToolStripMenuItem = new ToolStripMenuItem();
             colorToolStripMenuItem = new ToolStripMenuItem();
@@ -76,11 +75,13 @@
             okResizeButton = new Button();
             resizeDomainUpDown = new DomainUpDown();
             tabPage4 = new TabPage();
+            applyBrightnessButton = new Button();
             brightnessTrackBar = new TrackBar();
             brightnessDomainUpDown = new DomainUpDown();
             tabPage5 = new TabPage();
-            constrastTrackBar = new TrackBar();
-            constrastDomainUpDown = new DomainUpDown();
+            applyContrastButton = new Button();
+            contrastTrackBar = new TrackBar();
+            contrastDomainUpDown = new DomainUpDown();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -94,7 +95,7 @@
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).BeginInit();
             tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)constrastTrackBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)contrastTrackBar).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -123,11 +124,10 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem, invertToolStripMenuItem, cropToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redToolStripMenuItem, greenToolStripMenuItem, blueToolStripMenuItem, invertToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
-            editToolStripMenuItem.Click += editToolStripMenuItem_Click;
             // 
             // redToolStripMenuItem
             // 
@@ -157,20 +157,12 @@
             invertToolStripMenuItem.Text = "Negative";
             invertToolStripMenuItem.Click += invertToolStripMenuItem_Click;
             // 
-            // cropToolStripMenuItem
-            // 
-            cropToolStripMenuItem.Name = "cropToolStripMenuItem";
-            cropToolStripMenuItem.Size = new Size(152, 26);
-            cropToolStripMenuItem.Text = "Crop";
-            cropToolStripMenuItem.Click += cropToolStripMenuItem_Click;
-            // 
             // inforToolStripMenuItem
             // 
             inforToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { propertiesToolStripMenuItem, colorToolStripMenuItem });
             inforToolStripMenuItem.Name = "inforToolStripMenuItem";
             inforToolStripMenuItem.Size = new Size(54, 24);
             inforToolStripMenuItem.Text = "Infor";
-            inforToolStripMenuItem.Click += inforToolStripMenuItem_Click;
             // 
             // propertiesToolStripMenuItem
             // 
@@ -261,6 +253,7 @@
             // 
             // widthCrop
             // 
+            widthCrop.Enabled = false;
             widthCrop.Location = new Point(1338, 185);
             widthCrop.Name = "widthCrop";
             widthCrop.Size = new Size(125, 27);
@@ -268,6 +261,7 @@
             // 
             // heightCrop
             // 
+            heightCrop.Enabled = false;
             heightCrop.Location = new Point(1338, 233);
             heightCrop.Name = "heightCrop";
             heightCrop.Size = new Size(125, 27);
@@ -275,6 +269,7 @@
             // 
             // yPositionCrop
             // 
+            yPositionCrop.Enabled = false;
             yPositionCrop.Location = new Point(1338, 137);
             yPositionCrop.Name = "yPositionCrop";
             yPositionCrop.Size = new Size(125, 27);
@@ -282,6 +277,7 @@
             // 
             // xPositionCrop
             // 
+            xPositionCrop.Enabled = false;
             xPositionCrop.Location = new Point(1338, 81);
             xPositionCrop.Name = "xPositionCrop";
             xPositionCrop.Size = new Size(125, 27);
@@ -290,6 +286,7 @@
             // xCropLabel
             // 
             xCropLabel.AutoSize = true;
+            xCropLabel.Enabled = false;
             xCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             xCropLabel.Location = new Point(1313, 84);
             xCropLabel.Name = "xCropLabel";
@@ -300,6 +297,7 @@
             // yCropLabel
             // 
             yCropLabel.AutoSize = true;
+            yCropLabel.Enabled = false;
             yCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             yCropLabel.Location = new Point(1313, 140);
             yCropLabel.Name = "yCropLabel";
@@ -310,6 +308,7 @@
             // HeightCropLabel
             // 
             HeightCropLabel.AutoSize = true;
+            HeightCropLabel.Enabled = false;
             HeightCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             HeightCropLabel.Location = new Point(1264, 236);
             HeightCropLabel.Name = "HeightCropLabel";
@@ -320,6 +319,7 @@
             // widthCropLabel
             // 
             widthCropLabel.AutoSize = true;
+            widthCropLabel.Enabled = false;
             widthCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             widthCropLabel.Location = new Point(1269, 188);
             widthCropLabel.Name = "widthCropLabel";
@@ -340,16 +340,17 @@
             // 
             // changeGlowButton
             // 
+            changeGlowButton.Enabled = false;
             changeGlowButton.Location = new Point(1343, 416);
             changeGlowButton.Name = "changeGlowButton";
             changeGlowButton.Size = new Size(94, 29);
             changeGlowButton.TabIndex = 22;
             changeGlowButton.Text = "Change Glow";
             changeGlowButton.UseVisualStyleBackColor = true;
-            changeGlowButton.Click += changeGlowButton_Click;
             // 
             // changeGlowTextBox
             // 
+            changeGlowTextBox.Enabled = false;
             changeGlowTextBox.Location = new Point(1325, 383);
             changeGlowTextBox.Name = "changeGlowTextBox";
             changeGlowTextBox.Size = new Size(125, 27);
@@ -358,6 +359,7 @@
             // changeGlowLabel
             // 
             changeGlowLabel.AutoSize = true;
+            changeGlowLabel.Enabled = false;
             changeGlowLabel.Location = new Point(1337, 357);
             changeGlowLabel.Name = "changeGlowLabel";
             changeGlowLabel.Size = new Size(97, 20);
@@ -367,6 +369,7 @@
             // changeContrastLabel
             // 
             changeContrastLabel.AutoSize = true;
+            changeContrastLabel.Enabled = false;
             changeContrastLabel.Location = new Point(1332, 465);
             changeContrastLabel.Name = "changeContrastLabel";
             changeContrastLabel.Size = new Size(118, 20);
@@ -375,6 +378,7 @@
             // 
             // changeContrastTextBox
             // 
+            changeContrastTextBox.Enabled = false;
             changeContrastTextBox.Location = new Point(1328, 488);
             changeContrastTextBox.Name = "changeContrastTextBox";
             changeContrastTextBox.Size = new Size(125, 27);
@@ -382,13 +386,13 @@
             // 
             // changeContrastButton
             // 
+            changeContrastButton.Enabled = false;
             changeContrastButton.Location = new Point(1346, 521);
             changeContrastButton.Name = "changeContrastButton";
             changeContrastButton.Size = new Size(94, 29);
             changeContrastButton.TabIndex = 25;
             changeContrastButton.Text = "Change Glow";
             changeContrastButton.UseVisualStyleBackColor = true;
-            changeContrastButton.Click += changeContrastButton_Click;
             // 
             // makeSelectionButton
             // 
@@ -522,6 +526,7 @@
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(applyBrightnessButton);
             tabPage4.Controls.Add(brightnessTrackBar);
             tabPage4.Controls.Add(brightnessDomainUpDown);
             tabPage4.Location = new Point(4, 29);
@@ -531,6 +536,16 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Brightness";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // applyBrightnessButton
+            // 
+            applyBrightnessButton.Location = new Point(138, 165);
+            applyBrightnessButton.Name = "applyBrightnessButton";
+            applyBrightnessButton.Size = new Size(94, 29);
+            applyBrightnessButton.TabIndex = 2;
+            applyBrightnessButton.Text = "APPLY";
+            applyBrightnessButton.UseVisualStyleBackColor = true;
+            applyBrightnessButton.Click += applyBrightnessButton_Click;
             // 
             // brightnessTrackBar
             // 
@@ -551,8 +566,9 @@
             // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(constrastTrackBar);
-            tabPage5.Controls.Add(constrastDomainUpDown);
+            tabPage5.Controls.Add(applyContrastButton);
+            tabPage5.Controls.Add(contrastTrackBar);
+            tabPage5.Controls.Add(contrastDomainUpDown);
             tabPage5.Location = new Point(4, 29);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
@@ -561,22 +577,32 @@
             tabPage5.Text = "Contrast";
             tabPage5.UseVisualStyleBackColor = true;
             // 
-            // constrastTrackBar
+            // applyContrastButton
             // 
-            constrastTrackBar.Location = new Point(65, 55);
-            constrastTrackBar.Maximum = 100;
-            constrastTrackBar.Minimum = -100;
-            constrastTrackBar.Name = "constrastTrackBar";
-            constrastTrackBar.Size = new Size(130, 56);
-            constrastTrackBar.TabIndex = 3;
-            constrastTrackBar.Scroll += constrastTrackBar_Scroll;
+            applyContrastButton.Location = new Point(142, 172);
+            applyContrastButton.Name = "applyContrastButton";
+            applyContrastButton.Size = new Size(94, 29);
+            applyContrastButton.TabIndex = 4;
+            applyContrastButton.Text = "APPLY";
+            applyContrastButton.UseVisualStyleBackColor = true;
+            applyContrastButton.Click += applyContrastButton_Click;
             // 
-            // constrastDomainUpDown
+            // contrastTrackBar
             // 
-            constrastDomainUpDown.Location = new Point(201, 65);
-            constrastDomainUpDown.Name = "constrastDomainUpDown";
-            constrastDomainUpDown.Size = new Size(84, 27);
-            constrastDomainUpDown.TabIndex = 2;
+            contrastTrackBar.Location = new Point(65, 55);
+            contrastTrackBar.Maximum = 100;
+            contrastTrackBar.Minimum = -100;
+            contrastTrackBar.Name = "contrastTrackBar";
+            contrastTrackBar.Size = new Size(130, 56);
+            contrastTrackBar.TabIndex = 3;
+            contrastTrackBar.Scroll += contrastTrackBar_Scroll;
+            // 
+            // contrastDomainUpDown
+            // 
+            contrastDomainUpDown.Location = new Point(201, 65);
+            contrastDomainUpDown.Name = "contrastDomainUpDown";
+            contrastDomainUpDown.Size = new Size(84, 27);
+            contrastDomainUpDown.TabIndex = 2;
             // 
             // Form1
             // 
@@ -625,7 +651,7 @@
             ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).EndInit();
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)constrastTrackBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)contrastTrackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -650,7 +676,6 @@
         private Panel panelPictureBox2;
         private TrackBar trackBar1;
         private Label label1;
-        private ToolStripMenuItem cropToolStripMenuItem;
         private TextBox widthCrop;
         private TextBox heightCrop;
         private TextBox yPositionCrop;
@@ -682,7 +707,9 @@
         private DomainUpDown brightnessDomainUpDown;
         private TrackBar brightnessTrackBar;
         private TabPage tabPage5;
-        private TrackBar constrastTrackBar;
-        private DomainUpDown constrastDomainUpDown;
+        private TrackBar contrastTrackBar;
+        private DomainUpDown contrastDomainUpDown;
+        private Button applyBrightnessButton;
+        private Button applyContrastButton;
     }
 }
