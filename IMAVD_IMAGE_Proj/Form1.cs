@@ -1,16 +1,19 @@
-using System.Security.Cryptography.X509Certificates;
+ï»¿using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Numerics;
+using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IMAVD_IMAGE_Proj
 {
     public partial class Form1 : Form
     {
         /// <summary>
-        /// Variáveis para armazenamento de informações padrões da imagem
+        /// Variï¿½veis para armazenamento de informaï¿½ï¿½es padrï¿½es da imagem
         /// </summary>
         private Image Img;
         private Size OriginalImageSize;
@@ -18,7 +21,7 @@ namespace IMAVD_IMAGE_Proj
         PictureBox org;
 
         /// <summary>
-        /// Variáveis globais para armazenamento das propriedades da imagem
+        /// Variï¿½veis globais para armazenamento das propriedades da imagem
         /// </summary>
         public static string imageName = "";
         public static string imageExtension = "";
@@ -29,7 +32,7 @@ namespace IMAVD_IMAGE_Proj
         public static Image imagePath = null;
 
         /// <summary>
-        /// Variáveis para armazenamento de informações referentes ao corte (crop) da imagem
+        /// Variï¿½veis para armazenamento de informaï¿½ï¿½es referentes ao corte (crop) da imagem
         /// </summary>
         private int cropX, cropY, cropWidth, cropHeight, oCropX, oCropY;
         public Pen cropPen;
@@ -38,14 +41,17 @@ namespace IMAVD_IMAGE_Proj
         public Form1()
         {
             InitializeComponent();
+            picImagem = new PictureBox();
+
+
         }
 
         /// <summary>
-        /// Definição dos valores do trackBar ao inicializar o formulário
+        /// Definiï¿½ï¿½o dos valores do trackBar ao inicializar o formulï¿½rio
         /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             trackBar1.Minimum = 1;
             trackBar1.Maximum = 6;
             trackBar1.SmallChange = 1;
@@ -53,12 +59,12 @@ namespace IMAVD_IMAGE_Proj
             trackBar1.UseWaitCursor = false;
 
             //minimizar o efeito de stutter
-            this.DoubleBuffered = true; 
+            this.DoubleBuffered = true;
 
         }
 
         /// <summary>
-        /// Ação de abertura de image, obtenção e atribuição de propriedades da mesma às variáveis globais
+        /// Aï¿½ï¿½o de abertura de image, obtenï¿½ï¿½o e atribuiï¿½ï¿½o de propriedades da mesma ï¿½s variï¿½veis globais
         /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -93,7 +99,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Função para carregamento de informações da imagem a serem utilizados em outras funções
+        /// Funï¿½ï¿½o para carregamento de informaï¿½ï¿½es da imagem a serem utilizados em outras funï¿½ï¿½es
         /// </summary>
         private void LoadImage()
         {
@@ -108,7 +114,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Função para determinar a posição, no painel, da imagem carregada
+        /// Funï¿½ï¿½o para determinar a posiï¿½ï¿½o, no painel, da imagem carregada
         /// </summary>
         private void PictureBoxLocation()
         {
@@ -126,7 +132,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para converter a cor da imagem para vermelho
+        /// Aï¿½ï¿½o para converter a cor da imagem para vermelho
         /// </summary>
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -159,7 +165,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para converter a cor da imagem para verde
+        /// Aï¿½ï¿½o para converter a cor da imagem para verde
         /// </summary>
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -190,7 +196,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para converter a cor da imagem para azul
+        /// Aï¿½ï¿½o para converter a cor da imagem para azul
         /// </summary>
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -221,7 +227,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para inverter a cor da imagem
+        /// Aï¿½ï¿½o para inverter a cor da imagem
         /// </summary> 
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -256,7 +262,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Função para redimencionar a imagem
+        /// Funï¿½ï¿½o para redimencionar a imagem
         /// </summary>
         Image ZoomPicture(Image img, Size size)
         {
@@ -268,8 +274,8 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para realizar o zoom à imagem com o trackBar
-        /// Necessário corrigir reset da imagem quando zoom é realizado
+        /// Aï¿½ï¿½o para realizar o zoom ï¿½ imagem com o trackBar
+        /// Necessï¿½rio corrigir reset da imagem quando zoom ï¿½ realizado
         /// </summary>
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
@@ -281,7 +287,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para permiter a seleção da área à ser realizado o corte (crop)
+        /// Aï¿½ï¿½o para permiter a seleï¿½ï¿½o da ï¿½rea ï¿½ ser realizado o corte (crop)
         /// </summary>
         private void makeSelectionButton_Click(object sender, EventArgs e)
         {
@@ -289,7 +295,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         //// <summary>
-        /// Ação para desenho da área para corte - Click (posição inicial)
+        /// Aï¿½ï¿½o para desenho da ï¿½rea para corte - Click (posiï¿½ï¿½o inicial)
         /// </summary>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -305,7 +311,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         //// <summary>
-        /// Ação para desenho da área para corte - Move (seleção da área)
+        /// Aï¿½ï¿½o para desenho da ï¿½rea para corte - Move (seleï¿½ï¿½o da ï¿½rea)
         /// </summary>
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -321,7 +327,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para realizar o corte à imagem com base na seleção da área
+        /// Aï¿½ï¿½o para realizar o corte ï¿½ imagem com base na seleï¿½ï¿½o da ï¿½rea
         /// </summary>
         private void makeCropButton_Click(object sender, EventArgs e)
         {
@@ -352,7 +358,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para salvar a imagem cortada
+        /// Aï¿½ï¿½o para salvar a imagem cortada
         /// </summary>
         private void saveCropButton_Click(object sender, EventArgs e)
         {
@@ -368,7 +374,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Função para mudar o incremento do domainUpDown, mas não está funcionando
+        /// Funï¿½ï¿½o para mudar o incremento do domainUpDown, mas nï¿½o estï¿½ funcionando
         /// </summary>
         private void BindDomainIUpDown()
         {
@@ -380,10 +386,10 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para realizar o redimensionamento da imagem
+        /// Aï¿½ï¿½o para realizar o redimensionamento da imagem
         /// </summary>
         private void resizeDomainUpDown_SelectedItemChanged(object sender, EventArgs e)
-        {   
+        {
             int percentage = 0;
             try
             {
@@ -399,7 +405,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para aplicar o redimensionamento
+        /// Aï¿½ï¿½o para aplicar o redimensionamento
         /// </summary>
         private void okResizeButton_Click(object sender, EventArgs e)
         {
@@ -418,7 +424,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para modificar o brilho da imagem
+        /// Aï¿½ï¿½o para modificar o brilho da imagem
         /// </summary>
         private void brightnessTrackBar_Scroll(object sender, EventArgs e)
         {
@@ -456,14 +462,14 @@ namespace IMAVD_IMAGE_Proj
 
             if (applyBrightnessButton.Enabled == false)
             {
-                //Img = bm_dest; Tentativa de adição de sobreposição do brilho ao contraste
+                //Img = bm_dest; Tentativa de adiï¿½ï¿½o de sobreposiï¿½ï¿½o do brilho ao contraste
             }
 
             applyBrightnessButton.Enabled = true;
         }
 
         /// <summary>
-        /// Ação para aplicação a modificação do brilho, mas ainda não está funcionando
+        /// Aï¿½ï¿½o para aplicaï¿½ï¿½o a modificaï¿½ï¿½o do brilho, mas ainda nï¿½o estï¿½ funcionando
         /// </summary>
         private void applyBrightnessButton_Click(object sender, EventArgs e)
         {
@@ -471,7 +477,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para modificar o contraste da imagem
+        /// Aï¿½ï¿½o para modificar o contraste da imagem
         /// </summary>
         private void contrastTrackBar_Scroll(object sender, EventArgs e)
         {
@@ -500,14 +506,14 @@ namespace IMAVD_IMAGE_Proj
 
             if (applyContrastButton.Enabled == false)
             {
-                //Img = bm_dest; Tentativa de adição de sobreposição do contrate ao brilho
+                //Img = bm_dest; Tentativa de adiï¿½ï¿½o de sobreposiï¿½ï¿½o do contrate ao brilho
             }
 
             applyContrastButton.Enabled = true;
         }
 
         /// <summary>
-        /// Ação para aplicação a modificação do contraste, mas ainda não está funcionando
+        /// Aï¿½ï¿½o para aplicaï¿½ï¿½o a modificaï¿½ï¿½o do contraste, mas ainda nï¿½o estï¿½ funcionando
         /// </summary>
         private void applyContrastButton_Click(object sender, EventArgs e)
         {
@@ -515,16 +521,17 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para rotacionar a imagem para a esquerda
+        /// Aï¿½ï¿½o para rotacionar a imagem para a esquerda
         /// </summary>
         private void rotateLeftButton_Click(object sender, EventArgs e)
         {
             pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             pictureBox1.Refresh();
+            imgStack.Push(pictureBox1.Image);
         }
 
         /// <summary>
-        /// Ação para rotacionar a imagem para a direita
+        /// Aï¿½ï¿½o para rotacionar a imagem para a direita
         /// </summary>
         private void rotateRightButton_Click(object sender, EventArgs e)
         {
@@ -533,7 +540,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para rotacionar a imagem na horizonta
+        /// Aï¿½ï¿½o para rotacionar a imagem na horizonta
         /// </summary>
         private void rotateHorizontalButton_Click(object sender, EventArgs e)
         {
@@ -542,7 +549,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para rotacionar a imagem na vertical
+        /// Aï¿½ï¿½o para rotacionar a imagem na vertical
         /// </summary>
         private void rotateVerticalButton_Click(object sender, EventArgs e)
         {
@@ -551,7 +558,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para abrir o form responsável por buscar uma cor na imagem
+        /// Aï¿½ï¿½o para abrir o form responsï¿½vel por buscar uma cor na imagem
         /// </summary>
         private void findColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -560,7 +567,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para abrir o form responsável por pegar a cor da imagem
+        /// Aï¿½ï¿½o para abrir o form responsï¿½vel por pegar a cor da imagem
         /// </summary>
         private void getColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -569,12 +576,100 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// Ação para abrir o form responsável por exibir as propriedades da imagem
+        /// Aï¿½ï¿½o para abrir o form responsï¿½vel por exibir as propriedades da imagem
         /// </summary>
         private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties properties = new Properties();
             properties.Show();
+        }
+
+        private PictureBox picImagem;
+        private Bitmap imagemCarregada;
+        private Stack<Image> imgStack = new Stack<Image>();
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            // Configuraï¿½ï¿½es do OpenFileDialog
+            openFileDialog1.Filter = "Arquivos de Imagem (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
+            openFileDialog1.Title = "Selecionar Imagem";
+            openFileDialog1.Multiselect = false;
+
+            // Exibe o OpenFileDialog e verifica se o usuï¿½rio selecionou um arquivo
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // Obtï¿½m o caminho completo do arquivo selecionado
+                string caminhoDaImagem = openFileDialog1.FileName;
+
+                // Carrega a imagem no controle PictureBox
+                pictureBox1.Image = Image.FromFile(caminhoDaImagem);
+
+                imgStack.Push(pictureBox1.Image);
+
+                // Atualiza a variï¿½vel imagemCarregada com a imagem selecionada
+                imagemCarregada = new Bitmap(caminhoDaImagem);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private Bitmap RemoverChromaKey(Bitmap imagem)
+        {
+            if (imagem == null)
+            {
+                throw new ArgumentNullException(nameof(imagem), "A imagem nï¿½o pode ser nula.");
+            }
+
+            Bitmap novaImagem = new Bitmap(imagem.Width, imagem.Height);
+
+            Color chromaKey = Color.FromArgb(0, 255, 0); // Verde
+
+            for (int y = 0; y < novaImagem.Height; y++)
+            {
+                for (int x = 0; x < novaImagem.Width; x++)
+                {
+                    Color pixelColor = imagem.GetPixel(x, y);
+
+                    // Verifica a distï¿½ncia Euclidiana entre as cores
+                    double distance = Math.Sqrt(Math.Pow(pixelColor.R - chromaKey.R, 2) +
+                                                Math.Pow(pixelColor.G - chromaKey.G, 2) +
+                                                Math.Pow(pixelColor.B - chromaKey.B, 2));
+
+                    // Se a distï¿½ncia for maior que 100, copia a cor do pixel para a nova imagem
+                    if (distance > 100)
+                    {
+                        novaImagem.SetPixel(x, y, pixelColor);
+                    }
+                }
+            }
+
+            return novaImagem;
+        }
+
+
+        private void CarregarImagem(Image imagem)
+        {
+            try
+            {
+                // armazena a imagem atual da PictureBox1 na pilha de imagens
+                imgStack.Push(pictureBox1.Image);
+
+                // exibe a nova imagem na PictureBox1
+                pictureBox1.Image = imagem;
+
+                // atualiza a variï¿½vel imagemAtual com a imagem carregada
+                imagemAtual = imagem;
+            }
+            catch (Exception ex)
+            {
+                // exibe mensagem de erro em caso de falha ao carregar a imagem
+                MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
+            }
         }
 
 
@@ -583,12 +678,160 @@ namespace IMAVD_IMAGE_Proj
 
 
 
-        //======================================FUNÇÕES MODIFICADAS======================================================//
 
 
 
 
-        //Ação pode ser removida
+
+
+
+
+
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        Bitmap imagemOriginal;
+
+        private Image imagemAtual;
+
+        private void AdicionarTexto(string texto)
+        {
+            // verifica se hï¿½ uma imagem carregada
+            if (pictureBox1.Image != null)
+            {
+                // cria um objeto Graphics a partir da imagem atual da PictureBox1
+                Graphics g = Graphics.FromImage(pictureBox1.Image);
+
+                // define uma fonte e um Brush para o texto a ser desenhado
+                Font fonte = new Font("Arial", 24);
+                Brush brush = new SolidBrush(Color.Black);
+
+                // define a posiï¿½ï¿½o onde o texto serï¿½ desenhado
+                Point posicao = new Point(50, 50);
+
+                // desenha o texto na imagem
+                g.DrawString(texto, fonte, brush, posicao);
+
+                // atualiza a PictureBox1 com a imagem modificada
+                pictureBox1.Refresh();
+            }
+        }
+
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                // Obtï¿½m a imagem carregada no PictureBox
+                Bitmap imagemCarregada = new Bitmap(pictureBox1.Image);
+
+                // Aplica a remoï¿½ï¿½o do Chroma Key na imagem carregada
+                Bitmap imagemSemChromaKey = RemoverChromaKey(imagemCarregada);
+
+                // Exibe a imagem resultante na tela
+                pictureBox1.Image = imagemSemChromaKey;
+            }
+            else
+            {
+                MessageBox.Show("Carregue uma imagem antes de remover o Chroma Key.");
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            // verifica se hï¿½ pelo menos duas imagens na pilha
+            if (imgStack.Count >= 1)
+            {
+                // remove a imagem atual da PictureBox1
+                pictureBox1.Image = null;
+
+                // exibe a ï¿½ltima imagem carregada na PictureBox1
+                Image ultimaImagem = imgStack.Peek();
+                pictureBox1.Image = ultimaImagem;
+
+                // armazena a imagem que acabou de ser exibida em uma nova variï¿½vel Image
+                Image imagemPenultima = pictureBox1.Image;
+
+                // remove a imagem que acabou de ser exibida da pilha
+                //imgStack.Pop();
+
+                // exibe a penï¿½ltima imagem carregada na PictureBox1
+                pictureBox1.Image = imgStack.Peek();
+
+                // armazena a imagem penï¿½ltima como a imagem atual da PictureBox1
+                imagemAtual = pictureBox1.Image;
+            }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            string texto = textBox1.Text;
+            AdicionarTexto(texto);
+            imgStack.Push(pictureBox1.Image);
+        }
+
+        private void AdicionarImagem(Image imagem, float escala)
+        {
+            // verifica se hÃ¡ uma imagem carregada
+            if (pictureBox1.Image != null)
+            {
+                // cria um objeto Graphics a partir da imagem atual da PictureBox1
+                Graphics g = Graphics.FromImage(pictureBox1.Image);
+
+                // define a posiÃ§Ã£o e a escala da imagem a ser adicionada
+                int posX = 50;
+                int posY = 50;
+                int largura = (int)(imagem.Width * escala);
+                int altura = (int)(imagem.Height * escala);
+
+                // desenha a imagem na posiÃ§Ã£o e escala desejadas
+                g.DrawImage(imagem, posX, posY, largura, altura);
+
+                // atualiza a PictureBox1 com a imagem modificada
+                pictureBox1.Refresh();
+            }
+        }
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // carrega a imagem a ser adicionada
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Arquivos de imagem|*.jpg;*.jpeg;*.png;*.bmp";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Image imagem = Image.FromFile(openFileDialog.FileName);
+
+                // adiciona a imagem na PictureBox1 com escala de 0.2 (20%)
+                AdicionarImagem(imagem, 0.2f);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        //======================================FUNï¿½ï¿½ES MODIFICADAS======================================================//
+
+
+
+
+        //Aï¿½ï¿½o pode ser removida
         /*private void cropToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pictureBox1.Image != null)
@@ -602,34 +845,34 @@ namespace IMAVD_IMAGE_Proj
 
                     if (pictureBox1.Image.Width > xCrop && pictureBox1.Image.Height > yCrop && pictureBox1.Image.Width > wCrop && pictureBox1.Image.Height > hCrop)
                     {
-                        //setar essas informações pelo form (pos em X da imagem, pos Y da imagem,tamanho do crop altura, tamanho do crop largura)
+                        //setar essas informaï¿½ï¿½es pelo form (pos em X da imagem, pos Y da imagem,tamanho do crop altura, tamanho do crop largura)
                         Rectangle rect = new Rectangle(xCrop, yCrop, wCrop, hCrop);
                         pictureBox1.Image = CropImage(pictureBox1.Image, rect);
                         saveCropButton.Enabled = true;
                     }
                     else
                     {
-                        MessageBox.Show("Valores informados não são acessíveis a imagem usada. Verifique se a pasição de corte e o tamanho não ultrapassam o tamanho da imagem");
+                        MessageBox.Show("Valores informados nï¿½o sï¿½o acessï¿½veis a imagem usada. Verifique se a pasiï¿½ï¿½o de corte e o tamanho nï¿½o ultrapassam o tamanho da imagem");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Valores para corte não informados");
+                    MessageBox.Show("Valores para corte nï¿½o informados");
                 }
             }
             else
             {
-                MessageBox.Show("Imagem não foi aberta");
+                MessageBox.Show("Imagem nï¿½o foi aberta");
             }
         }
-        //Opção alternativa. Pode ser removido
+        //Opï¿½ï¿½o alternativa. Pode ser removido
         private static Image CropImage(Image img, Rectangle cropArea)
         {
             Bitmap bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }*/
 
-        //Necessário corrigir soma de brilho. 
+        //Necessï¿½rio corrigir soma de brilho. 
         /*public static Bitmap AdjustBrightness(Bitmap image, float brightnessAdjustment)
         {
             Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
@@ -650,7 +893,7 @@ namespace IMAVD_IMAGE_Proj
             return adjustedImage;
         }
 
-        //Necessário corrigir soma de contraste.
+        //Necessï¿½rio corrigir soma de contraste.
         public static Bitmap AdjustContrast(Bitmap image, float contrastLevel)
         {
             Bitmap adjustedImage = new Bitmap(image.Width, image.Height);

@@ -82,6 +82,14 @@
             applyContrastButton = new Button();
             contrastTrackBar = new TrackBar();
             contrastDomainUpDown = new DomainUpDown();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            button5 = new Button();
+            label3 = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -604,11 +612,94 @@
             contrastDomainUpDown.Size = new Size(84, 27);
             contrastDomainUpDown.TabIndex = 2;
             // 
+            // button1
+            // 
+            button1.Location = new Point(608, 521);
+            button1.Name = "button1";
+            button1.Size = new Size(156, 29);
+            button1.TabIndex = 32;
+            button1.Text = "Chromakey Image";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(780, 521);
+            button2.Name = "button2";
+            button2.Size = new Size(125, 29);
+            button2.TabIndex = 33;
+            button2.Text = "Rmv Chromakey";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(928, 521);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 34;
+            button3.Text = "Undo*";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(794, 589);
+            button4.Name = "button4";
+            button4.Size = new Size(98, 29);
+            button4.TabIndex = 35;
+            button4.Text = "ADD";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click_1;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(608, 589);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(180, 27);
+            textBox1.TabIndex = 36;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(608, 566);
+            label2.Name = "label2";
+            label2.Size = new Size(144, 20);
+            label2.TabIndex = 37;
+            label2.Text = "Write a text to insert";
+            // 
+            // button5
+            // 
+            button5.Location = new Point(608, 648);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 29);
+            button5.TabIndex = 38;
+            button5.Text = "ADD";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(608, 625);
+            label3.Name = "label3";
+            label3.Size = new Size(103, 20);
+            label3.TabIndex = 39;
+            label3.Text = "Add an image";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1493, 1055);
+            Controls.Add(label3);
+            Controls.Add(button5);
+            Controls.Add(label2);
+            Controls.Add(textBox1);
+            Controls.Add(button4);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(tabControl1);
             Controls.Add(changeContrastLabel);
             Controls.Add(changeContrastTextBox);
@@ -711,5 +802,13 @@
         private DomainUpDown contrastDomainUpDown;
         private Button applyBrightnessButton;
         private Button applyContrastButton;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button button4;
+        private TextBox textBox1;
+        private Label label2;
+        private Button button5;
+        private Label label3;
     }
 }
