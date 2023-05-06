@@ -817,6 +817,73 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // verifica se há uma imagem carregada
+            if (pictureBox1.Image != null)
+            {
+                // cria um objeto SaveFileDialog para selecionar o local onde a imagem será salva
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Arquivo JPEG (*.jpg)|*.jpg|Arquivo PNG (*.png)|*.png|Arquivo BMP (*.bmp)|*.bmp";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // salva a imagem no formato selecionado
+                    switch (saveFileDialog.FilterIndex)
+                    {
+                        case 1:
+                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
+                            break;
+                        case 2:
+                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Png);
+                            break;
+                        case 3:
+                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        /* private void AlterarGamma(float gamma)
+         {
+             if (pictureBox1.Image != null)
+             {
+                 Image imagem = pictureBox1.Image;
+
+                 // Define os valores da matriz de cores para alterar o Gamma
+                 float[][] cores = {
+             new float[] {gamma, 0, 0, 0, 0},
+             new float[] {0, gamma, 0, 0, 0},
+             new float[] {0, 0, gamma, 0, 0},
+             new float[] {0, 0, 0, 1, 0},
+             new float[] {0, 0, 0, 0, 1}
+         };
+
+                 // Cria um objeto ImageAttributes e define a matriz de cores
+                 ImageAttributes atributos = new ImageAttributes();
+                 atributos.SetColorMatrix(new ColorMatrix(cores), ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                 // Cria um objeto Graphics a partir da imagem atual da PictureBox1
+                 Graphics g = Graphics.FromImage(imagem);
+
+                 // Desenha a imagem com as alterações de Gamma
+                 g.DrawImage(imagem, new Rectangle(0, 0, imagem.Width, imagem.Height), 0, 0, imagem.Width, imagem.Height, GraphicsUnit.Pixel, atributos);
+
+                 // Atualiza a PictureBox1 com a imagem modificada
+                 pictureBox1.Image = imagem;
+             }
+         }
+
+
+
+         private void trackBar2_Scroll(object sender, EventArgs e)
+         {
+             float gamma = trackBar2.Value / 10f;
+             AlterarGamma(gamma);
+         }
+        */
 
 
 

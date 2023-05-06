@@ -90,6 +90,7 @@
             label2 = new Label();
             button5 = new Button();
             label3 = new Label();
+            button6 = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -687,11 +688,22 @@
             label3.TabIndex = 39;
             label3.Text = "Add an image";
             // 
+            // button6
+            // 
+            button6.Location = new Point(928, 648);
+            button6.Name = "button6";
+            button6.Size = new Size(94, 29);
+            button6.TabIndex = 40;
+            button6.Text = "Download";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1493, 1055);
+            Controls.Add(button6);
             Controls.Add(label3);
             Controls.Add(button5);
             Controls.Add(label2);
@@ -810,5 +822,6 @@
         private Label label2;
         private Button button5;
         private Label label3;
+        private Button button6;
     }
 }
