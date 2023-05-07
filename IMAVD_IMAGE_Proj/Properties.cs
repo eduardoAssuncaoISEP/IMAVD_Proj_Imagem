@@ -19,12 +19,12 @@ namespace IMAVD_IMAGE_Proj
 
         private void Properties_Load(object sender, EventArgs e)
         {
-            image_name.Text = Form1.imageName;
-            image_dimension.Text = Form1.imageDimension;
-            image_extension.Text = Form1.imageExtension;
-            image_location.Text = Form1.imageLocation;
-            image_size.Text = Form1.imageSize;
-            image_created.Text = Form1.imageCreatedOn;
+            image_name.Text = Principal.imageName;
+            image_dimension.Text = Principal.imageDimension;
+            image_extension.Text = Principal.imageExtension;
+            image_location.Text = Principal.imageLocation;
+            image_size.Text = Principal.imageSize;
+            image_created.Text = Principal.imageCreatedOn;
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IMAVD_IMAGE_Proj
 {
-    public partial class Form1 : Form
+    public partial class Principal : Form
     {
         /// <summary>
         /// Vari�veis para armazenamento de informa��es padr�es da imagem
@@ -38,7 +38,7 @@ namespace IMAVD_IMAGE_Proj
         public Pen cropPen;
         public DashStyle cropDashStyle = DashStyle.DashDot;
 
-        public Form1()
+        public Principal()
         {
             InitializeComponent();
             picImagem = new PictureBox();

@@ -28,7 +28,7 @@ namespace IMAVD_IMAGE_Proj
 
         private void GetColor_Load(object sender, EventArgs e)
         {
-            getColorPictureBox.Image = Form1.imagePath;
+            getColorPictureBox.Image = Principal.imagePath;
         }
 
         //Function to get color from image

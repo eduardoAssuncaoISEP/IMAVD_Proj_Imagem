@@ -25,7 +25,7 @@ namespace IMAVD_IMAGE_Proj
 
         private void ColorSearch_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Form1.imagePath;
+            pictureBox1.Image = Principal.imagePath;
         }
 
         private void button1_Click(object sender, EventArgs e)
