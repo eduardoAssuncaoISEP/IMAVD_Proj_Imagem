@@ -475,7 +475,7 @@ namespace IMAVD_IMAGE_Proj
         {
             applyBrightnessButton.Enabled = false;
         }
-
+        //Comentários
         /// <summary>
         /// A��o para modificar o contraste da imagem
         /// </summary>
