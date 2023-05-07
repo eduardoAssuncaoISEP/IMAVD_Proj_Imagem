@@ -846,6 +846,7 @@ namespace IMAVD_IMAGE_Proj
         }
 
 
+
         /* private void AlterarGamma(float gamma)
          {
              if (pictureBox1.Image != null)
