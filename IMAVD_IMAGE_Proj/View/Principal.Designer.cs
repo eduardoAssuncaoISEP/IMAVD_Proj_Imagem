@@ -81,6 +81,7 @@
             applyContrastButton = new Button();
             contrastTrackBar = new TrackBar();
             contrastDomainUpDown = new DomainUpDown();
+            tabPage6 = new TabPage();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
@@ -93,10 +94,9 @@
             panel1 = new Panel();
             label4 = new Label();
             panel2 = new Panel();
-            tabPage6 = new TabPage();
             panel3 = new Panel();
-            label5 = new Label();
             button7 = new Button();
+            label5 = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -111,9 +111,9 @@
             ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).BeginInit();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)contrastTrackBar).BeginInit();
+            tabPage6.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            tabPage6.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -144,7 +144,7 @@
             openToolStripMenuItem.BackColor = SystemColors.Control;
             openToolStripMenuItem.ForeColor = Color.FromArgb(26, 26, 26);
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(103, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -161,28 +161,28 @@
             // 
             redToolStripMenuItem.BackColor = SystemColors.Control;
             redToolStripMenuItem.Name = "redToolStripMenuItem";
-            redToolStripMenuItem.Size = new Size(180, 22);
+            redToolStripMenuItem.Size = new Size(121, 22);
             redToolStripMenuItem.Text = "Red";
             redToolStripMenuItem.Click += redToolStripMenuItem_Click;
             // 
             // greenToolStripMenuItem
             // 
             greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            greenToolStripMenuItem.Size = new Size(180, 22);
+            greenToolStripMenuItem.Size = new Size(121, 22);
             greenToolStripMenuItem.Text = "Green";
             greenToolStripMenuItem.Click += greenToolStripMenuItem_Click;
             // 
             // blueToolStripMenuItem
             // 
             blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            blueToolStripMenuItem.Size = new Size(180, 22);
+            blueToolStripMenuItem.Size = new Size(121, 22);
             blueToolStripMenuItem.Text = "Blue";
             blueToolStripMenuItem.Click += blueToolStripMenuItem_Click;
             // 
             // invertToolStripMenuItem
             // 
             invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            invertToolStripMenuItem.Size = new Size(180, 22);
+            invertToolStripMenuItem.Size = new Size(121, 22);
             invertToolStripMenuItem.Text = "Negative";
             invertToolStripMenuItem.Click += invertToolStripMenuItem_Click;
             // 
@@ -198,7 +198,7 @@
             // propertiesToolStripMenuItem
             // 
             propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            propertiesToolStripMenuItem.Size = new Size(180, 22);
+            propertiesToolStripMenuItem.Size = new Size(127, 22);
             propertiesToolStripMenuItem.Text = "Properties";
             propertiesToolStripMenuItem.Click += propertiesToolStripMenuItem_Click;
             // 
@@ -206,7 +206,7 @@
             // 
             colorToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { findColorToolStripMenuItem, getColorToolStripMenuItem });
             colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            colorToolStripMenuItem.Size = new Size(180, 22);
+            colorToolStripMenuItem.Size = new Size(127, 22);
             colorToolStripMenuItem.Text = "Color";
             // 
             // findColorToolStripMenuItem
@@ -458,15 +458,19 @@
             // 
             // tabControl1
             // 
+            tabControl1.Appearance = TabAppearance.FlatButtons;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
+            tabControl1.ImeMode = ImeMode.NoControl;
             tabControl1.Location = new Point(10, 417);
             tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
+            tabControl1.Padding = new Point(0, 0);
+            tabControl1.RightToLeft = RightToLeft.No;
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(458, 103);
             tabControl1.TabIndex = 31;
@@ -478,11 +482,11 @@
             tabPage1.Controls.Add(rotateHorizontalButton);
             tabPage1.Controls.Add(rotateRightButton);
             tabPage1.Controls.Add(rotateLeftButton);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 27);
             tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 2, 3, 2);
-            tabPage1.Size = new Size(450, 75);
+            tabPage1.Size = new Size(450, 72);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Rotation";
             // 
@@ -536,11 +540,11 @@
             tabPage2.Controls.Add(makeSelectionButton);
             tabPage2.Controls.Add(makeCropButton);
             tabPage2.Controls.Add(saveCropButton);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 27);
             tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3, 2, 3, 2);
-            tabPage2.Size = new Size(450, 75);
+            tabPage2.Size = new Size(450, 72);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Crop";
             // 
@@ -549,11 +553,11 @@
             tabPage3.BackColor = Color.FromArgb(51, 47, 46);
             tabPage3.Controls.Add(okResizeButton);
             tabPage3.Controls.Add(resizeDomainUpDown);
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Location = new Point(4, 27);
             tabPage3.Margin = new Padding(3, 2, 3, 2);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3, 2, 3, 2);
-            tabPage3.Size = new Size(450, 75);
+            tabPage3.Size = new Size(450, 72);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Resize";
             // 
@@ -586,11 +590,11 @@
             tabPage4.Controls.Add(changeContrastTextBox);
             tabPage4.Controls.Add(changeContrastButton);
             tabPage4.Controls.Add(changeContrastLabel);
-            tabPage4.Location = new Point(4, 24);
+            tabPage4.Location = new Point(4, 27);
             tabPage4.Margin = new Padding(3, 2, 3, 2);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3, 2, 3, 2);
-            tabPage4.Size = new Size(450, 75);
+            tabPage4.Size = new Size(450, 72);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Brightness";
             // 
@@ -631,11 +635,11 @@
             tabPage5.Controls.Add(applyContrastButton);
             tabPage5.Controls.Add(contrastTrackBar);
             tabPage5.Controls.Add(contrastDomainUpDown);
-            tabPage5.Location = new Point(4, 24);
+            tabPage5.Location = new Point(4, 27);
             tabPage5.Margin = new Padding(3, 2, 3, 2);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3, 2, 3, 2);
-            tabPage5.Size = new Size(450, 75);
+            tabPage5.Size = new Size(450, 72);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Contrast";
             // 
@@ -669,6 +673,18 @@
             contrastDomainUpDown.Name = "contrastDomainUpDown";
             contrastDomainUpDown.Size = new Size(82, 23);
             contrastDomainUpDown.TabIndex = 2;
+            // 
+            // tabPage6
+            // 
+            tabPage6.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage6.Controls.Add(changeGlowTextBox);
+            tabPage6.Controls.Add(changeGlowButton);
+            tabPage6.Location = new Point(4, 27);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(450, 72);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Glow";
             // 
             // button1
             // 
@@ -804,18 +820,6 @@
             panel2.Size = new Size(203, 216);
             panel2.TabIndex = 43;
             // 
-            // tabPage6
-            // 
-            tabPage6.BackColor = Color.FromArgb(51, 47, 46);
-            tabPage6.Controls.Add(changeGlowTextBox);
-            tabPage6.Controls.Add(changeGlowButton);
-            tabPage6.Location = new Point(4, 24);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(450, 75);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Glow";
-            // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(51, 47, 46);
@@ -835,6 +839,15 @@
             panel3.Size = new Size(458, 143);
             panel3.TabIndex = 44;
             // 
+            // button7
+            // 
+            button7.Location = new Point(98, 87);
+            button7.Name = "button7";
+            button7.Size = new Size(75, 23);
+            button7.TabIndex = 41;
+            button7.Text = "Redo*";
+            button7.UseVisualStyleBackColor = true;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -845,15 +858,6 @@
             label5.Size = new Size(163, 17);
             label5.TabIndex = 0;
             label5.Text = "CHROMA KEY CONTROL";
-            // 
-            // button7
-            // 
-            button7.Location = new Point(98, 87);
-            button7.Name = "button7";
-            button7.Size = new Size(75, 23);
-            button7.TabIndex = 41;
-            button7.Text = "Redo*";
-            button7.UseVisualStyleBackColor = true;
             // 
             // Principal
             // 
@@ -870,6 +874,7 @@
             Controls.Add(panel3);
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
             Name = "Principal";
             Text = "Form1";
             Load += Form1_Load;
@@ -892,12 +897,12 @@
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)contrastTrackBar).EndInit();
+            tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            tabPage6.ResumeLayout(false);
-            tabPage6.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);

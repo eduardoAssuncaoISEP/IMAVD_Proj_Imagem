@@ -43,7 +43,6 @@ namespace IMAVD_IMAGE_Proj
             InitializeComponent();
             picImagem = new PictureBox();
 
-
         }
 
         /// <summary>

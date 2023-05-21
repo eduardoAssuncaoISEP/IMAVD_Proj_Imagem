@@ -1,4 +1,4 @@
-namespace IMAVD_IMAGE_Proj
+namespace IMAVD_IMAGE_Proj.Controller
 {
     internal static class Program
     {
