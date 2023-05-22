@@ -1,6 +1,6 @@
 ﻿namespace IMAVD_IMAGE_Proj
 {
-    partial class Properties
+    partial class Information
     {
         /// <summary>
         /// Required designer variable.

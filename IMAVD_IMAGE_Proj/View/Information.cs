@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IMAVD_IMAGE_Proj
 {
-    public partial class Properties : Form
+    public partial class Information : Form
     {
-        public Properties()
+        public Information()
         {
             InitializeComponent();
         }

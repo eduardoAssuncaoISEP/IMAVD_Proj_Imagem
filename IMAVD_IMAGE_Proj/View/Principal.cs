@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Numerics;
 using System;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using IMAVD_IMAGE_Proj.Controller;
 
 namespace IMAVD_IMAGE_Proj
 {
@@ -38,11 +39,14 @@ namespace IMAVD_IMAGE_Proj
         public Pen cropPen;
         public DashStyle cropDashStyle = DashStyle.DashDot;
 
+        //Variável para armazenamento de pilha de alterações
+        private LinkedList<Image> imgStack;
+
         public Principal()
         {
             InitializeComponent();
+            imgStack = new LinkedList<Image>();
             picImagem = new PictureBox();
-
         }
 
         /// <summary>
@@ -63,12 +67,12 @@ namespace IMAVD_IMAGE_Proj
         }
 
         /// <summary>
-        /// A��o de abertura de image, obten��o e atribui��o de propriedades da mesma �s vari�veis globais
+        /// Ação de abertura de image, obtendo e atribuindo de propriedades da mesma �s vari�veis globais
         /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog Dlg = new OpenFileDialog();
-            Dlg.Filter = "";
+            Dlg.Filter = "Image Files (*.jpg, *.jpeg, *.png, *.gif)|*.jpg;*.jpeg;*.png;*.gif";
             Dlg.Title = "Select image";
             if (Dlg.ShowDialog() == DialogResult.OK)
             {
@@ -104,10 +108,17 @@ namespace IMAVD_IMAGE_Proj
         {
             int imgWidth = Img.Width;
             int imgHeight = Img.Height;
+            //Picture Box 1
             pictureBox1.Width = imgWidth;
             pictureBox1.Height = imgHeight;
             pictureBox1.Image = Img;
-            PictureBoxLocation();
+
+            //Picture Box 2
+            pictureBox2.Width = imgWidth;
+            pictureBox2.Height = imgHeight;
+            pictureBox2.Image = Img;
+            PictureBoxLocation1();
+            PictureBoxLocation2();
             OriginalImageSize = new Size(imgWidth, imgHeight);
             //SetResizeInfo();
         }
@@ -115,7 +126,7 @@ namespace IMAVD_IMAGE_Proj
         /// <summary>
         /// Fun��o para determinar a posi��o, no painel, da imagem carregada
         /// </summary>
-        private void PictureBoxLocation()
+        private void PictureBoxLocation1()
         {
             int _x = 0;
             int _y = 0;
@@ -128,6 +139,21 @@ namespace IMAVD_IMAGE_Proj
                 _y = (panelPictureBox1.Height - pictureBox1.Height) / 2;
             }
             pictureBox1.Location = new Point(_x, _y);
+        }
+
+        private void PictureBoxLocation2()
+        {
+            int _x = 0;
+            int _y = 0;
+            if (panelPictureBox2.Width > pictureBox2.Width)
+            {
+                _x = (panelPictureBox2.Width - pictureBox2.Width) / 2;
+            }
+            if (panelPictureBox2.Height > pictureBox2.Height)
+            {
+                _y = (panelPictureBox2.Height - pictureBox2.Height) / 2;
+            }
+            pictureBox2.Location = new Point(_x, _y);
         }
 
         /// <summary>
@@ -348,12 +374,12 @@ namespace IMAVD_IMAGE_Proj
             g.CompositingQuality = CompositingQuality.HighQuality;
             //set image attributes  
             g.DrawImage(OriginalImage, 0, 0, rect, GraphicsUnit.Pixel);
-            pictureBox1.Image = _img;
-            pictureBox1.Width = _img.Width;
-            pictureBox1.Height = _img.Height;
-            PictureBoxLocation();
+            pictureBox2.Image = _img;
+            pictureBox2.Width = _img.Width;
+            pictureBox2.Height = _img.Height;
+            PictureBoxLocation2();
             saveCropButton.Enabled = true;
-            //makeCropButton.Enabled = false;
+            insertImageStack(pictureBox2.Image);
         }
 
         /// <summary>
@@ -361,14 +387,14 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void saveCropButton_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
+            if (pictureBox2.Image == null)
                 saveCropButton.Enabled = false;
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Arquivos PNG (*.png)|*.png";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image.Save(dialog.FileName, ImageFormat.Png);
+                pictureBox2.Image.Save(dialog.FileName, ImageFormat.Png);
             }
         }
 
@@ -419,7 +445,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox1.Image = bm_dest;
             pictureBox1.Width = bm_dest.Width;
             pictureBox1.Height = bm_dest.Height;
-            PictureBoxLocation();
+            PictureBoxLocation1();
         }
 
         /// <summary>
@@ -524,9 +550,9 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateLeftButton_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            pictureBox1.Refresh();
-            imgStack.Push(pictureBox1.Image);
+            pictureBox2.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            pictureBox2.Refresh();
+            insertImageStack(pictureBox2.Image);
         }
 
         /// <summary>
@@ -534,8 +560,9 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateRightButton_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            pictureBox1.Refresh();
+            pictureBox2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            pictureBox2.Refresh();
+            insertImageStack(pictureBox2.Image);
         }
 
         /// <summary>
@@ -543,8 +570,9 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateHorizontalButton_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            pictureBox1.Refresh();
+            pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            pictureBox2.Refresh();
+            insertImageStack(pictureBox2.Image);
         }
 
         /// <summary>
@@ -552,8 +580,9 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateVerticalButton_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            pictureBox1.Refresh();
+            pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox2.Refresh();
+            insertImageStack(pictureBox2.Image);
         }
 
         /// <summary>
@@ -579,13 +608,13 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Properties properties = new Properties();
+            Information properties = new Information();
             properties.Show();
         }
 
         private PictureBox picImagem;
         private Bitmap imagemCarregada;
-        private Stack<Image> imgStack = new Stack<Image>();
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -604,18 +633,13 @@ namespace IMAVD_IMAGE_Proj
 
                 // Carrega a imagem no controle PictureBox
                 pictureBox1.Image = Image.FromFile(caminhoDaImagem);
-
-                imgStack.Push(pictureBox1.Image);
+                //insertImageStack(pictureBox1.Image);
 
                 // Atualiza a vari�vel imagemCarregada com a imagem selecionada
                 imagemCarregada = new Bitmap(caminhoDaImagem);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private Bitmap RemoverChromaKey(Bitmap imagem)
         {
@@ -656,7 +680,7 @@ namespace IMAVD_IMAGE_Proj
             try
             {
                 // armazena a imagem atual da PictureBox1 na pilha de imagens
-                imgStack.Push(pictureBox1.Image);
+                //imgStack.Push(pictureBox1.Image);
 
                 // exibe a nova imagem na PictureBox1
                 pictureBox1.Image = imagem;
@@ -755,7 +779,7 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox1.Image = null;
 
                 // exibe a �ltima imagem carregada na PictureBox1
-                Image ultimaImagem = imgStack.Peek();
+                Image ultimaImagem = imgStack.Last();
                 pictureBox1.Image = ultimaImagem;
 
                 // armazena a imagem que acabou de ser exibida em uma nova vari�vel Image
@@ -765,7 +789,7 @@ namespace IMAVD_IMAGE_Proj
                 //imgStack.Pop();
 
                 // exibe a pen�ltima imagem carregada na PictureBox1
-                pictureBox1.Image = imgStack.Peek();
+                pictureBox1.Image = imgStack.Last();
 
                 // armazena a imagem pen�ltima como a imagem atual da PictureBox1
                 imagemAtual = pictureBox1.Image;
@@ -776,7 +800,7 @@ namespace IMAVD_IMAGE_Proj
         {
             string texto = textBox1.Text;
             AdicionarTexto(texto);
-            imgStack.Push(pictureBox1.Image);
+            //imgStack.Push(pictureBox1.Image);
         }
 
         private void AdicionarImagem(Image imagem, float escala)
@@ -843,6 +867,24 @@ namespace IMAVD_IMAGE_Proj
                 }
             }
         }
+
+        private void insertImageStack(Image image)
+        {
+            if (imgStack.Count < 10)
+            {
+                imgStack.AddLast(image);
+            }
+            else
+            {
+                imgStack.RemoveFirst();
+                imgStack.AddLast(image);
+            }
+        }
+
+
+
+
+
 
 
 
