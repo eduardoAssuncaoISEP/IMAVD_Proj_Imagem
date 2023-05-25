@@ -140,31 +140,27 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void PictureBoxLocation1()
         {
-            int _x = 0;
-            int _y = 0;
-            if (panelPictureBox1.Width > pictureBox1.Width)
-            {
-                _x = (panelPictureBox1.Width - pictureBox1.Width) / 2;
-            }
-            if (panelPictureBox1.Height > pictureBox1.Height)
-            {
-                _y = (panelPictureBox1.Height - pictureBox1.Height) / 2;
-            }
+            int _x = (panelPictureBox1.Width > pictureBox1.Width) ?
+                (panelPictureBox1.Width - pictureBox1.Width) / 2 :
+                (pictureBox1.Width - panelPictureBox1.Width) / 2;
+
+            int _y = (panelPictureBox1.Height > pictureBox1.Height) ?
+                (panelPictureBox1.Height - pictureBox1.Height) / 2 :
+                (pictureBox1.Height - panelPictureBox1.Height) / 2;
+
             pictureBox1.Location = new Point(_x, _y);
         }
 
         private void PictureBoxLocation2()
         {
-            int _x = 0;
-            int _y = 0;
-            if (panelPictureBox2.Width > pictureBox2.Width)
-            {
-                _x = (panelPictureBox2.Width - pictureBox2.Width) / 2;
-            }
-            if (panelPictureBox2.Height > pictureBox2.Height)
-            {
-                _y = (panelPictureBox2.Height - pictureBox2.Height) / 2;
-            }
+            int _x = (panelPictureBox2.Width > pictureBox2.Width) ?
+                (panelPictureBox2.Width - pictureBox2.Width) / 2 :
+                 (pictureBox2.Width - panelPictureBox2.Width) / 2;
+
+            int _y = (panelPictureBox2.Height > pictureBox2.Height) ?
+                (panelPictureBox2.Height - pictureBox2.Height) / 2 :
+                (pictureBox2.Height - panelPictureBox2.Height) / 2;
+
             pictureBox2.Location = new Point(_x, _y);
         }
 
@@ -540,8 +536,10 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateLeftButton_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            pictureBox2.Refresh();
+            Image image = pictureBox2.Image;
+            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            pictureBox2.Image = image;
+            PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
             ModifiedImg = pictureBox2.Image;
         }
@@ -551,8 +549,10 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateRightButton_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            pictureBox2.Refresh();
+            Image image = pictureBox2.Image;
+            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            pictureBox2.Image = image;
+            PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
             ModifiedImg = pictureBox2.Image;
         }
@@ -562,8 +562,10 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateHorizontalButton_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            pictureBox2.Refresh();
+            Image image = pictureBox2.Image;
+            image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            pictureBox2.Image = image;
+            PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
             ModifiedImg = pictureBox2.Image;
         }
@@ -573,8 +575,10 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateVerticalButton_Click(object sender, EventArgs e)
         {
-            pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            pictureBox2.Refresh();
+            Image image = pictureBox2.Image;
+            image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            pictureBox2.Image = image;
+            PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
             ModifiedImg = pictureBox2.Image;
         }
@@ -822,6 +826,7 @@ namespace IMAVD_IMAGE_Proj
                 imgStack.RemoveFirst();
                 imgStack.AddLast(image);
             }
+            clearRedo();
             if (!undoButton.Enabled)
                 undoButton.Enabled = true;
         }
@@ -1086,9 +1091,10 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox2.Image = newLastImage;
                 PictureBoxLocation2();
                 ModifiedImg = pictureBox2.Image;
-                
 
-                if(imgStack.Count == 1) {
+
+                if (imgStack.Count == 1)
+                {
                     undoButton.Enabled = false;
                 }
                 redoButton.Enabled = true;
@@ -1098,7 +1104,7 @@ namespace IMAVD_IMAGE_Proj
 
         private void redoButton_Click(object sender, EventArgs e)
         {
-            if(redoImgStack.Count >= 1)
+            if (redoImgStack.Count >= 1)
             {
                 //Pega a última image e depois a remove
                 Image imageLast = redoImgStack.Last();
@@ -1113,10 +1119,206 @@ namespace IMAVD_IMAGE_Proj
 
                 if (redoImgStack.Count == 0)
                 {
-                   redoButton.Enabled = false;
+                    redoButton.Enabled = false;
                 }
                 undoButton.Enabled = true;
             }
+        }
+
+        private void clearRedo()
+        {
+            if (redoImgStack.Count >= 1)
+            {
+                redoImgStack.Clear();
+
+                redoButton.Enabled = false;
+            }
+        }
+
+        private void fourBoxShape_Click(object sender, EventArgs e)
+        {
+            int margin = 15;
+
+            // Calcula a largura e altura de cada área
+            Image image = pictureBox2.Image;
+            int width = image.Width / 2;
+            int height = image.Height / 2;
+
+            Image[] dividedImages = new Image[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                // Cria uma nova área de imagem com a largura e altura calculadas
+                Bitmap dividedBitmap = new Bitmap(width, height);
+                dividedBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+                // Cria um objeto Graphics a partir da nova área de imagem
+                using (Graphics graphics = Graphics.FromImage(dividedBitmap))
+                {
+                    // Define a área de destino para a cópia da porção da imagem original
+                    int x = (i % 2) * (width);
+                    int y = (i / 2) * (height);
+                    Rectangle destinationRect = new Rectangle(0, 0, width, height);
+
+                    // Define a área de origem para a cópia da porção da imagem original
+                    Rectangle sourceRect = new Rectangle(x, y, width, height);
+
+                    // Copia a porção da imagem original para a nova área de imagem
+                    graphics.DrawImage(image, destinationRect, sourceRect, GraphicsUnit.Pixel);
+                }
+
+                dividedImages[i] = dividedBitmap;
+            }
+
+            // Cria uma nova imagem composta com a largura e altura calculadas
+            int compositeWidth = (width + margin) * 2 - margin;
+            int compositeHeight = (height + margin) * 2 - margin;
+            Bitmap compositeImage = new Bitmap(compositeWidth, compositeHeight);
+            compositeImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            // Cria um objeto Graphics a partir da imagem composta
+            using (Graphics graphics = Graphics.FromImage(compositeImage))
+            {
+                // Define o fundo do Graphics com uma cor de fundo, se necessário
+                graphics.Clear(Color.White);
+
+                // Desenha as quatro imagens divididas na imagem composta, com a margem
+                for (int i = 0; i < 4; i++)
+                {
+                    int x = (i % 2) * (width + margin);
+                    int y = (i / 2) * (height + margin);
+
+                    graphics.DrawImage(dividedImages[i], x, y);
+                }
+            }
+            // Define a imagem composta como a imagem exibida no PictureBox
+            pictureBox2.Image = compositeImage;
+            PictureBoxLocation2();
+            insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
+        }
+
+        private void twoRectangleShape_Click(object sender, EventArgs e)
+        {
+            int margin = 15;
+
+            // Calcula a largura e altura de cada área
+            Image image = pictureBox2.Image;
+            int width = image.Width;
+            int height = image.Height / 2;
+
+            Image[] dividedImages = new Image[2];
+
+            for (int i = 0; i < 2; i++)
+            {
+                // Cria uma nova área de imagem com a largura e altura calculadas
+                Bitmap dividedBitmap = new Bitmap(width, height);
+                dividedBitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+                // Cria um objeto Graphics a partir da nova área de imagem
+                using (Graphics graphics = Graphics.FromImage(dividedBitmap))
+                {
+                    // Define a área de destino para a cópia da porção da imagem original
+                    int x = 0;
+                    int y = i * height;
+                    Rectangle destinationRect = new Rectangle(0, 0, width, height);
+
+                    // Define a área de origem para a cópia da porção da imagem original
+                    Rectangle sourceRect = new Rectangle(x, y, width, height);
+
+                    // Copia a porção da imagem original para a nova área de imagem
+                    graphics.DrawImage(image, destinationRect, sourceRect, GraphicsUnit.Pixel);
+                }
+
+                dividedImages[i] = dividedBitmap;
+            }
+
+            // Cria uma nova imagem composta com a largura e altura calculadas
+            int compositeWidth = width;
+            int compositeHeight = (height + margin) * 2 - margin;
+            Bitmap compositeImage = new Bitmap(compositeWidth, compositeHeight);
+            compositeImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            // Cria um objeto Graphics a partir da imagem composta
+            using (Graphics graphics = Graphics.FromImage(compositeImage))
+            {
+                // Define o fundo do Graphics com uma cor de fundo, se necessário
+                graphics.Clear(Color.White);
+
+                // Desenha as quatro imagens divididas na imagem composta, com a margem
+                for (int i = 0; i < 2; i++)
+                {
+                    int x = 0;
+                    int y = i * (height + margin);
+
+                    graphics.DrawImage(dividedImages[i], x, y);
+                }
+            }
+            // Define a imagem composta como a imagem exibida no PictureBox
+            pictureBox2.Image = compositeImage;
+            PictureBoxLocation2();
+            insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
+        }
+
+        private void triangleTopShape_Click(object sender, EventArgs e)
+        {
+            //Triângulo canto superior esquerdo
+            Image image = pictureBox2.Image;
+            int width = image.Width;
+            int height = image.Height;
+
+            // Define as coordenadas dos vértices dos triângulos
+            Point[] trianglePoints = new Point[]
+            {
+            new Point(width, height),
+            new Point(0, height),
+            new Point(width, 0)
+            };
+
+            drawTriangles(image, trianglePoints);
+
+        }
+
+        private void drawTriangles(Image image, Point[] trianglePoints)
+        {
+            // Criação do bitmap para exibir a imagem recortada
+            Bitmap mergedImage = new Bitmap(image.Width, image.Height);
+            mergedImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+
+            //Criação dos Graphics para desenhar no Bitmap
+            using (Graphics graphics = Graphics.FromImage(mergedImage))
+            {
+                // Desenho da imagem original no bitmap
+                graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height));
+                // Desenho dos triângulos no bitmap
+                graphics.FillPolygon(Brushes.White, trianglePoints);
+
+            }
+
+            pictureBox2.Image = mergedImage;
+            PictureBoxLocation2();
+            insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
+        }
+
+        private void triangleBottomShape_Click(object sender, EventArgs e)
+        {
+            //Triângulo canto superior esquerdo
+            Image image = pictureBox2.Image;
+            int width = image.Width;
+            int height = image.Height;
+
+            // Define as coordenadas dos vértices dos triângulos
+            Point[] trianglePoints = new Point[]
+            {
+            new Point(0,0),
+            new Point(width,0),
+            new Point(0, height)
+            };
+
+            drawTriangles(image, trianglePoints);
         }
     }
 }

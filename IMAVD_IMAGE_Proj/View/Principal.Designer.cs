@@ -95,6 +95,11 @@
             redGammaBox = new TextBox();
             redGammaBar = new TrackBar();
             label10 = new Label();
+            tabPage7 = new TabPage();
+            triangleBottomShape = new Button();
+            triangleTopShape = new Button();
+            twoRectangleShape = new Button();
+            fourBoxShape = new Button();
             insertChromaImage = new Button();
             button2 = new Button();
             undoButton = new Button();
@@ -132,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)blueGammaBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)greenGammaBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)redGammaBar).BeginInit();
+            tabPage7.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -439,6 +445,7 @@
             ControlPanel1.Controls.Add(tabPage4);
             ControlPanel1.Controls.Add(tabPage5);
             ControlPanel1.Controls.Add(tabPage6);
+            ControlPanel1.Controls.Add(tabPage7);
             ControlPanel1.ImeMode = ImeMode.NoControl;
             ControlPanel1.Location = new Point(12, 448);
             ControlPanel1.Margin = new Padding(3, 2, 3, 2);
@@ -882,6 +889,68 @@
             label10.TabIndex = 0;
             label10.Text = "R:";
             // 
+            // tabPage7
+            // 
+            tabPage7.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage7.Controls.Add(triangleBottomShape);
+            tabPage7.Controls.Add(triangleTopShape);
+            tabPage7.Controls.Add(twoRectangleShape);
+            tabPage7.Controls.Add(fourBoxShape);
+            tabPage7.Location = new Point(4, 27);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new Padding(3);
+            tabPage7.Size = new Size(450, 102);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Shapes";
+            // 
+            // triangleBottomShape
+            // 
+            triangleBottomShape.BackColor = Color.FromArgb(51, 47, 46);
+            triangleBottomShape.ForeColor = Color.Black;
+            triangleBottomShape.Image = Properties.Resources.Shape4;
+            triangleBottomShape.Location = new Point(273, 19);
+            triangleBottomShape.Name = "triangleBottomShape";
+            triangleBottomShape.Size = new Size(64, 64);
+            triangleBottomShape.TabIndex = 3;
+            triangleBottomShape.UseVisualStyleBackColor = false;
+            triangleBottomShape.Click += triangleBottomShape_Click;
+            // 
+            // triangleTopShape
+            // 
+            triangleTopShape.BackColor = Color.FromArgb(51, 47, 46);
+            triangleTopShape.ForeColor = Color.Black;
+            triangleTopShape.Image = Properties.Resources.Shape3;
+            triangleTopShape.Location = new Point(185, 19);
+            triangleTopShape.Name = "triangleTopShape";
+            triangleTopShape.Size = new Size(64, 64);
+            triangleTopShape.TabIndex = 2;
+            triangleTopShape.UseVisualStyleBackColor = false;
+            triangleTopShape.Click += triangleTopShape_Click;
+            // 
+            // twoRectangleShape
+            // 
+            twoRectangleShape.BackColor = Color.FromArgb(51, 47, 46);
+            twoRectangleShape.ForeColor = Color.Black;
+            twoRectangleShape.Image = Properties.Resources.Shape2;
+            twoRectangleShape.Location = new Point(96, 19);
+            twoRectangleShape.Name = "twoRectangleShape";
+            twoRectangleShape.Size = new Size(64, 64);
+            twoRectangleShape.TabIndex = 1;
+            twoRectangleShape.UseVisualStyleBackColor = false;
+            twoRectangleShape.Click += twoRectangleShape_Click;
+            // 
+            // fourBoxShape
+            // 
+            fourBoxShape.BackColor = Color.FromArgb(51, 47, 46);
+            fourBoxShape.ForeColor = Color.Black;
+            fourBoxShape.Image = Properties.Resources.Shape1;
+            fourBoxShape.Location = new Point(6, 19);
+            fourBoxShape.Name = "fourBoxShape";
+            fourBoxShape.Size = new Size(64, 64);
+            fourBoxShape.TabIndex = 0;
+            fourBoxShape.UseVisualStyleBackColor = false;
+            fourBoxShape.Click += fourBoxShape_Click;
+            // 
             // insertChromaImage
             // 
             insertChromaImage.Location = new Point(10, 36);
@@ -1154,6 +1223,7 @@
             ((System.ComponentModel.ISupportInitialize)blueGammaBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)greenGammaBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)redGammaBar).EndInit();
+            tabPage7.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -1252,5 +1322,10 @@
         private TextBox brightnessBox;
         private TextBox contrastBox;
         private Button returnButton;
+        private TabPage tabPage7;
+        private Button fourBoxShape;
+        private Button twoRectangleShape;
+        private Button triangleBottomShape;
+        private Button triangleTopShape;
     }
 }

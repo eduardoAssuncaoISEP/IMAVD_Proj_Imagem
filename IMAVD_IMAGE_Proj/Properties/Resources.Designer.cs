@@ -63,9 +63,39 @@ namespace IMAVD_IMAGE_Proj.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lock1 {
+        internal static System.Drawing.Bitmap Shape1 {
             get {
-                object obj = ResourceManager.GetObject("Lock1", resourceCulture);
+                object obj = ResourceManager.GetObject("Shape1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shape2 {
+            get {
+                object obj = ResourceManager.GetObject("Shape2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shape3 {
+            get {
+                object obj = ResourceManager.GetObject("Shape3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shape4 {
+            get {
+                object obj = ResourceManager.GetObject("Shape4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
