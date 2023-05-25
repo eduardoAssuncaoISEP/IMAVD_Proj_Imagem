@@ -646,23 +646,26 @@ namespace IMAVD_IMAGE_Proj
         private void AdicionarTexto(string texto)
         {
             // verifica se h� uma imagem carregada
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                // cria um objeto Graphics a partir da imagem atual da PictureBox1
-                Graphics g = Graphics.FromImage(pictureBox1.Image);
+                Image image = pictureBox2.Image;
 
-                // define uma fonte e um Brush para o texto a ser desenhado
-                Font fonte = new Font("Arial", 24);
-                Brush brush = new SolidBrush(Color.Black);
+                Bitmap frameImage = new Bitmap(image);
 
-                // define a posi��o onde o texto ser� desenhado
-                Point posicao = new Point(50, 50);
+                using (Graphics graphics = Graphics.FromImage(frameImage))
+                {
+                    // define uma fonte e um Brush para o texto a ser desenhado
+                    Font fonte = new Font("Arial", 24);
+                    Brush brush = new SolidBrush(Color.Black);
 
-                // desenha o texto na imagem
-                g.DrawString(texto, fonte, brush, posicao);
+                    // define a posi��o onde o texto ser� desenhado
+                    Point posicao = new Point(50, 50);
 
-                // atualiza a PictureBox1 com a imagem modificada
-                pictureBox1.Refresh();
+                    // desenha o texto na imagem
+                    graphics.DrawString(texto, fonte, brush, posicao);
+                }
+                pictureBox2.Image = frameImage;
+                PictureBoxLocation2();
             }
         }
 
@@ -687,28 +690,31 @@ namespace IMAVD_IMAGE_Proj
         {
             string texto = textBox1.Text;
             AdicionarTexto(texto);
-            //imgStack.Push(pictureBox1.Image);
+            ModifiedImg = pictureBox2.Image;
+            insertImageStack(pictureBox2.Image);
         }
 
         private void AdicionarImagem(Image imagem, float escala)
         {
             // verifica se há uma imagem carregada
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                // cria um objeto Graphics a partir da imagem atual da PictureBox1
-                Graphics g = Graphics.FromImage(pictureBox1.Image);
+                Bitmap framImage = new Bitmap(pictureBox2.Image);
+                
+                using (Graphics graphics = Graphics.FromImage(framImage))
+                {
+                    // define a posição e a escala da imagem a ser adicionada
+                    int posX = 50;
+                    int posY = 50;
+                    int largura = (int)(imagem.Width * escala);
+                    int altura = (int)(imagem.Height * escala);
 
-                // define a posição e a escala da imagem a ser adicionada
-                int posX = 50;
-                int posY = 50;
-                int largura = (int)(imagem.Width * escala);
-                int altura = (int)(imagem.Height * escala);
+                    // desenha a imagem na posição e escala desejadas
+                    graphics.DrawImage(imagem, posX, posY, largura, altura);
+                }
+                pictureBox2.Image = framImage;
+                PictureBoxLocation2();
 
-                // desenha a imagem na posição e escala desejadas
-                g.DrawImage(imagem, posX, posY, largura, altura);
-
-                // atualiza a PictureBox1 com a imagem modificada
-                pictureBox1.Refresh();
             }
         }
 
@@ -724,6 +730,8 @@ namespace IMAVD_IMAGE_Proj
 
                 // adiciona a imagem na PictureBox1 com escala de 0.2 (20%)
                 AdicionarImagem(imagem, 0.2f);
+                ModifiedImg = pictureBox2.Image;
+                insertImageStack(pictureBox2.Image);
             }
         }
 
