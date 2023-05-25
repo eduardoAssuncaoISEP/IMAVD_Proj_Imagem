@@ -1045,6 +1045,10 @@ namespace IMAVD_IMAGE_Proj
                 pictureBox2.Image = pictureBox1.Image;
                 PictureBoxLocation2();
                 ModifiedImg = pictureBox2.Image;
+                clearRedo();
+                imgStack.Clear();
+                imgStack.AddLast(ModifiedImg);
+                undoButton.Enabled = false;
             }
         }
 
@@ -1319,6 +1323,71 @@ namespace IMAVD_IMAGE_Proj
             };
 
             drawTriangles(image, trianglePoints);
+        }
+
+        private void verticalMultiply_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsNumber(e.KeyChar) && !(e.KeyChar == (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void horizontalMultiply_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsNumber(e.KeyChar) && !(e.KeyChar == (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void verticalMultiply_Leave(object sender, EventArgs e)
+        {
+            if (verticalMultiply.Text.Equals(""))
+                verticalMultiply.Text = "1";
+        }
+
+        private void horizontalMultiply_Leave(object sender, EventArgs e)
+        {
+            if (horizontalMultiply.Text.Equals(""))
+                horizontalMultiply.Text = "1";
+        }
+
+        private void applyMultiply_Click(object sender, EventArgs e)
+        {
+            int N = int.Parse(verticalMultiply.Text);
+            N = (N == 0) ? 1 : N;
+            int K = int.Parse(horizontalMultiply.Text);
+            K = (K == 0) ? 1 : K;
+
+            if ((N == 1) && (K == 1)) return;
+
+            Image image = pictureBox2.Image;
+            int width = image.Width / K;
+            width = (width < 2) ? 2 : width;
+
+            int height = image.Height / N;
+            height = (height<2) ? 2 : height;
+
+
+            Bitmap frameImage = new Bitmap(image.Width, image.Height);
+            frameImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using(Graphics graphics = Graphics.FromImage(frameImage))
+            {
+                for(int i=0; i<N; i++)
+                {
+                    for(int j=0; j<K; j++)
+                    {
+                        graphics.DrawImage(image, j * width, i * height, width, height);
+                    }
+                }
+            }
+
+            pictureBox2.Image = frameImage;
+            PictureBoxLocation2();
+            insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
         }
     }
 }

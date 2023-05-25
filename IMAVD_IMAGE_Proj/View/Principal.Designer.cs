@@ -100,6 +100,12 @@
             triangleTopShape = new Button();
             twoRectangleShape = new Button();
             fourBoxShape = new Button();
+            tabPage8 = new TabPage();
+            applyMultiply = new Button();
+            horizontalMultiply = new TextBox();
+            label14 = new Label();
+            verticalMultiply = new TextBox();
+            label13 = new Label();
             insertChromaImage = new Button();
             button2 = new Button();
             undoButton = new Button();
@@ -138,6 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)greenGammaBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)redGammaBar).BeginInit();
             tabPage7.SuspendLayout();
+            tabPage8.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -446,6 +453,7 @@
             ControlPanel1.Controls.Add(tabPage5);
             ControlPanel1.Controls.Add(tabPage6);
             ControlPanel1.Controls.Add(tabPage7);
+            ControlPanel1.Controls.Add(tabPage8);
             ControlPanel1.ImeMode = ImeMode.NoControl;
             ControlPanel1.Location = new Point(12, 448);
             ControlPanel1.Margin = new Padding(3, 2, 3, 2);
@@ -951,6 +959,73 @@
             fourBoxShape.UseVisualStyleBackColor = false;
             fourBoxShape.Click += fourBoxShape_Click;
             // 
+            // tabPage8
+            // 
+            tabPage8.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage8.Controls.Add(applyMultiply);
+            tabPage8.Controls.Add(horizontalMultiply);
+            tabPage8.Controls.Add(label14);
+            tabPage8.Controls.Add(verticalMultiply);
+            tabPage8.Controls.Add(label13);
+            tabPage8.Location = new Point(4, 27);
+            tabPage8.Name = "tabPage8";
+            tabPage8.Padding = new Padding(3);
+            tabPage8.Size = new Size(450, 102);
+            tabPage8.TabIndex = 7;
+            tabPage8.Text = "Multiply";
+            // 
+            // applyMultiply
+            // 
+            applyMultiply.Location = new Point(6, 68);
+            applyMultiply.Name = "applyMultiply";
+            applyMultiply.Size = new Size(140, 23);
+            applyMultiply.TabIndex = 4;
+            applyMultiply.Text = "Apply";
+            applyMultiply.UseVisualStyleBackColor = true;
+            applyMultiply.Click += applyMultiply_Click;
+            // 
+            // horizontalMultiply
+            // 
+            horizontalMultiply.Location = new Point(99, 36);
+            horizontalMultiply.Name = "horizontalMultiply";
+            horizontalMultiply.Size = new Size(47, 23);
+            horizontalMultiply.TabIndex = 3;
+            horizontalMultiply.Text = "1";
+            horizontalMultiply.KeyPress += horizontalMultiply_KeyPress;
+            horizontalMultiply.Leave += horizontalMultiply_Leave;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.ForeColor = Color.FromArgb(241, 241, 241);
+            label14.Location = new Point(6, 39);
+            label14.Name = "label14";
+            label14.Size = new Size(87, 15);
+            label14.TabIndex = 2;
+            label14.Text = "K (Horizontal):";
+            // 
+            // verticalMultiply
+            // 
+            verticalMultiply.Location = new Point(99, 7);
+            verticalMultiply.Name = "verticalMultiply";
+            verticalMultiply.Size = new Size(47, 23);
+            verticalMultiply.TabIndex = 1;
+            verticalMultiply.Text = "1";
+            verticalMultiply.KeyPress += verticalMultiply_KeyPress;
+            verticalMultiply.Leave += verticalMultiply_Leave;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = Color.FromArgb(241, 241, 241);
+            label13.Location = new Point(6, 11);
+            label13.Name = "label13";
+            label13.Size = new Size(72, 15);
+            label13.TabIndex = 0;
+            label13.Text = "N (Vertical):";
+            // 
             // insertChromaImage
             // 
             insertChromaImage.Location = new Point(10, 36);
@@ -1224,6 +1299,8 @@
             ((System.ComponentModel.ISupportInitialize)greenGammaBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)redGammaBar).EndInit();
             tabPage7.ResumeLayout(false);
+            tabPage8.ResumeLayout(false);
+            tabPage8.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -1327,5 +1404,11 @@
         private Button twoRectangleShape;
         private Button triangleBottomShape;
         private Button triangleTopShape;
+        private TabPage tabPage8;
+        private TextBox horizontalMultiply;
+        private Label label14;
+        private TextBox verticalMultiply;
+        private Label label13;
+        private Button applyMultiply;
     }
 }
