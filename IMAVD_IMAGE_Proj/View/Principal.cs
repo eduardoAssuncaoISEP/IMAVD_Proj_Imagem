@@ -50,6 +50,7 @@ namespace IMAVD_IMAGE_Proj
             imgStack = new LinkedList<Image>();
             redoImgStack = new LinkedList<Image>();
             picImagem = new PictureBox();
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         /// <summary>
