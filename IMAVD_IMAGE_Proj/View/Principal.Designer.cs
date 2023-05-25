@@ -106,8 +106,7 @@
             label14 = new Label();
             verticalMultiply = new TextBox();
             label13 = new Label();
-            insertChromaImage = new Button();
-            button2 = new Button();
+            removeChromaButton = new Button();
             undoButton = new Button();
             button4 = new Button();
             textBox1 = new TextBox();
@@ -118,13 +117,18 @@
             panel1 = new Panel();
             label4 = new Label();
             panel2 = new Panel();
-            panel3 = new Panel();
+            panelChromaKey = new Panel();
+            colorPick = new Panel();
+            label15 = new Label();
+            selectedColorChroma = new Panel();
+            pickChromaButton = new Button();
             label5 = new Label();
             redoButton = new Button();
             label6 = new Label();
             label7 = new Label();
             panel4 = new Panel();
             returnButton = new Button();
+            colorPickDialog = new ColorDialog();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
@@ -147,7 +151,7 @@
             tabPage8.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
+            panelChromaKey.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -289,6 +293,8 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
+            pictureBox1.MouseClick += pictureBox1_MouseClick;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
             // 
             // trackBar1
             // 
@@ -454,6 +460,7 @@
             ControlPanel1.Controls.Add(tabPage6);
             ControlPanel1.Controls.Add(tabPage7);
             ControlPanel1.Controls.Add(tabPage8);
+            ControlPanel1.Enabled = false;
             ControlPanel1.ImeMode = ImeMode.NoControl;
             ControlPanel1.Location = new Point(12, 448);
             ControlPanel1.Margin = new Padding(3, 2, 3, 2);
@@ -1026,27 +1033,19 @@
             label13.TabIndex = 0;
             label13.Text = "N (Vertical):";
             // 
-            // insertChromaImage
+            // removeChromaButton
             // 
-            insertChromaImage.Location = new Point(10, 36);
-            insertChromaImage.Margin = new Padding(3, 2, 3, 2);
-            insertChromaImage.Name = "insertChromaImage";
-            insertChromaImage.Size = new Size(163, 22);
-            insertChromaImage.TabIndex = 32;
-            insertChromaImage.Text = "Chromakey Image";
-            insertChromaImage.UseVisualStyleBackColor = true;
-            insertChromaImage.Click += button1_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(215, 34);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(163, 22);
-            button2.TabIndex = 33;
-            button2.Text = "Remove Chromakey";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click_1;
+            removeChromaButton.BackColor = Color.Maroon;
+            removeChromaButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            removeChromaButton.ForeColor = Color.FromArgb(241, 241, 241);
+            removeChromaButton.Location = new Point(278, 35);
+            removeChromaButton.Margin = new Padding(3, 2, 3, 2);
+            removeChromaButton.Name = "removeChromaButton";
+            removeChromaButton.Size = new Size(163, 25);
+            removeChromaButton.TabIndex = 33;
+            removeChromaButton.Text = "Remove Chromakey";
+            removeChromaButton.UseVisualStyleBackColor = false;
+            removeChromaButton.Click += button2_Click_1;
             // 
             // undoButton
             // 
@@ -1092,7 +1091,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(296, 86);
+            button5.Location = new Point(326, 88);
             button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
             button5.Size = new Size(82, 22);
@@ -1106,7 +1105,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(241, 241, 241);
-            label3.Location = new Point(296, 66);
+            label3.Location = new Point(326, 68);
             label3.Name = "label3";
             label3.Size = new Size(82, 15);
             label3.TabIndex = 39;
@@ -1165,21 +1164,61 @@
             panel2.Size = new Size(203, 216);
             panel2.TabIndex = 43;
             // 
-            // panel3
+            // panelChromaKey
             // 
-            panel3.BackColor = Color.FromArgb(51, 47, 46);
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(label3);
-            panel3.Controls.Add(insertChromaImage);
-            panel3.Controls.Add(button5);
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(button2);
-            panel3.Controls.Add(textBox1);
-            panel3.Controls.Add(button4);
-            panel3.Location = new Point(801, 448);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(458, 133);
-            panel3.TabIndex = 44;
+            panelChromaKey.BackColor = Color.FromArgb(51, 47, 46);
+            panelChromaKey.Controls.Add(colorPick);
+            panelChromaKey.Controls.Add(label15);
+            panelChromaKey.Controls.Add(selectedColorChroma);
+            panelChromaKey.Controls.Add(pickChromaButton);
+            panelChromaKey.Controls.Add(label5);
+            panelChromaKey.Controls.Add(label3);
+            panelChromaKey.Controls.Add(button5);
+            panelChromaKey.Controls.Add(label2);
+            panelChromaKey.Controls.Add(removeChromaButton);
+            panelChromaKey.Controls.Add(textBox1);
+            panelChromaKey.Controls.Add(button4);
+            panelChromaKey.Enabled = false;
+            panelChromaKey.Location = new Point(801, 448);
+            panelChromaKey.Name = "panelChromaKey";
+            panelChromaKey.Size = new Size(458, 133);
+            panelChromaKey.TabIndex = 44;
+            // 
+            // colorPick
+            // 
+            colorPick.Location = new Point(91, 34);
+            colorPick.Name = "colorPick";
+            colorPick.Size = new Size(33, 25);
+            colorPick.TabIndex = 43;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.ForeColor = Color.FromArgb(241, 241, 241);
+            label15.Location = new Point(174, 39);
+            label15.Name = "label15";
+            label15.Size = new Size(42, 15);
+            label15.TabIndex = 42;
+            label15.Text = "Color: ";
+            // 
+            // selectedColorChroma
+            // 
+            selectedColorChroma.BackColor = Color.Green;
+            selectedColorChroma.Location = new Point(218, 35);
+            selectedColorChroma.Name = "selectedColorChroma";
+            selectedColorChroma.Size = new Size(42, 25);
+            selectedColorChroma.TabIndex = 41;
+            // 
+            // pickChromaButton
+            // 
+            pickChromaButton.Location = new Point(10, 34);
+            pickChromaButton.Name = "pickChromaButton";
+            pickChromaButton.Size = new Size(75, 25);
+            pickChromaButton.TabIndex = 40;
+            pickChromaButton.Text = "Pick Color";
+            pickChromaButton.UseVisualStyleBackColor = true;
+            pickChromaButton.Click += pickChromaButton_Click;
             // 
             // label5
             // 
@@ -1266,7 +1305,7 @@
             Controls.Add(panelPictureBox2);
             Controls.Add(panelPictureBox1);
             Controls.Add(menuStrip1);
-            Controls.Add(panel3);
+            Controls.Add(panelChromaKey);
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
@@ -1305,8 +1344,8 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            panelChromaKey.ResumeLayout(false);
+            panelChromaKey.PerformLayout();
             panel4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -1360,7 +1399,7 @@
         private Button applyBrightnessButton;
         private Button applyContrastButton;
         private Button insertChromaImage;
-        private Button button2;
+        private Button removeChromaButton;
         private Button undoButton;
         private Button button4;
         private TextBox textBox1;
@@ -1371,7 +1410,7 @@
         private Panel panel1;
         private Label label4;
         private Panel panel2;
-        private Panel panel3;
+        private Panel panelChromaKey;
         private Button redoButton;
         private Label label5;
         private Label label6;
@@ -1410,5 +1449,10 @@
         private TextBox verticalMultiply;
         private Label label13;
         private Button applyMultiply;
+        private Button pickChromaButton;
+        private Panel selectedColorChroma;
+        private ColorDialog colorPickDialog;
+        private Panel colorPick;
+        private Label label15;
     }
 }

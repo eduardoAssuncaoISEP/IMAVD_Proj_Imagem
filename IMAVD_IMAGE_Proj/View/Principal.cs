@@ -50,7 +50,6 @@ namespace IMAVD_IMAGE_Proj
             imgStack = new LinkedList<Image>();
             redoImgStack = new LinkedList<Image>();
             picImagem = new PictureBox();
-            ControlPanel1.Enabled = false;
         }
 
         /// <summary>
@@ -105,6 +104,7 @@ namespace IMAVD_IMAGE_Proj
                 imageCreatedOn = fileInfo.CreationTime.ToString();
 
                 ControlPanel1.Enabled = true;
+                panelChromaKey.Enabled = true;
                 setDimensionsResize(pictureBox2.Image);
 
                 returnButton.Enabled = true;
@@ -607,41 +607,11 @@ namespace IMAVD_IMAGE_Proj
         private Bitmap imagemCarregada;
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            // Configura��es do OpenFileDialog
-            openFileDialog1.Filter = "Arquivos de Imagem (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.Title = "Selecionar Imagem";
-            openFileDialog1.Multiselect = false;
-
-            // Exibe o OpenFileDialog e verifica se o usu�rio selecionou um arquivo
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                // Obt�m o caminho completo do arquivo selecionado
-                string caminhoDaImagem = openFileDialog1.FileName;
-
-                // Carrega a imagem no controle PictureBox
-                pictureBox1.Image = Image.FromFile(caminhoDaImagem);
-                //insertImageStack(pictureBox1.Image);
-
-                // Atualiza a vari�vel imagemCarregada com a imagem selecionada
-                imagemCarregada = new Bitmap(caminhoDaImagem);
-            }
-        }
-
-
         private Bitmap RemoverChromaKey(Bitmap imagem)
         {
-            if (imagem == null)
-            {
-                throw new ArgumentNullException(nameof(imagem), "A imagem n�o pode ser nula.");
-            }
-
             Bitmap novaImagem = new Bitmap(imagem.Width, imagem.Height);
 
-            Color chromaKey = Color.FromArgb(0, 255, 0); // Verde
+            Color chromaKey = selectedColorChroma.BackColor;
 
             for (int y = 0; y < novaImagem.Height; y++)
             {
@@ -665,54 +635,6 @@ namespace IMAVD_IMAGE_Proj
             return novaImagem;
         }
 
-
-        private void CarregarImagem(Image imagem)
-        {
-            try
-            {
-                // armazena a imagem atual da PictureBox1 na pilha de imagens
-                //imgStack.Push(pictureBox1.Image);
-
-                // exibe a nova imagem na PictureBox1
-                pictureBox1.Image = imagem;
-
-                // atualiza a vari�vel imagemAtual com a imagem carregada
-                imagemAtual = imagem;
-            }
-            catch (Exception ex)
-            {
-                // exibe mensagem de erro em caso de falha ao carregar a imagem
-                MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         Bitmap imagemOriginal;
 
@@ -744,21 +666,16 @@ namespace IMAVD_IMAGE_Proj
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
-            {
-                // Obt�m a imagem carregada no PictureBox
-                Bitmap imagemCarregada = new Bitmap(pictureBox1.Image);
+            // Obt�m a imagem carregada no PictureBox
+            Bitmap imagemCarregada = new Bitmap(pictureBox1.Image);
 
-                // Aplica a remo��o do Chroma Key na imagem carregada
-                Bitmap imagemSemChromaKey = RemoverChromaKey(imagemCarregada);
+            // Aplica a remo��o do Chroma Key na imagem carregada
+            Bitmap imagemSemChromaKey = RemoverChromaKey(imagemCarregada);
 
-                // Exibe a imagem resultante na tela
-                pictureBox1.Image = imagemSemChromaKey;
-            }
-            else
-            {
-                MessageBox.Show("Carregue uma imagem antes de remover o Chroma Key.");
-            }
+            // Exibe a imagem resultante na tela
+            pictureBox2.Image = imagemSemChromaKey;
+            insertImageStack(imagemSemChromaKey);
+            ModifiedImg = imagemSemChromaKey;
         }
 
 
@@ -1131,8 +1048,8 @@ namespace IMAVD_IMAGE_Proj
         }
 
         private void clearUndo()
-        {   
-            if(imgStack.Count >= 1)
+        {
+            if (imgStack.Count >= 1)
             {
                 imgStack.Clear();
                 imgStack.AddLast(ModifiedImg);
@@ -1373,17 +1290,17 @@ namespace IMAVD_IMAGE_Proj
             width = (width < 2) ? 2 : width;
 
             int height = image.Height / N;
-            height = (height<2) ? 2 : height;
+            height = (height < 2) ? 2 : height;
 
 
             Bitmap frameImage = new Bitmap(image.Width, image.Height);
             frameImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
-            using(Graphics graphics = Graphics.FromImage(frameImage))
+            using (Graphics graphics = Graphics.FromImage(frameImage))
             {
-                for(int i=0; i<N; i++)
+                for (int i = 0; i < N; i++)
                 {
-                    for(int j=0; j<K; j++)
+                    for (int j = 0; j < K; j++)
                     {
                         graphics.DrawImage(image, j * width, i * height, width, height);
                     }
@@ -1394,6 +1311,56 @@ namespace IMAVD_IMAGE_Proj
             PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
             ModifiedImg = pictureBox2.Image;
+        }
+
+        private void pickChromaButton_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Cursor = Cursors.Cross;
+            MessageBox.Show("Select the chroma key colour in the FIRST PANEL.");
+        }
+
+        public Color GetColorAt(Point location)
+        {
+            [DllImport("user32.dll")]
+            static extern bool GetCursorPos(ref Point lpPoint);
+
+            [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+
+            static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+
+            using (Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
+            {
+                using (Graphics gdest = Graphics.FromImage(screenPixel))
+                {
+                    using (Graphics gsrc = Graphics.FromHwnd(pictureBox1.Handle))
+                    {
+                        IntPtr hSrcDC = gsrc.GetHdc();
+                        IntPtr hDC = gdest.GetHdc();
+                        int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
+                        gdest.ReleaseHdc();
+                        gsrc.ReleaseHdc();
+                    }
+                }
+
+                return screenPixel.GetPixel(0, 0);
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Cursor == Cursors.Cross)
+            {
+                colorPick.BackColor = GetColorAt(e.Location);
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(pictureBox1.Cursor == Cursors.Cross)
+            {
+                selectedColorChroma.BackColor = GetColorAt(e.Location);
+                pictureBox1.Cursor = Cursors.Default;
+            }
         }
     }
 }

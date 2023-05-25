@@ -41,7 +41,7 @@ namespace IMAVD_IMAGE_Proj
                 //Showing color choice
                 DialogResult IsColorChosen = colorDialog1.ShowDialog();
 
-                if (IsColorChosen == System.Windows.Forms.DialogResult.OK)
+                if (IsColorChosen == DialogResult.OK)
                 {
                     selectColorPanel.BackColor = colorDialog1.Color;
                     //colorSelectName.Text = colorDialog1.Color.;
