@@ -1,13 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Text;
-using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Numerics;
-using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using IMAVD_IMAGE_Proj.Controller;
 
 namespace IMAVD_IMAGE_Proj
 {
@@ -700,7 +693,7 @@ namespace IMAVD_IMAGE_Proj
             if (pictureBox2.Image != null)
             {
                 Bitmap framImage = new Bitmap(pictureBox2.Image);
-                
+
                 using (Graphics graphics = Graphics.FromImage(framImage))
                 {
                     // define a posição e a escala da imagem a ser adicionada
