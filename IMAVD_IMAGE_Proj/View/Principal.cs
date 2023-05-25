@@ -17,6 +17,7 @@ namespace IMAVD_IMAGE_Proj
         /// Vari�veis para armazenamento de informa��es padr�es da imagem
         /// </summary>
         private Image Img;
+        private Image ModifiedImg;
         private Size OriginalImageSize;
         private Size ModifiedImageSize;
         PictureBox org;
@@ -41,12 +42,15 @@ namespace IMAVD_IMAGE_Proj
 
         //Variável para armazenamento de pilha de alterações
         private LinkedList<Image> imgStack;
+        private LinkedList<Image> redoImgStack;
 
         public Principal()
         {
             InitializeComponent();
             imgStack = new LinkedList<Image>();
+            redoImgStack = new LinkedList<Image>();
             picImagem = new PictureBox();
+            ControlPanel1.Enabled = false;
         }
 
         /// <summary>
@@ -78,6 +82,7 @@ namespace IMAVD_IMAGE_Proj
             {
                 makeSelectionButton.Enabled = true;
                 Img = Image.FromFile(Dlg.FileName);
+                ModifiedImg = Img;
                 LoadImage();
 
                 FileInfo fileInfo = new FileInfo(Dlg.FileName);
@@ -98,6 +103,13 @@ namespace IMAVD_IMAGE_Proj
                 imageSize = tamanhoEmKilobytes.ToString() + " KB";
                 imageLocation = Path.GetFullPath(Dlg.FileName);
                 imageCreatedOn = fileInfo.CreationTime.ToString();
+
+                ControlPanel1.Enabled = true;
+                setDimensionsResize(pictureBox2.Image);
+
+                returnButton.Enabled = true;
+                saveImageButton.Enabled = true;
+                insertImageStack(Img);
             }
         }
 
@@ -162,11 +174,11 @@ namespace IMAVD_IMAGE_Proj
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                Bitmap img = new Bitmap(pictureBox1.Image);
-                int width = pictureBox1.Image.Width;
-                int height = pictureBox1.Image.Height;
+                Bitmap img = new Bitmap(pictureBox2.Image);
+                int width = pictureBox2.Image.Width;
+                int height = pictureBox2.Image.Height;
 
                 //Bitmap red = new Bitmap(img);
 
@@ -186,6 +198,8 @@ namespace IMAVD_IMAGE_Proj
                 }
 
                 pictureBox2.Image = img;
+                insertImageStack(pictureBox2.Image);
+                ModifiedImg = img;
             }
         }
 
@@ -195,11 +209,11 @@ namespace IMAVD_IMAGE_Proj
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                Bitmap img = new Bitmap(pictureBox1.Image);
-                int width = pictureBox1.Image.Width;
-                int height = pictureBox1.Image.Height;
+                Bitmap img = new Bitmap(pictureBox2.Image);
+                int width = pictureBox2.Image.Width;
+                int height = pictureBox2.Image.Height;
 
                 for (int y = 0; y < height; y++)
                 {
@@ -217,6 +231,8 @@ namespace IMAVD_IMAGE_Proj
                 }
 
                 pictureBox2.Image = img;
+                insertImageStack(pictureBox2.Image);
+                ModifiedImg = img;
             }
         }
 
@@ -226,11 +242,11 @@ namespace IMAVD_IMAGE_Proj
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                Bitmap img = new Bitmap(pictureBox1.Image);
-                int width = pictureBox1.Image.Width;
-                int height = pictureBox1.Image.Height;
+                Bitmap img = new Bitmap(pictureBox2.Image);
+                int width = pictureBox2.Image.Width;
+                int height = pictureBox2.Image.Height;
 
                 for (int y = 0; y < height; y++)
                 {
@@ -248,6 +264,8 @@ namespace IMAVD_IMAGE_Proj
                 }
 
                 pictureBox2.Image = img;
+                insertImageStack(pictureBox2.Image);
+                ModifiedImg = img;
             }
         }
 
@@ -257,11 +275,11 @@ namespace IMAVD_IMAGE_Proj
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //verificando se a imagem foi aberta
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                Bitmap img = new Bitmap(pictureBox1.Image);
-                int width = pictureBox1.Image.Width;
-                int height = pictureBox1.Image.Height;
+                Bitmap img = new Bitmap(pictureBox2.Image);
+                int width = pictureBox2.Image.Width;
+                int height = pictureBox2.Image.Height;
 
                 for (int y = 0; y < height; y++)
                 {
@@ -283,6 +301,8 @@ namespace IMAVD_IMAGE_Proj
                 }
 
                 pictureBox2.Image = img;
+                insertImageStack(pictureBox2.Image);
+                ModifiedImg = img;
             }
         }
 
@@ -319,37 +339,7 @@ namespace IMAVD_IMAGE_Proj
             makeSelectionButton.Enabled = false;
         }
 
-        //// <summary>
-        /// A��o para desenho da �rea para corte - Click (posi��o inicial)
-        /// </summary>
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
-            {
-                Cursor = Cursors.Cross;
-                cropX = e.X;
-                cropY = e.Y;
-                cropPen = new Pen(Color.Black, 1);
-                cropPen.DashStyle = DashStyle.DashDotDot;
-            }
-            pictureBox1.Refresh();
-        }
 
-        //// <summary>
-        /// A��o para desenho da �rea para corte - Move (sele��o da �rea)
-        /// </summary>
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (pictureBox1.Image == null)
-                return;
-            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
-            {
-                pictureBox1.Refresh();
-                cropWidth = e.X - cropX;
-                cropHeight = e.Y - cropY;
-                pictureBox1.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
-            }
-        }
 
         /// <summary>
         /// A��o para realizar o corte � imagem com base na sele��o da �rea
@@ -363,7 +353,7 @@ namespace IMAVD_IMAGE_Proj
             }
             Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
             //First we define a rectangle with the help of already calculated points  
-            Bitmap OriginalImage = new Bitmap(pictureBox1.Image, pictureBox1.Width, pictureBox1.Height);
+            Bitmap OriginalImage = new Bitmap(pictureBox2.Image, pictureBox2.Width, pictureBox2.Height);
             //Original image  
             Bitmap _img = new Bitmap(cropWidth, cropHeight);
             // for cropinf image  
@@ -378,8 +368,13 @@ namespace IMAVD_IMAGE_Proj
             pictureBox2.Width = _img.Width;
             pictureBox2.Height = _img.Height;
             PictureBoxLocation2();
-            saveCropButton.Enabled = true;
             insertImageStack(pictureBox2.Image);
+            setDimensionsResize(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
+
+            saveCropButton.Enabled = true;
+            makeSelectionButton.Enabled = true;
+            makeCropButton.Enabled = false;
         }
 
         /// <summary>
@@ -398,54 +393,44 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
-        /// <summary>
-        /// Fun��o para mudar o incremento do domainUpDown, mas n�o est� funcionando
-        /// </summary>
-        private void BindDomainIUpDown()
-        {
-            for (int i = 1; i <= 999; i++)
-            {
-                resizeDomainUpDown.Items.Add(i);
-            }
-            resizeDomainUpDown.Text = "100";
-        }
-
-        /// <summary>
-        /// A��o para realizar o redimensionamento da imagem
-        /// </summary>
-        private void resizeDomainUpDown_SelectedItemChanged(object sender, EventArgs e)
-        {
-            int percentage = 0;
-            try
-            {
-                percentage = Convert.ToInt32(resizeDomainUpDown.Text);
-                ModifiedImageSize = new Size((OriginalImageSize.Width * percentage) / 100, (OriginalImageSize.Height * percentage) / 100);
-                //SetResizeInfo();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Invalid Percentage");
-                return;
-            }
-        }
 
         /// <summary>
         /// A��o para aplicar o redimensionamento
         /// </summary>
         private void okResizeButton_Click(object sender, EventArgs e)
         {
-            Bitmap bm_source = new Bitmap(pictureBox1.Image);
-            // Make a bitmap for the result.  
-            Bitmap bm_dest = new Bitmap(Convert.ToInt32(ModifiedImageSize.Width), Convert.ToInt32(ModifiedImageSize.Height));
-            // Make a Graphics object for the result Bitmap.  
-            Graphics gr_dest = Graphics.FromImage(bm_dest);
-            // Copy the source image into the destination bitmap.  
-            gr_dest.DrawImage(bm_source, 0, 0, bm_dest.Width + 1, bm_dest.Height + 1);
-            // Display the result.  
-            pictureBox1.Image = bm_dest;
-            pictureBox1.Width = bm_dest.Width;
-            pictureBox1.Height = bm_dest.Height;
-            PictureBoxLocation1();
+            int percentage = 0;
+            try
+            {
+                percentage = Convert.ToInt32(resizeDomainUpDown.Text);
+                percentage = (percentage < 1) ? 1 : percentage;
+                if (percentage == 100) return;
+                ModifiedImageSize = new Size((OriginalImageSize.Width * percentage) / 100, (OriginalImageSize.Height * percentage) / 100);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid Percentage");
+                return;
+            }
+
+            if (percentageResize.Checked)
+            {
+                Bitmap bm_source = new Bitmap(pictureBox2.Image);
+                // Make a bitmap for the result.  
+                Bitmap bm_dest = new Bitmap(Convert.ToInt32(ModifiedImageSize.Width), Convert.ToInt32(ModifiedImageSize.Height));
+                // Make a Graphics object for the result Bitmap.  
+                Graphics gr_dest = Graphics.FromImage(bm_dest);
+                // Copy the source image into the destination bitmap.  
+                gr_dest.DrawImage(bm_source, 0, 0, bm_dest.Width + 1, bm_dest.Height + 1);
+                // Display the result.  
+                pictureBox2.Image = bm_dest;
+                pictureBox2.Width = bm_dest.Width;
+                pictureBox2.Height = bm_dest.Height;
+                PictureBoxLocation2();
+                insertImageStack(pictureBox2.Image);
+                setDimensionsResize(pictureBox2.Image);
+                ModifiedImg = pictureBox2.Image;
+            }
         }
 
         /// <summary>
@@ -453,7 +438,22 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void brightnessTrackBar_Scroll(object sender, EventArgs e)
         {
-            brightnessDomainUpDown.Text = brightnessTrackBar.Value.ToString();
+            brightnessBox.Text = brightnessTrackBar.Value.ToString();
+            setBrightness();
+        }
+
+        /// <summary>
+        /// A��o para aplica��o a modifica��o do brilho, mas ainda n�o est� funcionando
+        /// </summary>
+        private void applyBrightnessButton_Click(object sender, EventArgs e)
+        {
+            applyBrightnessButton.Enabled = false;
+            ModifiedImg = pictureBox2.Image;
+            insertImageStack(pictureBox2.Image);
+        }
+
+        private void setBrightness()
+        {
             float value = brightnessTrackBar.Value * 0.01f;
 
             float[][] colorMatrixElements = {
@@ -478,35 +478,38 @@ namespace IMAVD_IMAGE_Proj
             ImageAttributes imageAttributes = new ImageAttributes();
             imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            Image _img = Img;
+            Image _img = ModifiedImg;
             Graphics _g = default(Graphics);
             Bitmap bm_dest = new Bitmap(Convert.ToInt32(_img.Width), Convert.ToInt32(_img.Height));
             _g = Graphics.FromImage(bm_dest);
             _g.DrawImage(_img, new Rectangle(0, 0, bm_dest.Width + 1, bm_dest.Height + 1), 0, 0, bm_dest.Width + 1, bm_dest.Height + 1, GraphicsUnit.Pixel, imageAttributes);
-            pictureBox1.Image = bm_dest;
-
-            if (applyBrightnessButton.Enabled == false)
-            {
-                //Img = bm_dest; Tentativa de adi��o de sobreposi��o do brilho ao contraste
-            }
+            pictureBox2.Image = bm_dest;
 
             applyBrightnessButton.Enabled = true;
         }
 
-        /// <summary>
-        /// A��o para aplica��o a modifica��o do brilho, mas ainda n�o est� funcionando
-        /// </summary>
-        private void applyBrightnessButton_Click(object sender, EventArgs e)
-        {
-            applyBrightnessButton.Enabled = false;
-        }
         //Comentários
         /// <summary>
         /// A��o para modificar o contraste da imagem
         /// </summary>
         private void contrastTrackBar_Scroll(object sender, EventArgs e)
         {
-            contrastDomainUpDown.Text = contrastTrackBar.Value.ToString();
+            contrastBox.Text = contrastTrackBar.Value.ToString();
+            setContrast();
+        }
+
+        /// <summary>
+        /// A��o para aplica��o a modifica��o do contraste, mas ainda n�o est� funcionando
+        /// </summary>
+        private void applyContrastButton_Click(object sender, EventArgs e)
+        {
+            applyContrastButton.Enabled = false;
+            ModifiedImg = pictureBox2.Image;
+            insertImageStack(pictureBox2.Image);
+        }
+
+        private void setContrast()
+        {
             float value = contrastTrackBar.Value * 0.01f + 1; // Normalizar o valor entre 0 e 2
             float offset = -0.5f * (value - 1);
 
@@ -522,27 +525,14 @@ namespace IMAVD_IMAGE_Proj
             ImageAttributes imageAttributes = new ImageAttributes();
             imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            Image _img = Img;
+            Image _img = ModifiedImg;
             Graphics _g = default(Graphics);
             Bitmap bm_dest = new Bitmap(Convert.ToInt32(_img.Width), Convert.ToInt32(_img.Height));
             _g = Graphics.FromImage(bm_dest);
             _g.DrawImage(_img, new Rectangle(0, 0, bm_dest.Width + 1, bm_dest.Height + 1), 0, 0, bm_dest.Width + 1, bm_dest.Height + 1, GraphicsUnit.Pixel, imageAttributes);
-            pictureBox1.Image = bm_dest;
-
-            if (applyContrastButton.Enabled == false)
-            {
-                //Img = bm_dest; Tentativa de adi��o de sobreposi��o do contrate ao brilho
-            }
+            pictureBox2.Image = bm_dest;
 
             applyContrastButton.Enabled = true;
-        }
-
-        /// <summary>
-        /// A��o para aplica��o a modifica��o do contraste, mas ainda n�o est� funcionando
-        /// </summary>
-        private void applyContrastButton_Click(object sender, EventArgs e)
-        {
-            applyContrastButton.Enabled = false;
         }
 
         /// <summary>
@@ -553,6 +543,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox2.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             pictureBox2.Refresh();
             insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
         }
 
         /// <summary>
@@ -563,6 +554,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox2.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
             pictureBox2.Refresh();
             insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
         }
 
         /// <summary>
@@ -573,6 +565,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             pictureBox2.Refresh();
             insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
         }
 
         /// <summary>
@@ -583,6 +576,7 @@ namespace IMAVD_IMAGE_Proj
             pictureBox2.Image.RotateFlip(RotateFlipType.RotateNoneFlipY);
             pictureBox2.Refresh();
             insertImageStack(pictureBox2.Image);
+            ModifiedImg = pictureBox2.Image;
         }
 
         /// <summary>
@@ -770,31 +764,7 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            // verifica se h� pelo menos duas imagens na pilha
-            if (imgStack.Count >= 1)
-            {
-                // remove a imagem atual da PictureBox1
-                pictureBox1.Image = null;
 
-                // exibe a �ltima imagem carregada na PictureBox1
-                Image ultimaImagem = imgStack.Last();
-                pictureBox1.Image = ultimaImagem;
-
-                // armazena a imagem que acabou de ser exibida em uma nova vari�vel Image
-                Image imagemPenultima = pictureBox1.Image;
-
-                // remove a imagem que acabou de ser exibida da pilha
-                //imgStack.Pop();
-
-                // exibe a pen�ltima imagem carregada na PictureBox1
-                pictureBox1.Image = imgStack.Last();
-
-                // armazena a imagem pen�ltima como a imagem atual da PictureBox1
-                imagemAtual = pictureBox1.Image;
-            }
-        }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
@@ -840,33 +810,6 @@ namespace IMAVD_IMAGE_Proj
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            // verifica se há uma imagem carregada
-            if (pictureBox1.Image != null)
-            {
-                // cria um objeto SaveFileDialog para selecionar o local onde a imagem será salva
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Arquivo JPEG (*.jpg)|*.jpg|Arquivo PNG (*.png)|*.png|Arquivo BMP (*.bmp)|*.bmp";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // salva a imagem no formato selecionado
-                    switch (saveFileDialog.FilterIndex)
-                    {
-                        case 1:
-                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
-                            break;
-                        case 2:
-                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Png);
-                            break;
-                        case 3:
-                            pictureBox1.Image.Save(saveFileDialog.FileName, ImageFormat.Bmp);
-                            break;
-                    }
-                }
-            }
-        }
 
         private void insertImageStack(Image image)
         {
@@ -879,176 +822,301 @@ namespace IMAVD_IMAGE_Proj
                 imgStack.RemoveFirst();
                 imgStack.AddLast(image);
             }
+            if (!undoButton.Enabled)
+                undoButton.Enabled = true;
+        }
+
+        private void percentageResize_CheckedChanged(object sender, EventArgs e)
+        {
+            manualResize.Checked = false;
+        }
+
+        private void manualResize_CheckedChanged(object sender, EventArgs e)
+        {
+            percentageResize.Checked = false;
+        }
+
+        private void manualResizeApply_Click(object sender, EventArgs e)
+        {
+            if (manualResize.Checked)
+            {
+                int width = int.Parse(widthResize.Text);
+                width = (width == 0) ? ModifiedImg.Width : width;
+                int height = int.Parse(heightResize.Text);
+                height = (height == 0) ? ModifiedImg.Height : height;
+
+                if ((width == ModifiedImg.Width) && (height == ModifiedImg.Height)) return;
+
+                Bitmap bm_source = new Bitmap(pictureBox2.Image);
+                // Make a bitmap for the result.  
+                Bitmap bm_dest = new Bitmap(Convert.ToInt32(width), Convert.ToInt32(height));
+                // Make a Graphics object for the result Bitmap.  
+                Graphics gr_dest = Graphics.FromImage(bm_dest);
+                // Copy the source image into the destination bitmap.  
+                gr_dest.DrawImage(bm_source, 0, 0, bm_dest.Width + 1, bm_dest.Height + 1);
+                // Display the result.  
+                pictureBox2.Image = bm_dest;
+                pictureBox2.Width = bm_dest.Width;
+                pictureBox2.Height = bm_dest.Height;
+                PictureBoxLocation2();
+                insertImageStack(pictureBox2.Image);
+                setDimensionsResize(pictureBox2.Image);
+                widthResize.Text = width.ToString();
+                heightResize.Text = height.ToString();
+                ModifiedImg = pictureBox2.Image;
+            }
+        }
+
+        private void setDimensionsResize(Image image)
+        {
+            widthResize.Text = image.Width.ToString();
+            heightResize.Text = image.Height.ToString();
+        }
+
+        private void widthResize_TextChanged(object sender, EventArgs e)
+        {
+            int width = (widthResize.Text.Equals("")) ? ModifiedImg.Width :
+                    int.Parse(widthResize.Text);
+            if (proportionalResize.Checked && widthResize.Focused)
+            {
+                int height = (width * ModifiedImg.Height) / ModifiedImg.Width;
+                heightResize.Text = height.ToString();
+            }
+            widthResize.Text = width.ToString();
+        }
+
+        private void widthResize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            restrictedNumbers(sender, e);
+        }
+
+        private void restrictedNumbers(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar) && !(e.KeyChar == (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void heightResize_TextChanged(object sender, EventArgs e)
+        {
+            int height = (heightResize.Text.Equals("")) ? ModifiedImg.Height :
+                   int.Parse(heightResize.Text);
+            if (proportionalResize.Checked && heightResize.Focused)
+            {
+                int width = (height * ModifiedImg.Width) / ModifiedImg.Height;
+                widthResize.Text = width.ToString();
+            }
+            heightResize.Text = height.ToString();
+        }
+
+        private void heightResize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            restrictedNumbers(sender, e);
+        }
+
+        private void redGammaBar_Scroll(object sender, EventArgs e)
+        {
+            float redValue = redGammaBar.Value / 10.0f;
+            redGammaBox.Text = redValue.ToString();
+            setGamma();
+        }
+
+        private void greenGammaBar_Scroll(object sender, EventArgs e)
+        {
+            float greenValue = greenGammaBar.Value / 10.0f;
+            greenGammaBox.Text = greenValue.ToString();
+            setGamma();
+        }
+
+        private void blueGammaBar_Scroll(object sender, EventArgs e)
+        {
+            float blueValue = blueGammaBar.Value / 10.0f;
+            blueGammaBox.Text = blueValue.ToString();
+            setGamma();
+        }
+
+        private void setGamma()
+        {
+            //Dados da Imagem
+            int width = ModifiedImg.Width;
+            int height = ModifiedImg.Height;
+            Bitmap image = new Bitmap(ModifiedImg);
+
+            //Dados de Alteração Gama
+            float redGamma = redGammaBar.Value / 10.0f;
+            float greenGamma = greenGammaBar.Value / 10.0f;
+            float blueGamma = blueGammaBar.Value / 10.0f;
+
+            //Fórmula de alteração
+            BitmapData srcData = image.LockBits(
+                new Rectangle(0, 0, width, height),
+                ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb
+                );
+            int bytes = srcData.Stride * srcData.Height;
+            byte[] buffer = new byte[bytes];
+            byte[] result = new byte[bytes];
+            Marshal.Copy(srcData.Scan0, buffer, 0, bytes);
+            image.UnlockBits(srcData);
+            int current = 0;
+            double c = 1d;
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    current = y * srcData.Stride + x * 4;
+
+                    //Aplicação ao Red
+                    double rangeRed = (double)buffer[current] / 255;
+                    double correctionRed = c * Math.Pow(rangeRed, redGamma);
+                    result[current] = (byte)(correctionRed * 255);
+
+                    //Aplicação ao Green
+                    double rangeGreen = (double)buffer[current + 1] / 255;
+                    double correctionGreen = c * Math.Pow(rangeGreen, greenGamma);
+                    result[current + 1] = (byte)(correctionGreen * 255);
+
+                    //Aplicação ao Blue
+                    double rangeBlue = (double)buffer[current + 2] / 255;
+                    double correctionBlue = c * Math.Pow(rangeBlue, blueGamma);
+                    result[current + 2] = (byte)(correctionBlue * 255);
+
+                    //Aplicação ao Alfa
+                    result[current + 3] = 255;
+
+
+                }
+            }
+            Bitmap resImg = new Bitmap(width, height);
+            BitmapData resData = resImg.LockBits(
+                new Rectangle(0, 0, width, height),
+                ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb
+                );
+            Marshal.Copy(result, 0, resData.Scan0, bytes);
+            resImg.UnlockBits(resData);
+            pictureBox2.Image = (Image)resImg;
+
+        }
+
+        private void applyGamma_Click(object sender, EventArgs e)
+        {
+            ModifiedImg = pictureBox2.Image;
+            insertImageStack(pictureBox2.Image);
+        }
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
+            {
+                Cursor = Cursors.Cross;
+                cropX = e.X;
+                cropY = e.Y;
+                cropPen = new Pen(Color.Black, 1);
+                cropPen.DashStyle = DashStyle.DashDotDot;
+            }
+            pictureBox2.Refresh();
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox2.Image == null)
+                return;
+            if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
+            {
+                pictureBox2.Refresh();
+                cropWidth = e.X - cropX;
+                cropHeight = e.Y - cropY;
+                pictureBox2.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
+                makeCropButton.Enabled = true;
+            }
         }
 
 
-
-
-
-
-
-
-
-        /* private void AlterarGamma(float gamma)
-         {
-             if (pictureBox1.Image != null)
-             {
-                 Image imagem = pictureBox1.Image;
-
-                 // Define os valores da matriz de cores para alterar o Gamma
-                 float[][] cores = {
-             new float[] {gamma, 0, 0, 0, 0},
-             new float[] {0, gamma, 0, 0, 0},
-             new float[] {0, 0, gamma, 0, 0},
-             new float[] {0, 0, 0, 1, 0},
-             new float[] {0, 0, 0, 0, 1}
-         };
-
-                 // Cria um objeto ImageAttributes e define a matriz de cores
-                 ImageAttributes atributos = new ImageAttributes();
-                 atributos.SetColorMatrix(new ColorMatrix(cores), ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-                 // Cria um objeto Graphics a partir da imagem atual da PictureBox1
-                 Graphics g = Graphics.FromImage(imagem);
-
-                 // Desenha a imagem com as alterações de Gamma
-                 g.DrawImage(imagem, new Rectangle(0, 0, imagem.Width, imagem.Height), 0, 0, imagem.Width, imagem.Height, GraphicsUnit.Pixel, atributos);
-
-                 // Atualiza a PictureBox1 com a imagem modificada
-                 pictureBox1.Image = imagem;
-             }
-         }
-
-
-
-         private void trackBar2_Scroll(object sender, EventArgs e)
-         {
-             float gamma = trackBar2.Value / 10f;
-             AlterarGamma(gamma);
-         }
-        */
-
-
-
-
-
-
-
-
-
-        //======================================FUN��ES MODIFICADAS======================================================//
-
-
-
-
-        //A��o pode ser removida
-        /*private void cropToolStripMenuItem_Click(object sender, EventArgs e)
+        private void returnButton_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBox2.Image != null)
             {
-                if (xPositionCrop.Text.Length > 0 && yPositionCrop.Text.Length > 0 && widthCrop.Text.Length > 0 && heightCrop.Text.Length > 0)
-                {
-                    int xCrop = Convert.ToInt32(xPositionCrop.Text);
-                    int yCrop = Convert.ToInt32(yPositionCrop.Text);
-                    int wCrop = Convert.ToInt32(widthCrop.Text);
-                    int hCrop = Convert.ToInt32(heightCrop.Text);
+                pictureBox2.Image = pictureBox1.Image;
+                PictureBoxLocation2();
+                ModifiedImg = pictureBox2.Image;
+            }
+        }
 
-                    if (pictureBox1.Image.Width > xCrop && pictureBox1.Image.Height > yCrop && pictureBox1.Image.Width > wCrop && pictureBox1.Image.Height > hCrop)
+        private void saveImageButton_Click(object sender, EventArgs e)
+        {
+            // verifica se há uma imagem carregada
+            if (pictureBox2.Image != null)
+            {
+                // cria um objeto SaveFileDialog para selecionar o local onde a imagem será salva
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Arquivo JPEG (*.jpg)|*.jpg|Arquivo PNG (*.png)|*.png|Arquivo BMP (*.bmp)|*.bmp";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // salva a imagem no formato selecionado
+                    switch (saveFileDialog.FilterIndex)
                     {
-                        //setar essas informa��es pelo form (pos em X da imagem, pos Y da imagem,tamanho do crop altura, tamanho do crop largura)
-                        Rectangle rect = new Rectangle(xCrop, yCrop, wCrop, hCrop);
-                        pictureBox1.Image = CropImage(pictureBox1.Image, rect);
-                        saveCropButton.Enabled = true;
+                        case 1:
+                            pictureBox2.Image.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
+                            break;
+                        case 2:
+                            pictureBox2.Image.Save(saveFileDialog.FileName, ImageFormat.Png);
+                            break;
+                        case 3:
+                            pictureBox2.Image.Save(saveFileDialog.FileName, ImageFormat.Bmp);
+                            break;
                     }
-                    else
-                    {
-                        MessageBox.Show("Valores informados n�o s�o acess�veis a imagem usada. Verifique se a pasi��o de corte e o tamanho n�o ultrapassam o tamanho da imagem");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Valores para corte n�o informados");
                 }
             }
-            else
+        }
+
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            // verifica se h� pelo menos duas imagens na pilha
+            if (imgStack.Count >= 2)
             {
-                MessageBox.Show("Imagem n�o foi aberta");
-            }
-        }
-        //Op��o alternativa. Pode ser removido
-        private static Image CropImage(Image img, Rectangle cropArea)
-        {
-            Bitmap bmpImage = new Bitmap(img);
-            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
-        }*/
+                //Pega a última image e depois a remove
+                Image imageLast = imgStack.Last();
+                imgStack.RemoveLast();
 
-        //Necess�rio corrigir soma de brilho. 
-        /*public static Bitmap AdjustBrightness(Bitmap image, float brightnessAdjustment)
-        {
-            Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
+                //adiciona a última imagem ao Redo e utiliza a nova última imagem
+                redoImgStack.AddLast(imageLast);
+                Image newLastImage = imgStack.Last();
+                pictureBox2.Image = newLastImage;
+                PictureBoxLocation2();
+                ModifiedImg = pictureBox2.Image;
+                
 
-            for (int x = 0; x < image.Width; x++)
-            {
-                for (int y = 0; y < image.Height; y++)
-                {
-                    Color pixelColor = image.GetPixel(x, y);
-                    int r = Clamp((int)(pixelColor.R + brightnessAdjustment), 0, 255);
-                    int g = Clamp((int)(pixelColor.G + brightnessAdjustment), 0, 255);
-                    int b = Clamp((int)(pixelColor.B + brightnessAdjustment), 0, 255);
-
-                    adjustedImage.SetPixel(x, y, Color.FromArgb(pixelColor.A, r, g, b));
+                if(imgStack.Count == 1) {
+                    undoButton.Enabled = false;
                 }
+                redoButton.Enabled = true;
             }
 
-            return adjustedImage;
         }
 
-        //Necess�rio corrigir soma de contraste.
-        public static Bitmap AdjustContrast(Bitmap image, float contrastLevel)
+        private void redoButton_Click(object sender, EventArgs e)
         {
-            Bitmap adjustedImage = new Bitmap(image.Width, image.Height);
-            contrastLevel = (100.0f + contrastLevel) / 100.0f;
-            contrastLevel *= contrastLevel;
-
-            for (int x = 0; x < image.Width; x++)
+            if(redoImgStack.Count >= 1)
             {
-                for (int y = 0; y < image.Height; y++)
+                //Pega a última image e depois a remove
+                Image imageLast = redoImgStack.Last();
+                redoImgStack.RemoveLast();
+
+                //adiciona a última imagem ao Undo e utiliza a nova última imagem
+                imgStack.AddLast(imageLast);
+                pictureBox2.Image = imageLast;
+                PictureBoxLocation2();
+                ModifiedImg = pictureBox2.Image;
+
+
+                if (redoImgStack.Count == 0)
                 {
-                    Color pixelColor = image.GetPixel(x, y);
-                    float r = pixelColor.R / 255.0f;
-                    float g = pixelColor.G / 255.0f;
-                    float b = pixelColor.B / 255.0f;
-                    r = (((r - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
-                    g = (((g - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
-                    b = (((b - 0.5f) * contrastLevel) + 0.5f) * 255.0f;
-
-                    adjustedImage.SetPixel(x, y, Color.FromArgb(pixelColor.A, Clamp((int)r, 0, 255), Clamp((int)g, 0, 255), Clamp((int)b, 0, 255)));
+                   redoButton.Enabled = false;
                 }
+                undoButton.Enabled = true;
             }
-
-            return adjustedImage;
         }
-
-        private static int Clamp(int value, int min, int max)
-        {
-            return (value < min) ? min : (value > max) ? max : value;
-        }
-
-        private void changeGlowButton_Click(object sender, EventArgs e)
-        {
-            int brightnessAdjustment = Convert.ToInt32(changeGlowTextBox.Text);
-
-            Bitmap originalImage = new Bitmap(pictureBox1.Image);
-            pictureBox1.Image = AdjustBrightness(originalImage, brightnessAdjustment);
-
-        }
-
-        private void changeContrastButton_Click(object sender, EventArgs e)
-        {
-            int contrastAdjustment = Convert.ToInt32(changeContrastTextBox.Text);
-
-            Bitmap originalImage = new Bitmap(pictureBox1.Image);
-            pictureBox1.Image = AdjustContrast(originalImage, contrastAdjustment);
-        }*/
     }
 }

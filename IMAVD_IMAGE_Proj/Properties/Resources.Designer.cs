@@ -59,5 +59,15 @@ namespace IMAVD_IMAGE_Proj.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lock1 {
+            get {
+                object obj = ResourceManager.GetObject("Lock1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

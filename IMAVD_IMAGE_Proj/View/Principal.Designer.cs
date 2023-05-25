@@ -58,7 +58,7 @@
             saveCropButton = new Button();
             makeSelectionButton = new Button();
             makeCropButton = new Button();
-            tabControl1 = new TabControl();
+            ControlPanel1 = new TabControl();
             tabPage1 = new TabPage();
             rotateVerticalButton = new Button();
             rotateHorizontalButton = new Button();
@@ -66,42 +66,61 @@
             rotateLeftButton = new Button();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
+            proportionalResize = new CheckBox();
+            manualResizeApply = new Button();
+            label9 = new Label();
+            label8 = new Label();
+            heightResize = new TextBox();
+            widthResize = new TextBox();
+            manualResize = new CheckBox();
+            percentageResize = new CheckBox();
             okResizeButton = new Button();
             resizeDomainUpDown = new DomainUpDown();
             tabPage4 = new TabPage();
+            brightnessBox = new TextBox();
             applyBrightnessButton = new Button();
             brightnessTrackBar = new TrackBar();
-            brightnessDomainUpDown = new DomainUpDown();
             tabPage5 = new TabPage();
+            contrastBox = new TextBox();
             applyContrastButton = new Button();
             contrastTrackBar = new TrackBar();
-            contrastDomainUpDown = new DomainUpDown();
+            tabPage6 = new TabPage();
+            applyGamma = new Button();
+            blueGammaBox = new TextBox();
+            blueGammaBar = new TrackBar();
+            label12 = new Label();
+            greenGammaBox = new TextBox();
+            greenGammaBar = new TrackBar();
+            label11 = new Label();
+            redGammaBox = new TextBox();
+            redGammaBar = new TrackBar();
+            label10 = new Label();
             insertChromaImage = new Button();
             button2 = new Button();
-            button3 = new Button();
+            undoButton = new Button();
             button4 = new Button();
             textBox1 = new TextBox();
             label2 = new Label();
             button5 = new Button();
             label3 = new Label();
-            button6 = new Button();
+            saveImageButton = new Button();
             panel1 = new Panel();
             label4 = new Label();
             panel2 = new Panel();
             panel3 = new Panel();
             label5 = new Label();
-            button7 = new Button();
+            redoButton = new Button();
             label6 = new Label();
             label7 = new Label();
             panel4 = new Panel();
-            tabPage6 = new TabPage();
+            returnButton = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelPictureBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panelPictureBox2.SuspendLayout();
-            tabControl1.SuspendLayout();
+            ControlPanel1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -109,6 +128,10 @@
             ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).BeginInit();
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)contrastTrackBar).BeginInit();
+            tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)blueGammaBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)greenGammaBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)redGammaBar).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -230,6 +253,8 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
+            pictureBox2.MouseDown += pictureBox2_MouseDown;
+            pictureBox2.MouseMove += pictureBox2_MouseMove;
             // 
             // panelPictureBox1
             // 
@@ -251,8 +276,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
             // 
             // trackBar1
             // 
@@ -397,6 +420,7 @@
             // 
             // makeCropButton
             // 
+            makeCropButton.Enabled = false;
             makeCropButton.Location = new Point(135, 8);
             makeCropButton.Margin = new Padding(3, 2, 3, 2);
             makeCropButton.Name = "makeCropButton";
@@ -406,24 +430,24 @@
             makeCropButton.UseVisualStyleBackColor = true;
             makeCropButton.Click += makeCropButton_Click;
             // 
-            // tabControl1
+            // ControlPanel1
             // 
-            tabControl1.Appearance = TabAppearance.FlatButtons;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Controls.Add(tabPage5);
-            tabControl1.Controls.Add(tabPage6);
-            tabControl1.ImeMode = ImeMode.NoControl;
-            tabControl1.Location = new Point(12, 448);
-            tabControl1.Margin = new Padding(3, 2, 3, 2);
-            tabControl1.Name = "tabControl1";
-            tabControl1.Padding = new Point(0, 0);
-            tabControl1.RightToLeft = RightToLeft.No;
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(458, 114);
-            tabControl1.TabIndex = 31;
+            ControlPanel1.Appearance = TabAppearance.FlatButtons;
+            ControlPanel1.Controls.Add(tabPage1);
+            ControlPanel1.Controls.Add(tabPage2);
+            ControlPanel1.Controls.Add(tabPage3);
+            ControlPanel1.Controls.Add(tabPage4);
+            ControlPanel1.Controls.Add(tabPage5);
+            ControlPanel1.Controls.Add(tabPage6);
+            ControlPanel1.ImeMode = ImeMode.NoControl;
+            ControlPanel1.Location = new Point(12, 448);
+            ControlPanel1.Margin = new Padding(3, 2, 3, 2);
+            ControlPanel1.Name = "ControlPanel1";
+            ControlPanel1.Padding = new Point(0, 0);
+            ControlPanel1.RightToLeft = RightToLeft.No;
+            ControlPanel1.SelectedIndex = 0;
+            ControlPanel1.Size = new Size(458, 133);
+            ControlPanel1.TabIndex = 31;
             // 
             // tabPage1
             // 
@@ -436,7 +460,7 @@
             tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3, 2, 3, 2);
-            tabPage1.Size = new Size(450, 83);
+            tabPage1.Size = new Size(450, 102);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Rotation";
             // 
@@ -494,71 +518,183 @@
             tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3, 2, 3, 2);
-            tabPage2.Size = new Size(450, 83);
+            tabPage2.Size = new Size(450, 102);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Crop";
             // 
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage3.Controls.Add(proportionalResize);
+            tabPage3.Controls.Add(manualResizeApply);
+            tabPage3.Controls.Add(label9);
+            tabPage3.Controls.Add(label8);
+            tabPage3.Controls.Add(heightResize);
+            tabPage3.Controls.Add(widthResize);
+            tabPage3.Controls.Add(manualResize);
+            tabPage3.Controls.Add(percentageResize);
             tabPage3.Controls.Add(okResizeButton);
             tabPage3.Controls.Add(resizeDomainUpDown);
             tabPage3.Location = new Point(4, 27);
             tabPage3.Margin = new Padding(3, 2, 3, 2);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3, 2, 3, 2);
-            tabPage3.Size = new Size(450, 83);
+            tabPage3.Size = new Size(450, 102);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Resize";
             // 
+            // proportionalResize
+            // 
+            proportionalResize.AutoSize = true;
+            proportionalResize.Checked = true;
+            proportionalResize.CheckState = CheckState.Checked;
+            proportionalResize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            proportionalResize.ForeColor = Color.FromArgb(241, 241, 241);
+            proportionalResize.Location = new Point(369, 55);
+            proportionalResize.Name = "proportionalResize";
+            proportionalResize.Size = new Size(63, 19);
+            proportionalResize.TabIndex = 9;
+            proportionalResize.Text = "Lock P.";
+            proportionalResize.UseVisualStyleBackColor = true;
+            // 
+            // manualResizeApply
+            // 
+            manualResizeApply.Location = new Point(313, 51);
+            manualResizeApply.Name = "manualResizeApply";
+            manualResizeApply.Size = new Size(50, 23);
+            manualResizeApply.TabIndex = 8;
+            manualResizeApply.Text = "Apply";
+            manualResizeApply.UseVisualStyleBackColor = true;
+            manualResizeApply.Click += manualResizeApply_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.FromArgb(241, 241, 241);
+            label9.Location = new Point(291, 57);
+            label9.Name = "label9";
+            label9.Size = new Size(16, 15);
+            label9.TabIndex = 7;
+            label9.Text = "H";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.FromArgb(241, 241, 241);
+            label8.Location = new Point(183, 57);
+            label8.Name = "label8";
+            label8.Size = new Size(19, 15);
+            label8.TabIndex = 6;
+            label8.Text = "W";
+            // 
+            // heightResize
+            // 
+            heightResize.Location = new Point(207, 51);
+            heightResize.Name = "heightResize";
+            heightResize.Size = new Size(78, 23);
+            heightResize.TabIndex = 5;
+            heightResize.TextChanged += heightResize_TextChanged;
+            heightResize.KeyPress += heightResize_KeyPress;
+            // 
+            // widthResize
+            // 
+            widthResize.Location = new Point(102, 51);
+            widthResize.Name = "widthResize";
+            widthResize.Size = new Size(78, 23);
+            widthResize.TabIndex = 4;
+            widthResize.TextChanged += widthResize_TextChanged;
+            widthResize.KeyPress += widthResize_KeyPress;
+            // 
+            // manualResize
+            // 
+            manualResize.AutoSize = true;
+            manualResize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            manualResize.ForeColor = Color.FromArgb(241, 241, 241);
+            manualResize.Location = new Point(6, 53);
+            manualResize.Name = "manualResize";
+            manualResize.Size = new Size(66, 19);
+            manualResize.TabIndex = 3;
+            manualResize.Text = "Manual";
+            manualResize.UseVisualStyleBackColor = true;
+            manualResize.CheckedChanged += manualResize_CheckedChanged;
+            // 
+            // percentageResize
+            // 
+            percentageResize.AutoSize = true;
+            percentageResize.Checked = true;
+            percentageResize.CheckState = CheckState.Checked;
+            percentageResize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            percentageResize.ForeColor = Color.FromArgb(241, 241, 241);
+            percentageResize.Location = new Point(6, 15);
+            percentageResize.Name = "percentageResize";
+            percentageResize.Size = new Size(90, 19);
+            percentageResize.TabIndex = 2;
+            percentageResize.Text = "Percentage";
+            percentageResize.UseVisualStyleBackColor = true;
+            percentageResize.CheckedChanged += percentageResize_CheckedChanged;
+            // 
             // okResizeButton
             // 
-            okResizeButton.Location = new Point(103, 9);
+            okResizeButton.Location = new Point(170, 14);
             okResizeButton.Margin = new Padding(3, 2, 3, 2);
             okResizeButton.Name = "okResizeButton";
-            okResizeButton.Size = new Size(34, 22);
+            okResizeButton.Size = new Size(50, 23);
             okResizeButton.TabIndex = 1;
-            okResizeButton.Text = "Ok";
+            okResizeButton.Text = "Apply";
             okResizeButton.UseVisualStyleBackColor = true;
             okResizeButton.Click += okResizeButton_Click;
             // 
             // resizeDomainUpDown
             // 
-            resizeDomainUpDown.Location = new Point(6, 8);
+            resizeDomainUpDown.Location = new Point(102, 14);
             resizeDomainUpDown.Margin = new Padding(3, 2, 3, 2);
             resizeDomainUpDown.Name = "resizeDomainUpDown";
-            resizeDomainUpDown.Size = new Size(91, 23);
+            resizeDomainUpDown.Size = new Size(62, 23);
             resizeDomainUpDown.TabIndex = 0;
-            resizeDomainUpDown.SelectedItemChanged += resizeDomainUpDown_SelectedItemChanged;
+            resizeDomainUpDown.Text = "100";
             // 
             // tabPage4
             // 
             tabPage4.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage4.Controls.Add(brightnessBox);
             tabPage4.Controls.Add(applyBrightnessButton);
             tabPage4.Controls.Add(brightnessTrackBar);
-            tabPage4.Controls.Add(brightnessDomainUpDown);
             tabPage4.Location = new Point(4, 27);
             tabPage4.Margin = new Padding(3, 2, 3, 2);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3, 2, 3, 2);
-            tabPage4.Size = new Size(450, 83);
+            tabPage4.Size = new Size(450, 102);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Brightness";
             // 
+            // brightnessBox
+            // 
+            brightnessBox.Enabled = false;
+            brightnessBox.Location = new Point(126, 13);
+            brightnessBox.Name = "brightnessBox";
+            brightnessBox.Size = new Size(30, 23);
+            brightnessBox.TabIndex = 3;
+            brightnessBox.Text = "0";
+            brightnessBox.TextAlign = HorizontalAlignment.Center;
+            // 
             // applyBrightnessButton
             // 
-            applyBrightnessButton.Location = new Point(213, 12);
+            applyBrightnessButton.Enabled = false;
+            applyBrightnessButton.Location = new Point(162, 12);
             applyBrightnessButton.Margin = new Padding(3, 2, 3, 2);
             applyBrightnessButton.Name = "applyBrightnessButton";
-            applyBrightnessButton.Size = new Size(82, 22);
+            applyBrightnessButton.Size = new Size(82, 24);
             applyBrightnessButton.TabIndex = 2;
-            applyBrightnessButton.Text = "APPLY";
+            applyBrightnessButton.Text = "Apply";
             applyBrightnessButton.UseVisualStyleBackColor = true;
             applyBrightnessButton.Click += applyBrightnessButton_Click;
             // 
             // brightnessTrackBar
             // 
             brightnessTrackBar.Cursor = Cursors.Hand;
+            brightnessTrackBar.LargeChange = 1;
             brightnessTrackBar.Location = new Point(6, 8);
             brightnessTrackBar.Margin = new Padding(3, 2, 3, 2);
             brightnessTrackBar.Maximum = 255;
@@ -568,36 +704,39 @@
             brightnessTrackBar.TabIndex = 1;
             brightnessTrackBar.Scroll += brightnessTrackBar_Scroll;
             // 
-            // brightnessDomainUpDown
-            // 
-            brightnessDomainUpDown.Location = new Point(126, 11);
-            brightnessDomainUpDown.Margin = new Padding(3, 2, 3, 2);
-            brightnessDomainUpDown.Name = "brightnessDomainUpDown";
-            brightnessDomainUpDown.Size = new Size(81, 23);
-            brightnessDomainUpDown.TabIndex = 0;
-            // 
             // tabPage5
             // 
             tabPage5.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage5.Controls.Add(contrastBox);
             tabPage5.Controls.Add(applyContrastButton);
             tabPage5.Controls.Add(contrastTrackBar);
-            tabPage5.Controls.Add(contrastDomainUpDown);
             tabPage5.Location = new Point(4, 27);
             tabPage5.Margin = new Padding(3, 2, 3, 2);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3, 2, 3, 2);
-            tabPage5.Size = new Size(450, 83);
+            tabPage5.Size = new Size(450, 102);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Contrast";
             // 
+            // contrastBox
+            // 
+            contrastBox.Enabled = false;
+            contrastBox.Location = new Point(126, 13);
+            contrastBox.Name = "contrastBox";
+            contrastBox.Size = new Size(30, 23);
+            contrastBox.TabIndex = 5;
+            contrastBox.Text = "0";
+            contrastBox.TextAlign = HorizontalAlignment.Center;
+            // 
             // applyContrastButton
             // 
-            applyContrastButton.Location = new Point(214, 12);
+            applyContrastButton.Enabled = false;
+            applyContrastButton.Location = new Point(162, 13);
             applyContrastButton.Margin = new Padding(3, 2, 3, 2);
             applyContrastButton.Name = "applyContrastButton";
-            applyContrastButton.Size = new Size(83, 22);
+            applyContrastButton.Size = new Size(83, 23);
             applyContrastButton.TabIndex = 4;
-            applyContrastButton.Text = "APPLY";
+            applyContrastButton.Text = "Apply";
             applyContrastButton.UseVisualStyleBackColor = true;
             applyContrastButton.Click += applyContrastButton_Click;
             // 
@@ -613,13 +752,135 @@
             contrastTrackBar.TabIndex = 3;
             contrastTrackBar.Scroll += contrastTrackBar_Scroll;
             // 
-            // contrastDomainUpDown
+            // tabPage6
             // 
-            contrastDomainUpDown.Location = new Point(126, 11);
-            contrastDomainUpDown.Margin = new Padding(3, 2, 3, 2);
-            contrastDomainUpDown.Name = "contrastDomainUpDown";
-            contrastDomainUpDown.Size = new Size(82, 23);
-            contrastDomainUpDown.TabIndex = 2;
+            tabPage6.BackColor = Color.FromArgb(51, 47, 46);
+            tabPage6.Controls.Add(applyGamma);
+            tabPage6.Controls.Add(blueGammaBox);
+            tabPage6.Controls.Add(blueGammaBar);
+            tabPage6.Controls.Add(label12);
+            tabPage6.Controls.Add(greenGammaBox);
+            tabPage6.Controls.Add(greenGammaBar);
+            tabPage6.Controls.Add(label11);
+            tabPage6.Controls.Add(redGammaBox);
+            tabPage6.Controls.Add(redGammaBar);
+            tabPage6.Controls.Add(label10);
+            tabPage6.Location = new Point(4, 27);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(450, 102);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Gamma";
+            // 
+            // applyGamma
+            // 
+            applyGamma.Enabled = false;
+            applyGamma.Location = new Point(250, 60);
+            applyGamma.Name = "applyGamma";
+            applyGamma.Size = new Size(75, 23);
+            applyGamma.TabIndex = 9;
+            applyGamma.Text = "Apply";
+            applyGamma.UseVisualStyleBackColor = true;
+            applyGamma.Click += applyGamma_Click;
+            // 
+            // blueGammaBox
+            // 
+            blueGammaBox.Enabled = false;
+            blueGammaBox.Location = new Point(344, 9);
+            blueGammaBox.Name = "blueGammaBox";
+            blueGammaBox.Size = new Size(30, 23);
+            blueGammaBox.TabIndex = 8;
+            blueGammaBox.Text = "1,0";
+            blueGammaBox.TextAlign = HorizontalAlignment.Center;
+            // 
+            // blueGammaBar
+            // 
+            blueGammaBar.LargeChange = 1;
+            blueGammaBar.Location = new Point(234, 3);
+            blueGammaBar.Maximum = 50;
+            blueGammaBar.Minimum = 2;
+            blueGammaBar.Name = "blueGammaBar";
+            blueGammaBar.Size = new Size(104, 45);
+            blueGammaBar.TabIndex = 7;
+            blueGammaBar.Value = 10;
+            blueGammaBar.Scroll += blueGammaBar_Scroll;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.FromArgb(241, 241, 241);
+            label12.Location = new Point(210, 11);
+            label12.Name = "label12";
+            label12.Size = new Size(18, 15);
+            label12.TabIndex = 6;
+            label12.Text = "B:";
+            // 
+            // greenGammaBox
+            // 
+            greenGammaBox.Enabled = false;
+            greenGammaBox.Location = new Point(140, 60);
+            greenGammaBox.Name = "greenGammaBox";
+            greenGammaBox.Size = new Size(30, 23);
+            greenGammaBox.TabIndex = 5;
+            greenGammaBox.Text = "1,0";
+            greenGammaBox.TextAlign = HorizontalAlignment.Center;
+            // 
+            // greenGammaBar
+            // 
+            greenGammaBar.LargeChange = 1;
+            greenGammaBar.Location = new Point(30, 54);
+            greenGammaBar.Maximum = 50;
+            greenGammaBar.Minimum = 2;
+            greenGammaBar.Name = "greenGammaBar";
+            greenGammaBar.Size = new Size(104, 45);
+            greenGammaBar.TabIndex = 4;
+            greenGammaBar.Value = 10;
+            greenGammaBar.Scroll += greenGammaBar_Scroll;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.FromArgb(241, 241, 241);
+            label11.Location = new Point(6, 62);
+            label11.Name = "label11";
+            label11.Size = new Size(19, 15);
+            label11.TabIndex = 3;
+            label11.Text = "G:";
+            // 
+            // redGammaBox
+            // 
+            redGammaBox.Enabled = false;
+            redGammaBox.Location = new Point(140, 9);
+            redGammaBox.Name = "redGammaBox";
+            redGammaBox.Size = new Size(30, 23);
+            redGammaBox.TabIndex = 2;
+            redGammaBox.Text = "1,0";
+            redGammaBox.TextAlign = HorizontalAlignment.Center;
+            // 
+            // redGammaBar
+            // 
+            redGammaBar.LargeChange = 1;
+            redGammaBar.Location = new Point(30, 3);
+            redGammaBar.Maximum = 50;
+            redGammaBar.Minimum = 2;
+            redGammaBar.Name = "redGammaBar";
+            redGammaBar.Size = new Size(104, 45);
+            redGammaBar.TabIndex = 1;
+            redGammaBar.Value = 10;
+            redGammaBar.Scroll += redGammaBar_Scroll;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.FromArgb(241, 241, 241);
+            label10.Location = new Point(6, 11);
+            label10.Name = "label10";
+            label10.Size = new Size(18, 15);
+            label10.TabIndex = 0;
+            label10.Text = "R:";
             // 
             // insertChromaImage
             // 
@@ -643,16 +904,17 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click_1;
             // 
-            // button3
+            // undoButton
             // 
-            button3.Location = new Point(58, 16);
-            button3.Margin = new Padding(3, 2, 3, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(82, 22);
-            button3.TabIndex = 34;
-            button3.Text = "Undo*";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click_1;
+            undoButton.Enabled = false;
+            undoButton.Location = new Point(58, 16);
+            undoButton.Margin = new Padding(3, 2, 3, 2);
+            undoButton.Name = "undoButton";
+            undoButton.Size = new Size(82, 22);
+            undoButton.TabIndex = 34;
+            undoButton.Text = "Undo*";
+            undoButton.UseVisualStyleBackColor = true;
+            undoButton.Click += undoButton_Click;
             // 
             // button4
             // 
@@ -706,16 +968,20 @@
             label3.TabIndex = 39;
             label3.Text = "Add an image";
             // 
-            // button6
+            // saveImageButton
             // 
-            button6.Location = new Point(58, 54);
-            button6.Margin = new Padding(3, 2, 3, 2);
-            button6.Name = "button6";
-            button6.Size = new Size(163, 22);
-            button6.TabIndex = 40;
-            button6.Text = "Save Image";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
+            saveImageButton.BackColor = Color.ForestGreen;
+            saveImageButton.Enabled = false;
+            saveImageButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            saveImageButton.ForeColor = Color.FromArgb(241, 241, 241);
+            saveImageButton.Location = new Point(58, 77);
+            saveImageButton.Margin = new Padding(3, 2, 3, 2);
+            saveImageButton.Name = "saveImageButton";
+            saveImageButton.Size = new Size(163, 25);
+            saveImageButton.TabIndex = 40;
+            saveImageButton.Text = "Save Image";
+            saveImageButton.UseVisualStyleBackColor = false;
+            saveImageButton.Click += saveImageButton_Click;
             // 
             // panel1
             // 
@@ -768,7 +1034,7 @@
             panel3.Controls.Add(button4);
             panel3.Location = new Point(801, 448);
             panel3.Name = "panel3";
-            panel3.Size = new Size(458, 114);
+            panel3.Size = new Size(458, 133);
             panel3.TabIndex = 44;
             // 
             // label5
@@ -782,14 +1048,16 @@
             label5.TabIndex = 0;
             label5.Text = "CHROMA KEY CONTROL";
             // 
-            // button7
+            // redoButton
             // 
-            button7.Location = new Point(146, 15);
-            button7.Name = "button7";
-            button7.Size = new Size(75, 23);
-            button7.TabIndex = 41;
-            button7.Text = "Redo*";
-            button7.UseVisualStyleBackColor = true;
+            redoButton.Enabled = false;
+            redoButton.Location = new Point(146, 15);
+            redoButton.Name = "redoButton";
+            redoButton.Size = new Size(75, 23);
+            redoButton.TabIndex = 41;
+            redoButton.Text = "Redo*";
+            redoButton.UseVisualStyleBackColor = true;
+            redoButton.Click += redoButton_Click;
             // 
             // label6
             // 
@@ -816,36 +1084,41 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(51, 47, 46);
-            panel4.Controls.Add(button7);
-            panel4.Controls.Add(button6);
-            panel4.Controls.Add(button3);
+            panel4.Controls.Add(returnButton);
+            panel4.Controls.Add(redoButton);
+            panel4.Controls.Add(saveImageButton);
+            panel4.Controls.Add(undoButton);
             panel4.Location = new Point(486, 294);
             panel4.Name = "panel4";
-            panel4.Size = new Size(300, 94);
+            panel4.Size = new Size(300, 116);
             panel4.TabIndex = 47;
             // 
-            // tabPage6
+            // returnButton
             // 
-            tabPage6.BackColor = Color.FromArgb(51, 47, 46);
-            tabPage6.Location = new Point(4, 27);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(450, 83);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Gamma";
+            returnButton.BackColor = Color.Goldenrod;
+            returnButton.Enabled = false;
+            returnButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            returnButton.ForeColor = Color.FromArgb(26, 26, 26);
+            returnButton.Location = new Point(58, 46);
+            returnButton.Name = "returnButton";
+            returnButton.Size = new Size(163, 25);
+            returnButton.TabIndex = 42;
+            returnButton.Text = "Return to Original";
+            returnButton.UseVisualStyleBackColor = false;
+            returnButton.Click += returnButton_Click;
             // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 26);
-            ClientSize = new Size(1284, 584);
+            ClientSize = new Size(1284, 599);
             Controls.Add(panel4);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(tabControl1);
+            Controls.Add(ControlPanel1);
             Controls.Add(panelPictureBox2);
             Controls.Add(panelPictureBox1);
             Controls.Add(menuStrip1);
@@ -865,16 +1138,22 @@
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             panelPictureBox2.ResumeLayout(false);
             panelPictureBox2.PerformLayout();
-            tabControl1.ResumeLayout(false);
+            ControlPanel1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)brightnessTrackBar).EndInit();
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)contrastTrackBar).EndInit();
+            tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)blueGammaBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)greenGammaBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)redGammaBar).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -917,7 +1196,7 @@
         private Button saveCropButton;
         private Button makeSelectionButton;
         private Button makeCropButton;
-        private TabControl tabControl1;
+        private TabControl ControlPanel1;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Button rotateVerticalButton;
@@ -928,31 +1207,50 @@
         private DomainUpDown resizeDomainUpDown;
         private Button okResizeButton;
         private TabPage tabPage4;
-        private DomainUpDown brightnessDomainUpDown;
         private TrackBar brightnessTrackBar;
         private TabPage tabPage5;
         private TrackBar contrastTrackBar;
-        private DomainUpDown contrastDomainUpDown;
         private Button applyBrightnessButton;
         private Button applyContrastButton;
         private Button insertChromaImage;
         private Button button2;
-        private Button button3;
+        private Button undoButton;
         private Button button4;
         private TextBox textBox1;
         private Label label2;
         private Button button5;
         private Label label3;
-        private Button button6;
+        private Button saveImageButton;
         private Panel panel1;
         private Label label4;
         private Panel panel2;
         private Panel panel3;
-        private Button button7;
+        private Button redoButton;
         private Label label5;
         private Label label6;
         private Label label7;
         private Panel panel4;
         private TabPage tabPage6;
+        private Button manualResizeApply;
+        private Label label9;
+        private Label label8;
+        private TextBox heightResize;
+        private TextBox widthResize;
+        private CheckBox manualResize;
+        private CheckBox percentageResize;
+        private CheckBox proportionalResize;
+        private Label label10;
+        private TrackBar redGammaBar;
+        private TextBox redGammaBox;
+        private TextBox blueGammaBox;
+        private TrackBar blueGammaBar;
+        private Label label12;
+        private TextBox greenGammaBox;
+        private TrackBar greenGammaBar;
+        private Label label11;
+        private Button applyGamma;
+        private TextBox brightnessBox;
+        private TextBox contrastBox;
+        private Button returnButton;
     }
 }
