@@ -109,7 +109,10 @@ namespace IMAVD_IMAGE_Proj
 
                 returnButton.Enabled = true;
                 saveImageButton.Enabled = true;
-                insertImageStack(Img);
+                clearUndo();
+                clearRedo();
+
+
             }
         }
 
@@ -536,12 +539,7 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateLeftButton_Click(object sender, EventArgs e)
         {
-            Image image = pictureBox2.Image;
-            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            pictureBox2.Image = image;
-            PictureBoxLocation2();
-            insertImageStack(pictureBox2.Image);
-            ModifiedImg = pictureBox2.Image;
+            rotateImage(RotateFlipType.Rotate90FlipNone);
         }
 
         /// <summary>
@@ -549,12 +547,7 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateRightButton_Click(object sender, EventArgs e)
         {
-            Image image = pictureBox2.Image;
-            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            pictureBox2.Image = image;
-            PictureBoxLocation2();
-            insertImageStack(pictureBox2.Image);
-            ModifiedImg = pictureBox2.Image;
+            rotateImage(RotateFlipType.Rotate270FlipNone);
         }
 
         /// <summary>
@@ -562,12 +555,7 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateHorizontalButton_Click(object sender, EventArgs e)
         {
-            Image image = pictureBox2.Image;
-            image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            pictureBox2.Image = image;
-            PictureBoxLocation2();
-            insertImageStack(pictureBox2.Image);
-            ModifiedImg = pictureBox2.Image;
+            rotateImage(RotateFlipType.RotateNoneFlipX);
         }
 
         /// <summary>
@@ -575,8 +563,13 @@ namespace IMAVD_IMAGE_Proj
         /// </summary>
         private void rotateVerticalButton_Click(object sender, EventArgs e)
         {
-            Image image = pictureBox2.Image;
-            image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            rotateImage(RotateFlipType.RotateNoneFlipY);
+        }
+
+        private void rotateImage(RotateFlipType type)
+        {
+            Image image = (Image)pictureBox2.Image.Clone();
+            image.RotateFlip(type);
             pictureBox2.Image = image;
             PictureBoxLocation2();
             insertImageStack(pictureBox2.Image);
@@ -1046,9 +1039,7 @@ namespace IMAVD_IMAGE_Proj
                 PictureBoxLocation2();
                 ModifiedImg = pictureBox2.Image;
                 clearRedo();
-                imgStack.Clear();
-                imgStack.AddLast(ModifiedImg);
-                undoButton.Enabled = false;
+                clearUndo();
             }
         }
 
@@ -1136,6 +1127,21 @@ namespace IMAVD_IMAGE_Proj
                 redoImgStack.Clear();
 
                 redoButton.Enabled = false;
+            }
+        }
+
+        private void clearUndo()
+        {   
+            if(imgStack.Count >= 1)
+            {
+                imgStack.Clear();
+                imgStack.AddLast(ModifiedImg);
+                undoButton.Enabled = false;
+            }
+            else
+            {
+                imgStack.AddLast(ModifiedImg);
+                undoButton.Enabled = false;
             }
         }
 
