@@ -336,6 +336,7 @@ namespace IMAVD_IMAGE_Proj
         private void makeSelectionButton_Click(object sender, EventArgs e)
         {
             makeSelectionButton.Enabled = false;
+            pictureBox2.Cursor = Cursors.Cross;
         }
 
 
@@ -374,6 +375,7 @@ namespace IMAVD_IMAGE_Proj
             saveCropButton.Enabled = true;
             makeSelectionButton.Enabled = true;
             makeCropButton.Enabled = false;
+            pictureBox2.Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -924,7 +926,6 @@ namespace IMAVD_IMAGE_Proj
         {
             if (e.Button == MouseButtons.Left && makeSelectionButton.Enabled == false)
             {
-                Cursor = Cursors.Cross;
                 cropX = e.X;
                 cropY = e.Y;
                 cropPen = new Pen(Color.Black, 1);
@@ -943,6 +944,11 @@ namespace IMAVD_IMAGE_Proj
                 cropWidth = e.X - cropX;
                 cropHeight = e.Y - cropY;
                 pictureBox2.CreateGraphics().DrawRectangle(cropPen, cropX, cropY, cropWidth, cropHeight);
+
+                widthCrop.Text = cropWidth.ToString();
+                heightCrop.Text = cropHeight.ToString();
+                xPositionCrop.Text = e.Location.X.ToString();
+                yPositionCrop.Text = e.Location.Y.ToString();
                 makeCropButton.Enabled = true;
             }
         }
@@ -1356,7 +1362,7 @@ namespace IMAVD_IMAGE_Proj
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if(pictureBox1.Cursor == Cursors.Cross)
+            if (pictureBox1.Cursor == Cursors.Cross)
             {
                 selectedColorChroma.BackColor = GetColorAt(e.Location);
                 pictureBox1.Cursor = Cursors.Default;

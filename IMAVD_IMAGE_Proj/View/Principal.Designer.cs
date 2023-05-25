@@ -369,7 +369,6 @@
             // xCropLabel
             // 
             xCropLabel.AutoSize = true;
-            xCropLabel.Enabled = false;
             xCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             xCropLabel.ForeColor = Color.FromArgb(241, 241, 241);
             xCropLabel.Location = new Point(134, 46);
@@ -381,7 +380,6 @@
             // yCropLabel
             // 
             yCropLabel.AutoSize = true;
-            yCropLabel.Enabled = false;
             yCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             yCropLabel.ForeColor = Color.FromArgb(241, 241, 241);
             yCropLabel.Location = new Point(134, 89);
@@ -393,7 +391,6 @@
             // HeightCropLabel
             // 
             HeightCropLabel.AutoSize = true;
-            HeightCropLabel.Enabled = false;
             HeightCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             HeightCropLabel.ForeColor = Color.FromArgb(241, 241, 241);
             HeightCropLabel.Location = new Point(134, 171);
@@ -405,7 +402,6 @@
             // widthCropLabel
             // 
             widthCropLabel.AutoSize = true;
-            widthCropLabel.Enabled = false;
             widthCropLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             widthCropLabel.ForeColor = Color.FromArgb(241, 241, 241);
             widthCropLabel.Location = new Point(134, 130);
@@ -1143,9 +1139,9 @@
             label4.ForeColor = Color.FromArgb(241, 241, 241);
             label4.Location = new Point(14, 14);
             label4.Name = "label4";
-            label4.Size = new Size(107, 17);
+            label4.Size = new Size(147, 17);
             label4.TabIndex = 42;
-            label4.Text = "INFORMATION";
+            label4.Text = "INFORMATION CROP";
             // 
             // panel2
             // 
